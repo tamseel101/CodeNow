@@ -11,3 +11,5 @@ We want our first draft graded
 | Kyle Hobeck | hobeckky | 1007204758 | kyle.hobeck@mail.utoronto.ca | (365) 292-0715 | jswatj#7483 | krhobeck
 
 **Discord Chat/Server Invite :** https://discord.gg/c9dpJVJ96m
+
+**Trello:** https://trello.com/invite/b/gtaa2hw3/ATTIf803b7d6c3996f1229ec34e296adffaf19C1BB69/semtrack
