@@ -1,8 +1,8 @@
-# Semtrack
+# CodeNow
 
-Managing coursework and achieving academic goals can be challenging for students, especially with a heavy workload and tight deadlines. Students often try to use a combination of a to-do list and calendar apps to organize their semester. However, these tools fail to provide a complete picture of their workload. As a student, wouldn't it be nice if you already knew which weeks are going to be really busy for you?
+Preparing for technical interviews for software engineering positions can be a daunting process. The most common approach is to practice problems at [leetcode.com](http://leetcode.com/). However, with thousands of problems on the platform, it can get overwhelming for someone who has no idea where to start. Furthermore, even if you create your own plan for Leetcode problems, it quickly becomes cumbersome to track and manage your progress as you work through your plan. Lastly, it's important to take into account [Ebbinghaus's Forgetting Curve](https://www.mindtools.com/a9wjrjw/ebbinghauss-forgetting-curve) in your interview preparation. However, doing this manually is tedious and takes a lot of manual overhead.
 
-Semtrack aims to improve workload management for students by providing a graph of the student's workload throughout the semester, allowing them to identify heavy workload weeks and make informed decisions and plans. Additionally, students can track their progress on assignments, monitor their grades, and receive intelligent reminders of upcoming deadlines.
+CodeNow aims to improve the interview preparation workflow by providing the user with a customized Leetcode preparation plan based on the user's strengths and weaknesses with common technical interview concepts. CodeNow allows the user to create daily learning goals and schedules Leetcode problems for them to complete every day, while taking into account [Ebbinghaus's Forgetting Curve](https://www.mindtools.com/a9wjrjw/ebbinghauss-forgetting-curve). Additionally, CodeNow allows the user to visually see their progress as they work through their plan.
 
 ## Installation
 
