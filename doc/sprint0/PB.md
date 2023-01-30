@@ -1,5 +1,3 @@
-# Product Backlog: PB.md (version C)
-
 | # | User Story | Criteria of Satisfaction | Priority |
 | --- | --- | --- | --- |
 | 1 | As Suzie, Eren, or Ariel, I want to have an account so that I can save my current progress to continue practicing in the future. | Users of our app will be able to create an account, sign in, and sign out. | 10 |
