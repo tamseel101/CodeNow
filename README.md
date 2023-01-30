@@ -77,12 +77,23 @@ Then, you can run the Django server using the following command:
 python3 manage.py runserver
 ```
 
+### Database
+We are using sqlite for our database. To set up an sqlite database run the following command in the `backend` folder.
+
+```
+python3 manage.py migrate
+```
+
+You should now see an SQLite database in your directory.
+
+
 ### Frontend
 `cd` into `frontend` and run the following command:
 
 ```
 npm start
 ```
+
 
 ## Contributing
 <!-- Should I add commands? -->
