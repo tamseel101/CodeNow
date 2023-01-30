@@ -1,7 +1,7 @@
 
 # Problem
 
-Preparing for technical interviews for software engineering positions can be a daunting process. The most common approach is to practice problems on [leetcode.com](http://leetcode.com/). However, it is difficult to determine which problems to do. Many people rely on pre-made lists of Leetcode questions created by others but these lists are not catered towards their specific skillset. Additionally, it quickly becomes difficult to track and manage your progress as you work through the list. Furthermore, a common error in interview prep is neglecting [distributed practice](https://digitalpromise.org/2019/05/08/ask-the-cognitive-scientist-distributed-practice/) (also known as spaced learning) approach to address the Ebbinghaus Forgetting Curve.
+Preparing for technical interviews for software engineering positions can be a daunting process. The most common approach is to practice problems on [leetcode.com](http://leetcode.com/). However, it is difficult to determine which problems to do. Many people rely on pre-made lists of Leetcode questions created by others but these lists are not catered towards their specific skillset. Additionally, it quickly becomes difficult to track and manage your progress as you work through the list. Furthermore, a common error in interview preparation is neglecting [distributed practice](https://digitalpromise.org/2019/05/08/ask-the-cognitive-scientist-distributed-practice/) (also known as spaced learning) approach to address the Ebbinghaus Forgetting Curve.
 
 Our product, CodeNow aims to address these issues through its innovative approach on technical interview preparation.
 
