@@ -109,4 +109,4 @@ The `main` branch contains our official release.
 Merges to this branch will be made through a pull request at the end of every sprint. The pull request must be thoroughly reviewed and requires the approval of at least 4 members of the team.
 
 ### Ticketing System
-We will be using Github Issues to track our issues.
+We will be using Trello to track our issues.
