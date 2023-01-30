@@ -2,9 +2,9 @@
 
 ## Organization Of The Team
 
-Our team has utilized a democratic approach where all the members had a say in the direction of the project and all the necessary features that need to be included. We organized the work-flow in a systematic manner where we held regular meetings to discuss the progress and any issues that arose. To ensure that everyone is on board and meeting the deadlines, we utilized a collaboration tool - Notion - which has been managed by a designated Sprint Manager who organizes the work-flow and conducts weekly meetings. To maintain a high level of productivity and to ensure equality, the role of the meeting coordinator will rotate within the seven members. For S0, Sana was the coordinator who maintained and organized the work to verify that the deliverables are well done.
+Our team utilized a democratic approach where all the members had a say in the direction of the project and all the necessary features that need to be included. We organized our workflow in a systematic manner where we held regular meetings to discuss our progress and any issues that arose. To ensure that everyone is on board and meeting the deadlines, we utilized a collaboration tool, Notion, which has been managed by a designated Sprint Manager. The Sprint Manager's role is to organize the workflow and conducts weekly meetings. To maintain a high level of productivity and to ensure equality, the role of the Sprint Manager will rotate within the seven members. For S0, Sana was the Sprint Manager who maintained and organized the work to ensure that the deliverables are well done.
 
-In order to effectively organize our team, task allocation was meticulously divided among all the team members. Each team member was not only responsible for completing their assigned tasks, but also served as a peer reviewer for tasks they did not do. This approach ensured that every deliverable was thoroughly reviewed from an external perspective, and ensured clarity, consistency and brevity in the final output.  
+In order to effectively organize our team, task allocation was meticulously divided among all the team members. Each team member was not only responsible for completing their assigned tasks, but also served as a peer reviewer for tasks they did not do. This approach ensured that every deliverable was thoroughly reviewed from an external perspective, ensured clarity, consistency and brevity in the final output.
 
 Our task allocation is outlined as follows: 
 
@@ -16,7 +16,8 @@ Our task allocation is outlined as follows:
 
 ## **************************************Decisions and Priority**************************************
 
-In order to ensure effective communication and collaboration, decisions and questions were documented on Notion prior to majority of the meetings. By addressing all the questions during each meeting, we were able to reach a consensus and align our efforts towards a common goal: to deliver a valuable product. In instances where decisions were made outside of these meetings, updates were promptly communicated via our discord server to ensure all members were kept informed. 
+To ensure fairness in our decision making process, team members were asked to document their concerns which required a decision on our Notion tool. Then, in our regular meetings, each concern is discussed thoroughly and all members have a chance to share their thoughts. To reach consensus, members vote on the best decision. This approach ensures effective and fair decision making with all voices heard and decisions made transparently and democratically. In case of urgent decisions, an emergency meeting is scheduled promptly based on member availability. The same decision making process is used in emergency meetings.
+
 
 The prioritization of tasks was based on a thorough assessment of the complexity of each task. This involved identifying which tasks were more time-consuming and required multiple decisions from the group such as determining a hosting provider, selecting a development stack, and selecting appropriate development tools.
 
@@ -26,7 +27,7 @@ Finally, we also prioritized user experience since that is our key goal. We made
 
 ## Meetings
 
-As previously mentioned, regular meetings were held twice weekly to ensure that all team members were informed and updated on the progress of the project. However, in cases of sudden changes or important decisions, emergency meetings were scheduled to address these matters. Meetings were primarily conducted through Zoom, and in-person discussions were held during class or tutorials for those who were available. The meeting agenda consisted of questions and topics outlined in the meeting document. By the end of each meeting, all questions were addressed and attendance was recorded, along with a brief summary of the meeting for those who were unable to attend.
+As previously mentioned, regular meetings were held weekly to ensure that all team members were informed and updated on the progress of the project. However, in cases of sudden changes or important decisions, emergency meetings were scheduled to address these matters. Meetings were primarily conducted through Zoom, and in-person discussions were held during class or tutorials for those who were available. The meeting agenda consisted of questions and topics outlined in the meeting document. By the end of each meeting, all questions were addressed and attendance was recorded, along with a brief summary of the meeting for those who were unable to attend.
 
 ## Next Phase
 
