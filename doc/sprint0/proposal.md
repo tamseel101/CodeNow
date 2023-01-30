@@ -1,11 +1,101 @@
 
-With multiple courses to keep track of and deadlines to remember, school can be a hectic and stressful time for students. It can be difficult for students to understand how their workload is distributed during the semester and when their assessments are due. Traditional semester tracking tools, such as basic to-do lists or calendar apps, frequently fall short of providing a complete picture of the workload. Our app, Semtrack, aims to change that by providing a unique and innovative way for students to manage their semesters.
+# Problem
 
+Preparing for technical interviews for software engineering positions can be a daunting process. The most common approach is to practice problems on [leetcode.com](http://leetcode.com/). However, it is difficult to determine which problems to do. Many people rely on pre-made lists of Leetcode questions created by others but these lists are not catered towards their specific skillset. Additionally, it quickly becomes difficult to track and manage your progress as you work through the list. Furthermore, a common error in interview prep is neglecting [distributed practice](https://digitalpromise.org/2019/05/08/ask-the-cognitive-scientist-distributed-practice/) (also known as spaced learning) approach to address the Ebbinghaus Forgetting Curve.
 
-Semtrack analyzes the student data in order to suggest which assessments you should work on and at which times. These suggestions may depend on multiple factors such as assessment weight, due date, your current grade in the course and your goal for the course. Additionally, Semtrack will provide a visual graph of the student's workload during the entire semester. This will allow the student to identify heavy workload weeks and will let them make informed decisions and plans based on this data. Lastly, Semtrack will enable users to track their progress on assignments, track their grades, and receive reminders of upcoming deadlines based on the importance of the assessment and the anticipated length of the project.
+Our product, CodeNow aims to address these issues through its innovative approach on technical interview preparation.
 
-Here is an ideal scenario for this application. Suppose a student is four weeks into their course, and midterms are just around the corner. It may be a low week for them; not many assignments or tasks, and things feel like they're moving at a reasonable speed with their to-do list by their side for the week. Without knowledge, two weeks from now is about to hit them like a train, two tests, an assignment due at the end of their week and the usual weekly deadlines. Luckily for this student, they have their information loaded into Semtrack, an intelligent task and deadline management tool. It's notifying them of two weeks from now, and the student picks up, and they begin working on the two assessments ahead of time. What would have been a train wreck now turns into a stress-free study session with their friends. And their weekly to-do list has now been replaced with a much more intelligent friend, Semtrack.
+# CodeNow Objectives
 
-In our market research, we identified competitors such as myHomework and iStudiezPro, which are apps also utilized by students to track tasks and deadlines during the semester. These apps typically offer a combination of generic to-do lists and calendar features. Semtrack aims to stand out from these competitors by utilizing our unique perspective as fellow students to design an app that genuinely addresses the needs of students. One key area where we differentiate ourselves from our competitors is our ability to help students visualize their long-term workload and make decisions based on that. Our app also allows students to see upcoming busy weeks with multiple deadlines and gives reminders accordingly, providing insight and support not found in other semester-tracking apps.
+CodeNow aims to build a web application that
 
-Since Semtrack boasts multiple unique features that are not included in other study/planner apps and which significantly simplify the planning process, Semtrack will be able to stand out among competitors. For revenue, we have multiple approaches we can take. The first is a monthly subscription with a semester-long free trial. This way, users are able to see if the app is a good fit for them and to recognize the app’s full potential. This would be policed by the user entering their payment information upon downloading the app, to avoid a user making multiple accounts to get multiple free trials. The second approach is to lock certain features behind a paywall. This would not include the semester visualization features, as those are some of the main features of our app which heavily contribute to its uniqueness among other competitors on the market. Another approach is to charge extra to keep user data for long-term, such as keeping user data for over a semester. These three approaches all walk the line between inconveniencing free users and avoiding making our app unusable or frustrating to use.
+- Utilizes distributed practice in order to maximize learning retention and mitigate the affects of Ebbinghaus Forgetting Curve.
+- Creates a tailored plan for the user based on an initial pre-assessment quiz that assesses the users understanding of data structures and algorithms.
+- Schedules daily practice for the user and sends reminders so that they never forget about their practice.
+- Allows the user to track and visualize their progress throughout their interview preparation journey.
+
+# Key Personas and Scenarios
+
+## Key Persona 1: Suzie Bingham
+
+Suzie is a 20 year old Computer Science major at the University of Toronto who dreams of working in Silicon Valley as a software developer. She actively participates in hackathons and enjoys programming. Suzie is passionate about building software and making an impact as an aspiring software developer. Unfortunately, Suzie is not very good at solving data structures and algorithm-related problems. As a result, she has faced rejections in multiple software engineering internship interviews.
+
+Note: this persona refers to university students who are proficient at programming and building software but lack the skills to solve problems related to data structures and algorithms.<br>
+
+<br>
+
+****************Scenario****************
+
+Suzie recognizes that she is not the greatest at solving data structures and algorithm-related problems. She makes an effort to improve by signing up for [Leetcode.com](http://Leetcode.com) but is quickly overwhelmed with the sheer amount of practice problems on the website. Additionally, the website contains a variety of problems, including problems requiring the knowledge of arrays, graphs, linked lists and many more. Suzie wishes she knew which problems to focus on based on her current strength and weaknesses. Fortunately for Suzie, she discovered our product, CodeNow. Codenow assessed her current understanding of data structures and algorithms through a pre-assessment quiz and then created a tailored list of leetcode questions for her to solve. Suzie was also able to set learning goals such as the number of problems to do each day. CodeNow made the interview preperation process seamless and fun for Suzie!
+
+<br>
+
+## Key Persona 2: Ariel Winter
+
+Ariel is a software engineer with years of experience who was recently laid off. Ariel is hunting for a new job as a Software Engineer, but her technical interview skills have deteriorated over time. She has recently begun preparing for technical interviews and has difficulty remembering certain key concepts.
+
+Note: this persona refers to people of any experience level who struggle with the effects of Ebbinghaus's Forgetting Curve.
+
+<br>
+
+******************************************Scenario******************************************
+
+Ariel landed an interview at Uber and was presented with a question she had previously solved on Leetcode during her interview preparation. However, to his surprise, he could not recall the right approach to the problem due to the affects of the Forgetting Curve. As a result, she could not move to the next stage of the hiring process. Luckily, Ariel discovered CodeNow, a product which recognizes the importance of distributed practice and the effects of the Ebbinghaus's Forgetting Curve. CodeNow is built around the idea of distributed practice and places previously solved problems into the users’ Leetcode schedule. Because of CodeNow’s unique approach to interview preparation, Ariel is able to mitigate the effects of the Ebbinghaus's Forgetting Curve.
+
+<br>
+
+## Key Persona 3: Eren Yeager
+
+Eren is an aspiring software engineer who recently graduated from the University of Waterloo. Eren has ADHD and finds it difficult to focus and stay organized. This makes it really difficult for him to prepare for technical interviews. Eren performs best when given structure, reminders, and a quantifiable way to measure his progress.
+
+Note: this persona refers to people who want a structured approach to preparing for interviews and would love features that make interview preparation more accessible.
+
+<br>
+
+****************Scenario****************
+
+Eren applied to many software engineering-related positions and was able to get an interview at Microsoft. Conquered by happiness, Eren makes an effort to sign up for Leetcode and finds a list of commonly asked interview questions online. He started practicing them but found it difficult to organize his progress. Some days, he did not remember to practice them at all. Eventually, it was the day before the interview, and Eren panicked because his interview preparation journey had been a disaster. Out of fear, he cancelled his interview. Fortunately for Eren, he soon discovered our product, CodeNow. CodeNow provided him with a structured approach to practice Leetcode questions. CodeNow presented Eren with a tailored plan according to his strengths and weaknesses. Additionally, the platform asked Eren to provide key metrics such as time taken to complete the problem, perceived difficulty, and to rate his attempt out of 5. CodeNow used this information to schedule other Leetcode questions for Eren and actively update his plan. Additionally, the platform let him visually see his progress as he completes his questions through a graph. Eren fell in love with CodeNow and regularly practiced Leetcode because of CodeNow’s daily notifications reminding him to practice!
+
+<br>
+
+# Key Principles
+
+1. User Experience
+
+    We prioritize the needs of the end-users in any design and development-related decision, even if it may require additional time or resources.
+
+2. Scalable Design
+
+    We want to design with scalability in mind, optimizing our decisions for future growth and potential user numbers.
+
+3. Security
+
+    We prioritize the security and privacy of our users and ensure the integrity of our application. We consider security and privacy-related concerns in all design and development decisions and aim to build a secure system.
+
+4. Simplicity
+
+    We prioritize a simple, intuitive and easy-to-use design over adding complex features.
+
+<br>
+
+# Market Research and Business Potential
+
+According to the data from [US Bureau of Labor Statistics](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm#tab-6), the employment of software developers is projected to grow rapidly. There is a 25% increase expected from 2021 to 2031. Additionally, the current demand for software engineers is high. In the United States, there is an average of 162 900 job openings projected each year over the next decade. Additionally, according to the data from [National Center for Educational Statistics](https://www.collegetransitions.com/blog/most-popular-college-majors/), the number of computer science degrees awarded in 2020 has increased significantly, with a 40-fold increase from the 1970s. To summarize, the software engineering field offers numerous opportunities for job seekers.
+
+To land a software engineering job, many candidates dedicate significant effort to preparing for technical interviews. These interviews typically involve Leetcode-style questions, which test the candidate's problem-solving and programming skills. These questions are widely utilized in software engineering interview evaluations.
+
+Furthermore, the sudden popularity of technical interview preperation websites like [AlgoExpert.io](http://AlgoExpert.io) and [Neetcode.io](http://Neetcode.io) suggest that there is an increasing business potential within the space of technical interview preperation services.
+
+Our platform offers unique features such as incorporating distributed practice, tracking key metrics, and suggesting Leetcode questions based on the user’s strengths and weaknesses. We target a more specific group of users compared to our competitors. Specifically, we target users who are interested in a more tailored and guided approach to preparing for technical interviews. Meanwhile, our competitors cater to a more general audience of users aiming to prepare for technical interviews.
+
+We plan to launch this product as a paid service, offering users the option to pay either monthly or yearly. With an average base salary of $118,899 for software engineers in the United States (according to [Indeed.com](http://indeed.com/)), we are confident that users will see the value in paying for our service. To further incentivize potential users, we will offer a free 14-day trial. We believe that the quality of our service, combined with the endowment effect, will encourage users to continue their membership and not cancel. Our goal is to provide a high-quality service that delivers a substantial return on investment for users.
+
+<br>
+
+# Feasability
+
+This section is aims to convince the reader that this product is feasible within the semester timeframe. There are few components of the product that must be addressed.
+
+1. we are not making the user complete the problems on our platform. Instead, we direct them to specific problems on Leetcode.com. where they can utilize Leetcode’s code editor and numerous high quality test cases written per problem.
+2. we are not building a distributed practice algorithm from scratch. We will be using the SuperMemo2 algorithm to compute the next review date for each problem. Note that there is a `supermemo2` package available on [pypi.org](https://pypi.org/project/supermemo2/).
+3. In our minimum viable product, the tailored plan will be generated based on the user's answers to a pre-assessment quiz (consisting of multiple-choice questions). For instance, if the user consistently struggles with array-based questions, we will prioritize Leetcode problems related to arrays. No machine learning or complex algorithms are involved.
