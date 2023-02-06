@@ -9,9 +9,11 @@ function App() {
 
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <UserList />
-    </QueryClientProvider>
+    <div>
+      <QueryClientProvider client={queryClient}>
+        <UserList />
+      </QueryClientProvider>
+    </div>
   );
 }
 
