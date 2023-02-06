@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from codenow_api.accounts import views
-from .accounts.views import login
+from .accounts.views import LoginView
 
 
 router = routers.DefaultRouter()
@@ -28,5 +28,5 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('login', login)
+    path('login', LoginView.as_view(), name='login')
 ]
