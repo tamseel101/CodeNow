@@ -10,7 +10,6 @@ export default function useToken() {
         return userToken
     }
 
-
     // Initialize token state with getToken()
     const [token, setToken] = useState(getToken());
 
