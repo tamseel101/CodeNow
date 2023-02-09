@@ -11,23 +11,17 @@ export const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-
     // TODO: Refactor
     const handleSubmit = (e) => {
-        e.preventDefault()
 
         // Send a request to the backend
         axios.post('http://localhost:8000/login', {
             "username": username,
             "password": password
-          }, {
-            headers: {
-              'Content-Type': 'application/json'
-            }
           })
           .then(function (response) {
             if (response.data['error']) {
-              alert("no")
+              alert(response.data['error'])
             } else {
               props.setToken(response.data['token'])
             }
