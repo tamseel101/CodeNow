@@ -19,10 +19,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path='/' element={token === "h" ? <Login setToken={ setToken }/> : <Landing />}/>
+        <Route exact path='/' element={!token ? <Login setToken={ setToken }/> : <Landing setToken={ setToken }/>}/>
 
         <Route path='/login'
-          element= {token==="h" ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
+          element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
 
           <Route exact path="/register" element={ <Register/> } />

@@ -5,7 +5,7 @@ export const Landing = (props) => {
     return(
         <div>
             Hello World
-            <LogoutButton />
+            <LogoutButton setToken={ props.setToken }/>
         </div>
     )
 }
