@@ -1,36 +1,31 @@
 import './App.css';
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import {Register} from './Account/Register/Register';
 import {Landing} from './Landing/Landing'
 import { Login } from './Account/Login/Login';
-
-
-function setToken(userToken) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-}
-
-function getToken() {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken
-}
-
+import useToken from './Hooks/useToken';
+import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+console.log("test")
 
 function App() {
-  const token = getToken();
 
+  const { token, setToken } = useToken()
 
-  if (!token) {
-    return <Login setToken={setToken} />
-  }
+  useEffect(() => {console.log(token)}, [token])
+
+  console.log(token)
 
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={ <Landing/> } />
-        <Route exact path="/login" element={ <Login/> } />
-        <Route exact path="/register" element={ <Register/> } />
+        <Route exact path='/' element={token === "h" ? <Login setToken={ setToken }/> : <Landing />}/>
+
+        <Route path='/login'
+          element= {token==="h" ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
+
+
+          <Route exact path="/register" element={ <Register/> } />
       </Routes>
     </div>
   );
