@@ -25,7 +25,8 @@ function App() {
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
 
-          <Route exact path="/register" element={ <Register/> } />
+          <Route path='/register'
+          element= {!token ? <Register/> : <Navigate to ="/" />} />
       </Routes>
     </div>
   );
