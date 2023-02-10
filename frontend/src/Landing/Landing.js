@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import "./Box.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../Components/logoutButton";
 
 export const Landing = (props) => {
     const cardInfo = [
@@ -72,3 +73,5 @@ export const Landing = (props) => {
 
     )
 }
+
+export default Landing;
