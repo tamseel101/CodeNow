@@ -1,15 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './Register.css'
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    const [name, setName] = useState('');
+    const [username, setUserName] = useState('');
+    const navigate = useNavigate();
+
+    // TODO: Refactor
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);
+        e.preventDefault()
+        // Send a request to the backend
+        axios.post('http://localhost:8000/users/', {
+            "username": username,
+            "password": pass,
+            "email": email
+          })
+          .then(function (response) {
+            if (response.data['error']) {
+              alert(response.data['error'])
+            } else {
+                alert("User created! Please login.")
+                navigate("/")
+            }
+          })
+          .catch(function (error) {
+            alert("Error. Username or email likely exist.")
+          });
+
     }
+
+
 
     return(
         <div className="auth-form-container">
@@ -18,7 +41,7 @@ export const Register = (props) => {
             <form className="register-form" onSubmit={handleSubmit}>
 
                 <label>username</label>
-                <input value={name} onChange={(e) => setName(e.target.value)} 
+                <input value={username} onChange={(e) => setUserName(e.target.value)}
                     type="name"  
                     name="name" 
                     id="name" 

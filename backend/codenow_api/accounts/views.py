@@ -43,7 +43,7 @@ class LoginView(APIView):
 
         if not user:
             return Response({'error': 'Invalid Credentials'},
-                            status=HTTP_403_FORBIDDEN)
+                            status=HTTP_200_OK)
 
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key},
