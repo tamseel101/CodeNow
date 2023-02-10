@@ -6,7 +6,11 @@ from django.http import HttpResponse
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
-from .models import Categories, Attempts
+
+
+from .serializers import ProblemSerializer
+from .models import Categories, Attempts, Problem
+
 # Create your views here.
 class CategoryView(APIView):
     permission_classes = [AllowAny]
@@ -59,3 +63,41 @@ class AttemptView(APIView):
         a.save()
         return Response(status=HTTP_200_OK)
 
+
+from .models import Problem
+
+class ProblemsView(APIView):
+    queryset = Problem.objects.all()
+    serializer_class = ProblemSerializer
+
+    @csrf_exempt
+    def get(self, request):
+        """
+        API endpoint that returns all category data
+        """
+        # checking for the parameters from the URL
+        problems = Problem.objects.all()
+        count = len(problems)
+        problems_list = list(problems.values())
+        response = {
+            'count': count,
+            'problems': problems_list[0:5]
+        }
+        return Response(response)
+
+
+    @csrf_exempt
+    def post(self, request):
+        """
+        API endpoint that will add an question to the Problem table.
+        """
+        problem_name = request.data.get("problem_name")
+        topic = request.data.get("topic")
+        difficulty_level = request.data.get("difficulty_level")
+        leetcode_url = request.data.get("leetcode_url")
+        if None in (problem_name, topic, difficulty_level , leetcode_url):
+            return Response({'error': 'Please provide all necessary data'}, status=HTTP_400_BAD_REQUEST)
+
+        a= Problem(problem_name=problem_name,topic=topic,difficulty_level=difficulty_level,leetcode_url=leetcode_url)
+        a.save()
+        return Response(status=HTTP_200_OK)

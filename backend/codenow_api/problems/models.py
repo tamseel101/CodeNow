@@ -14,3 +14,8 @@ class Attempts(models.Model):
     time = models.IntegerField()
     completed = models.BooleanField(default=False)
 
+class Problem(models.Model):
+    problem_name = models.CharField(max_length=255)
+    topic = models.CharField(max_length=255)
+    difficulty_level = models.CharField(max_length=255)
+    leetcode_url = models.CharField(max_length=255)
