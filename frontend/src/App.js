@@ -7,7 +7,8 @@ import {Dashboard} from './Components/Dashboard_components/Dashboard'
 import useToken from './Hooks/useToken';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-console.log("test")
+import Attempt from './Attempt'
+
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
 
         <Route path='/login'
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
+
+        <Route exact path='/attempt' element={ <Attempt /> }/>
 
 
           <Route path='/register'

@@ -1,3 +1,4 @@
+from sqlite3 import Date
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 
 
-from .serializers import ProblemSerializer
+from .serializers import ProblemSerializer, AttemptsSerializer
 from .models import Categories, Attempts, Problem
 
 # Create your views here.
@@ -26,23 +27,24 @@ class CategoryView(APIView):
         return HttpResponse(data, content_type='application/json')
 
 class AttemptView(APIView):
+    queryset = Attempts.objects.all()
+    serializer_class = AttemptsSerializer
+
     permission_classes = [AllowAny]
     @csrf_exempt
     def get(self, request):
         """
         API endpoint that will retrieve attempt data.
         """
-        print(request)
-        user_id = request.query_params.get("user_id")
-        problem_id = request.query_params.get("problem_id")
-        if user_id is None:
-            return Response({'error': 'Please provide all necessary data'},
-                            status=HTTP_400_BAD_REQUEST)
-        if problem_id is None:
-            data = core_serializers.serialize("json", Attempts.objects.filter(user_id=user_id))
-            return HttpResponse(data, content_type='application/json')  
-        data = core_serializers.serialize("json", Attempts.objects.filter(user_id=user_id,problem_id=problem_id))
-        return HttpResponse(data, content_type='application/json')  
+        attempts = Attempts.objects.all()
+        count = len(attempts)
+        attempts_list = list(attempts.values())
+        response = {
+            'count': count,
+            'problems': attempts_list
+        }
+        return Response(response)
+
 
     @csrf_exempt
     def post(self, request):
@@ -51,15 +53,14 @@ class AttemptView(APIView):
         """
         user_id = request.data.get("user_id")
         problem_id = request.data.get("problem_id")
-        category_id = request.data.get("category_id")
-        date = request.data.get("date")
+        #date = request.data.get("date").. @BACKEND you can generate this on ur end ....
         perceived_difficulty = request.data.get("perceived_difficulty") # 1-100 scale
         time = request.data.get("time") # in minutes
         completed = request.data.get("completed") 
-        if None in (user_id, problem_id, category_id, date, perceived_difficulty, time, completed):
+        if None in (user_id, problem_id,  perceived_difficulty, time, completed):
             return Response({'error': 'Please provide all necessary data'},
                             status=HTTP_400_BAD_REQUEST)
-        a= Attempts(user_id=user_id,problem_id=problem_id,category_id=category_id,date=date,perceived_difficulty=perceived_difficulty,time=time,completed=completed )
+        a= Attempts(user_id=user_id,problem_id=problem_id,category_id=0, perceived_difficulty=perceived_difficulty,time=time,completed=completed )
         a.save()
         return Response(status=HTTP_200_OK)
 
