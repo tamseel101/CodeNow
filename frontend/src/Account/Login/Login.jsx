@@ -23,7 +23,7 @@ export const Login = (props) => {
             if (response.data['error']) {
               alert(response.data['error'])
             } else {
-              props.setToken(response.data['token'])
+              props.setToken(response.data['token'], response.data['user_id'])
             }
           })
           .catch(function (error) {

@@ -3,28 +3,77 @@ import { useState } from 'react';
 import './Questions.css'
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import {Row, Col} from 'react-bootstrap';
+import axios from 'axios';
+import {useLocation} from 'react-router-dom';
 
-function Questions({data, cardIndex}) {
-    const[active, setActive] = useState("FirstCard")
-    const [showButton, setShowButton] = useState(true);
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
+
+
+function Attempt({route, navigation}) {
+  const location = useLocation();
+
+    const[active, setActive] = useState("SecondCard")
+    const [showButton, setShowButton] = useState(false);
+
+    // Completion
     const [selectedOption, setSelectedOption] = useState('');
     const handleChange = event => {
         setSelectedOption(event.target.value);
       };
+
+    // Time taken
+    const [timeTaken, setTimeTaken] = useState(null)
+
+    const handleTimeTakenChange = (e) => {
+        setTimeTaken(e.target.value)
+    }
+
+    // Difficulty
+    const [difficulty, setDifficulty] = useState(3)
+
+    const handleDifficultyChange = (e) => {
+        setDifficulty(e.target.value)
+    }
+
+    const sendAttempt = () => {
+
+        // Send a request to the backend
+        axios.post('http://localhost:8000/problems/attempts', {
+            "user_id":sessionStorage.getItem('user_id'),
+            "problem_id":location.state.problem_id,
+            "perceived_difficulty": difficulty,
+            "time":timeTaken,
+            "completed": selectedOption
+          })
+          .then(function (response) {
+            if (response.data['error']) {
+              alert(response.data['error'])
+            } else {
+              console.log(response.data)
+              alert("Thank you! Your response was tracked.")
+            }
+          })
+          .catch(function (error) {
+            alert(error);
+          });
+
+    }
   return (
     <div id="home">
         <section>
             <div className='App'>
                 <div lassName='cards'>
-                    {active === "FirstCard" && 
+                    {active === "FirstCard" &&
                     <Card>
                         <section className='Main'>
                         <div>
                             <span className='home-page'></span>
                         </div>
                         <h1>Practice the Question!</h1>
-                        <p>  
+                        <p>
                              Get ready to tackle some mind-bending questions and unleash your coding potential!
                              Before you start, here are a few things you should know:
                         </p>
@@ -35,9 +84,9 @@ function Questions({data, cardIndex}) {
                             <li>Once you have completed a question, come back to this page and stop the timer! You will be promted with a few questions for us to track your progress!</li>
                         </ul>
                         </section>
-                    
+
                     </Card>}
-                    {active === "SecondCard" && 
+                    {active === "SecondCard" &&
                     <Card>
                         <section className='Question'>
                             <h1>Are you done?</h1>
@@ -47,34 +96,42 @@ function Questions({data, cardIndex}) {
                             </p>
                         </section>
                         <>
-                       
-                        <Form className='question-input'>
-                            <form>
+
                                 <div className='form'>
                                     <label className='Q1'>
-                                        Did you manage to complete this question?
-                                        <select value={selectedOption} onChange={handleChange} required>
-                                            <option value=""> --- </option>
-                                            <option value="option1">Yes</option>
-                                            <option value="option2">No</option>
-                                        </select>
+                                    <Form.Label>Did you manage to complete this question?</Form.Label>
+
+                                        <Form.Select value={selectedOption} onChange={handleChange} required>
+                                        <option value="">Click to Select Yes or No</option>
+                                        <option value="True">Yes</option>
+                                        <option value="False">No</option>
+                                      </Form.Select>
+
                                     </label>
                                     <br></br>
                                     <label className='Q2'>
-                                        How long did you take to complete the question?
-                                        <input type="text" id="text" name="text" placeholder='ex. 10 mins' required/>
+
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>How long did you take to complete the question? (Minutes)</Form.Label>
+                                        <Form.Control type="numeric" placeholder="10" required onChange={handleTimeTakenChange}/>
+                                      </Form.Group>
+
                                     </label>
                                     <br></br>
                                     <label className='Q3'>
-                                        How dificult was the question from the range 1-5?
-                                            <label for="customRange2" class="form-label"></label>
-                                            <input type="range" class="form-range" min="0" max="5" id="customRange2" required/>
+                                            <Form.Label>How dificult was this question for you?</Form.Label>
+                                            <Row>
+                                                <Col>Easy</Col>
+                                                <Col  sm={8}><Form.Range min="1" max="5" required onChange={handleDifficultyChange}/></Col>
+                                               <Col><span>Hard</span></Col>
+                                            </Row>
+
                                     </label>
                                     <br></br>
-                                    <button>Done</button>
+                                    <button class="mb-4"
+                                        onClick={sendAttempt}>Done</button>
                                 </div>
-                            </form>
-                        </Form>  
+
                         </>
                     </Card>}
                     <nav>
@@ -87,7 +144,7 @@ function Questions({data, cardIndex}) {
                               Start
                             </button>
                           </a>
-                          
+
                         )}
                     </nav>
                 </div>
@@ -97,4 +154,4 @@ function Questions({data, cardIndex}) {
   )
 }
 
-export default Questions;
+export default Attempt;
