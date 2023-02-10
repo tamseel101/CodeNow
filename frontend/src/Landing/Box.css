@@ -12,9 +12,10 @@ body {
 
 .box {
   margin: 20px;
-  background: rgb(138, 138, 138) !important;
+  background: #2a294d !important;
   color: aqua;
   text-align: center;
+  margin: auto;
 }
 
 .grid {
