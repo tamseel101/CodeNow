@@ -14,7 +14,9 @@ function LeetQuestion(props) {
                     <Card.Title className="QuestionText"><h2>{props.name}</h2></Card.Title>
                     <Card.Text className="DescText">{props.desc}</Card.Text>
                 </Col>
-                <Col sm={5}><Button className= "QuestionButton" variant="primary">Code Next</Button></Col>
+                <Col sm={5}>
+                <a target="_blank"
+                  href={props.url}><Button className= "QuestionButton" variant="primary">Code Next</Button></a></Col>
             </Row>
         </Card.Body>
     </Card>

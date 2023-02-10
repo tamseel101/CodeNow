@@ -6,7 +6,11 @@ from django.http import HttpResponse
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
-from .models import Categories, Attempts
+
+
+from .serializers import ProblemSerializer
+from .models import Categories, Attempts, Problem
+
 # Create your views here.
 class CategoryView(APIView):
     permission_classes = [AllowAny]
@@ -63,21 +67,27 @@ class AttemptView(APIView):
 from .models import Problem
 
 class ProblemsView(APIView):
-   permission_classes = [AllowAny]
-   @csrf_exempt
-   def get(self, request):
-       """
-       API endpoint that returns all problem data such as
-       Problem(problem_name="Two Sum",
-               topic="Arrays",
-               difficulty_level="easy",
-               leetcode_url="https://leetcode.com/problems/two-sum/"  )
-       """
-       data = core_serializers.serialize("json", Problem.objects.all(), fields=('problem_name','topic','difficulty_level','leetcode_url'))
-       return HttpResponse(data, content_type='application/json')
+    queryset = Problem.objects.all()
+    serializer_class = ProblemSerializer
 
-   @csrf_exempt
-   def post(self, request):
+    @csrf_exempt
+    def get(self, request):
+        """
+        API endpoint that returns all category data
+        """
+        # checking for the parameters from the URL
+        problems = Problem.objects.all()
+        count = len(problems)
+        problems_list = list(problems.values())
+        response = {
+            'count': count,
+            'problems': problems_list[0:5]
+        }
+        return Response(response)
+
+
+    @csrf_exempt
+    def post(self, request):
         """
         API endpoint that will add an question to the Problem table.
         """
