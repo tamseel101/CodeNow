@@ -27,6 +27,7 @@ export const Problems = (props) => {
                   name={problem.problem_name}
                   url={problem.leetcode_url}
                   desc={problem.difficulty_level}
+                  problem_id={problem.id}
                 />
             ))}
         </ul>
