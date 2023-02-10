@@ -28,5 +28,6 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('login', LoginView.as_view(), name='login')
+    path('login', LoginView.as_view(), name='login'),
+    path('problems/', include('codenow_api.problems.urls')),
 ]
