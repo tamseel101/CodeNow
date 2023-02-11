@@ -45,7 +45,6 @@ jobs:
       - name: Lint
         run: |
           cd frontend
-          ls
           eslint src --ext .js
           
     
