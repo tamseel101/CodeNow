@@ -38,10 +38,13 @@ jobs:
           ref: dev
       - name: Install ESLint [Frontend]
         run: |
-          cd frontend; npm install -g eslint; eslint --init
+          cd frontend
+          npm install -g eslint
+          eslint --init
 
       - name: Lint [Frontend]
         run: |
-          cd frontend; eslint
+          cd frontend
+          eslint src
     
           
