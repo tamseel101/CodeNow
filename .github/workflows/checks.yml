@@ -31,9 +31,14 @@ jobs:
     name: Frontend
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: CSC301H5/finalprojectw23-jason-s-juniors
+          ref: dev
       - name: Install ESLint [Frontend]
         run: |
-          ls
+          cd frontend
           npm install -g eslint
           eslint --init
 
