@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
-        run: "pipenv install --deploy --dev"
+        run: "touch Pipfile && pipenv install --deploy --dev"
 
       - name: Tests
         run: "cd backend; python manage.py test"
