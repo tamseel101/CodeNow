@@ -40,13 +40,12 @@ jobs:
         run: |
           cd frontend
           npm ci
-      - name: Prettier
-        run: |
-          cd frontend
-          npm run format
+          npm install -g eslint
+          eslint --init
       - name: Lint
         run: |
           cd frontend
-          npm run lint
+          eslint
+          
     
           
