@@ -4,8 +4,8 @@ name: Checks
 on: [pull_request, push]
 
 jobs:
-  test-lint:
-    name: Test and Lint
+  backend-test:
+    name: Backend
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -27,6 +27,10 @@ jobs:
       - name: Lint [Backend]
         run: flake8
 
+  frontend-test:
+    name: Frontend
+    runs-on: ubuntu-20.04
+    steps:
       - name: Install ESLint [Frontend]
         run: |
           cd frontend
@@ -37,4 +41,5 @@ jobs:
         run: |
           cd frontend
           eslint
+    
           
