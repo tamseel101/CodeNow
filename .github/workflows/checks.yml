@@ -13,6 +13,7 @@ jobs:
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
           ref: dev
+      - name: Install Requirements
         run: |
           pip install -r finalprojectw23-jason-s-juniors/backend/requirements.txt
 
