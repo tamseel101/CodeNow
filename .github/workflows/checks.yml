@@ -13,16 +13,28 @@ jobs:
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
           ref: dev
-      - name: Install Requirements
+      - name: Install Requirements [Backend]
         run: |
           cd backend
           pip install -r requirements.txt
 
-      - name: Install Flake
+      - name: Install Flake [Backend]
         run: pip install flake8
 
-      - name: Tests
+      - name: Tests [Backend]
         run: cd backend; python manage.py test
 
-      - name: Lint
+      - name: Lint [Backend]
         run: flake8
+
+      - name: Install ESLint [Frontend]
+        run: |
+          cd frontend
+          npm install -g eslint
+          eslint --init
+
+      - name: Lint [Frontend]
+        run: |
+          cd frontend
+          eslint
+          
