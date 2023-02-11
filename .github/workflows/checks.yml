@@ -36,9 +36,19 @@ jobs:
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
           ref: dev
+      - name: Install packages
+        run: |
+          cd frontend
+          npm ci
+          npm install --save-dev --save-exact prettier
+          npm install -g eslint-plugin-react;
 
       - name: Lint [Frontend]
         run: |
-          cd frontend; ls; npm install -g eslint-plugin-react; eslint src --ext .js
+          cd frontend; eslint src --ext .js
+
+      - name: Prettier
+        run: |
+          cd frontend; npx prettier --check .
     
           
