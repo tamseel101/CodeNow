@@ -16,7 +16,6 @@ jobs:
       - name: Install Requirements
         run: |
           cd backend
-          ls
           pip install -r requirements.txt
 
       - name: Install Flake
