@@ -7,6 +7,8 @@ jobs:
   test-lint:
     name: Test and Lint
     runs-on: ubuntu-20.04
+    env:
+      workdir: ./finalprojectw23-jason-s-juniors/backend
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -33,7 +35,7 @@ jobs:
         run: pip install flake8
 
       - name: Install Requirements
-        run: pip install -r finalprojectw23-jason-s-juniors/backend/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Tests
         run: cd backend; python manage.py test
