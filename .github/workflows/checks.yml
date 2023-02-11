@@ -15,8 +15,9 @@ jobs:
           ref: dev
       - name: Install Requirements
         run: |
+          cd backend
           ls
-          pip install -r finalprojectw23-jason-s-juniors/finalprojectw23-jason-s-juniors/backend/requirements.txt
+          pip install -r requirements.txt
 
       - name: Install Flake
         run: pip install flake8
