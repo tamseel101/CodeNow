@@ -40,7 +40,8 @@ jobs:
       - name: Lint [Frontend]
         run: |
           cd frontend
-          npm install eslint-plugin-react@latest --save-dev
+          ls
+          npm install eslint-plugin-react@latest
           eslint src --ext .js
     
           
