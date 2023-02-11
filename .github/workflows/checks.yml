@@ -36,14 +36,11 @@ jobs:
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
           ref: dev
-      - name: Install ESLint [Frontend]
-        run: |
-          cd frontend
-          npm install -g eslint
 
       - name: Lint [Frontend]
         run: |
           cd frontend
+          npm install eslint-plugin-react@latest --save-dev
           eslint src --ext .js
     
           
