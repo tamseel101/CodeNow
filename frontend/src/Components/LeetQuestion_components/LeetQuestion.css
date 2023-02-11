@@ -1,0 +1,16 @@
+.DescText {
+    color: whitesmoke;
+}
+
+.QuestionBackground{
+    background-color: #2a294d !important;
+}
+
+.QuestionText{
+    color: cyan;
+}
+
+.QuestionButton{
+    background-color: #d775ff !important;
+    align-items: center;
+}

@@ -45,49 +45,39 @@ Please refer to Trello on which team member was assigned this task
 
 **User Account**
 
-Implement user registration endpoint
+Implement user registration endpoint [Kyle]
 
-Create frontend for register page
+Implement user login endpoint [Abdullah]
 
-Implement user login endpoint
+Create frontend for register page and login page [Sana]
 
-Create frontend login page
+Connect the login and register with backend [Abdullah]
 
-Implement logout functionality
+**Landing Page**
 
-Display users name while logged in 
+Create a base landing page [Amelia]
 
-**Problem Database**
+Create a navigation bar [Melissa]
 
-create dashboard which will display all of the Leetcode problems retrieved from our backend
+Fix bugs on landing page to help user experience [Amelia]
 
-design and implement a  Leetcode problem model in Django
+**Dashboard**
 
-Populate the database with some sample Leetcode problems 
+Create a card for each leetcode problem [Melissa]
 
-**Begin problem**
+Create a dashboard page [Melissa]
 
-Implement a button beside the problem which allows the user to start a Leetcode problem
+Connect the UI of the dashboard page to the database in the backend containing the problems. [Abdullah]
 
-Create an endpoint in the backend to track that the user attempted a problem
+**Problems**
 
-Implement a modal or a page that is opened once the user clicks on "start problem”
+Create a data model for the problem categories in Django [Mohammad]
 
-Ensure that the user is redirected to the appropriate Leetcode problem
+Implement Leetcode problem model in Django [Tamseel]
 
-**Cancel Problem**
+Create the user interface for tracking the leetcode problem [Sana]
 
-Add a button to "Cancel" a problem that has been started previously
-
-Ensure that canceling the problem attempt removes the record from the database
-
-Create an endpoint to cancel a problem attempt
-
-**Track Key Metrics**
-
-Ask the user for key metrics after they have attempted the Leetcode problem
-
-Implement an endpoint which records each attempt and stores the key metrics that we will use in future sprints to customize the recomendations presented to users
+Send the key metrics tot he backend endpoint [Abdullah]
 
 ************************Landing Page************************
 
