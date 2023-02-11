@@ -42,9 +42,11 @@ jobs:
           npm install -g eslint
           eslint --init
 
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm
+
       - name: Lint [Frontend]
-        run: |
-          cd frontend
-          eslint src
+        run: eslint src --ext .js
     
           
