@@ -1,0 +1,18 @@
+---
+name: Checks
+
+on: [push]
+
+jobs:
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@dev
+
+      - name: Tests
+        run: "python manage.py test"
+
+      - name: Lint
+        run: "flake8"
