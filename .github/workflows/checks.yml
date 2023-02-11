@@ -33,7 +33,7 @@ jobs:
         run: pip install flake8
 
       - name: Install Requirements
-        run: pip install -r finalprojectw23-jason-s-juniors/requirements.txt
+        run: pip install -r backend/requirements.txt
 
       - name: Tests
         run: cd backend; python manage.py test
