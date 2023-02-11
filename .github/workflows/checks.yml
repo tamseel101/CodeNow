@@ -7,12 +7,11 @@ jobs:
   test-lint:
     name: Test and Lint
     runs-on: ubuntu-20.04
-    env:
-      workdir: ./finalprojectw23-jason-s-juniors
-      basefile: backend
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
+        with:
+          repository: finalprojectw23-jason-s-juniors/backend
 
       - name: Set up Python 3.10.0
         uses: actions/setup-python@master
