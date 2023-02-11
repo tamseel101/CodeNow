@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Install ESLint [Frontend]
         run: |
-          cd frontend
+          ls
           npm install -g eslint
           eslint --init
 
