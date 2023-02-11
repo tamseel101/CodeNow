@@ -1,7 +1,7 @@
 ---
 name: Checks
 
-on: [push]
+on: [pull_request, push]
 
 jobs:
   test-lint:
@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: "touch Pipfile && pipenv install --deploy --dev"
+
+      - name: Install Flake
+        run: pip install flake8
+
+      - name: Install Requirements
+        run: pip install -r requirements.txt
 
       - name: Tests
         run: "cd backend; python manage.py test"
