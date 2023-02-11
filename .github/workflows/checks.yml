@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Tests
-        run: "python backend/manage.py test"
+        run: "pipenv python manage.py test"
 
       - name: Lint
         run: "flake8"
