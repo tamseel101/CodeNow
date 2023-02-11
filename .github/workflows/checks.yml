@@ -42,6 +42,8 @@ jobs:
           npm install -g eslint
 
       - name: Lint [Frontend]
-        run: eslint src --ext .js
+        run: |
+          cd frontend
+          eslint src --ext .js
     
           
