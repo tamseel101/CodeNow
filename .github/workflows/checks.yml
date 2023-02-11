@@ -13,6 +13,7 @@ jobs:
         with:
           repository: finalprojectw23-jason-s-juniors/backend
           path: backend
+          ref: dev
 
       - name: Set up Python 3.10.0
         uses: actions/setup-python@master
