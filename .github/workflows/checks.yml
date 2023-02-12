@@ -13,12 +13,12 @@ jobs:
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
           ref: dev
-      - name: Install Requirements [Backend]
+      - name: Install Requirements
         run: |
           cd backend
           pip install -r requirements.txt
 
-      - name: Install Flake [Backend]
+      - name: Install Flake
         run: pip install flake8
 
       - name: Tests [Backend]
