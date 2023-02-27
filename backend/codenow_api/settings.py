@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
-    'codenow_api.problems'
+    'codenow_api.problems',
+    'codenow_api.UserProblems'
 ]
 
 MIDDLEWARE = [
