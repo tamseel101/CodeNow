@@ -75,7 +75,7 @@ function Attempt({route, navigation}) {
 
           <div className='form'>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <Form.Label>Did you manage to complete this question?</Form.Label>
 
             <Form.Select value={selectedOption} onChange={handleChange} required>
@@ -102,7 +102,7 @@ function Attempt({route, navigation}) {
           </div>
 
           <div className="mb-3">
-            <button class="btn btn-primary mb-4" onClick={sendAttempt}>Done</button>
+            <button className="btn btn-primary mb-4" onClick={sendAttempt}>Done</button>
           </div>
 
           </div>

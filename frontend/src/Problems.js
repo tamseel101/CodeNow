@@ -6,7 +6,7 @@ import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-export const Problems = (props) => {
+export const Problems = () => {
 
     const { data:problems, status } = useQuery('problems', async () => {
         const { data:problems } = await axios.get('http://localhost:8000/problems/');
@@ -27,6 +27,7 @@ export const Problems = (props) => {
                   url={problem.leetcode_url}
                   desc={problem.difficulty_level}
                   problem_id={problem.id}
+                  key={problem.id}
                 />
             ))}
         </ul>

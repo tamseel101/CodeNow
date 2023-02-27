@@ -50,21 +50,21 @@ export const Landing = (props) => {
             <Navbar/>
 
 
-            <div class="container mt-4 w-100">
+            <div className="container mt-4 w-100">
 
-                <h1 class="fw-bold mx-auto">Code Next</h1>
+                <h1 className="fw-bold mx-auto">Code Next</h1>
                 <h3>
                     Everything you need to excel in your next software interview
                     is now made available through code-next.
                 </h3>
 
-                <div class="row mt-4">
+                <div className="row mt-4">
                     {cardInfo.map(renderCard)}
                 </div>
 
-                <div class="d-flex justify-content-center mt-5">
+                <div className="d-flex justify-content-center mt-5">
                     <Link to="/register">
-                        <button class="btn btn-secondary btn-lg me-4"> Register Now! </button>
+                        <button className="btn btn-secondary btn-lg me-4"> Register Now! </button>
                     </Link>
 
                 </div>
