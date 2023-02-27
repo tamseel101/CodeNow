@@ -49,7 +49,7 @@ export const Login = (props) => {
 
               <input class="form-control" value={username} onChange={(e) => setUsername(e.target.value)}
                   type="text"
-                  placeholder="enter your username here"
+                  placeholder="Enter your username here"
                   id="email"
                   name="email">
               </input>
@@ -59,7 +59,7 @@ export const Login = (props) => {
               <label className="form-label" htmlFor="password">Password</label>
               <input class="form-control" value={password} onChange={(e) => setPassword(e.target.value)}
                   type="password"
-                  placeholder="enter your password here"
+                  placeholder="Enter your password here"
                   id="password"
                   name="password">
               </input>

@@ -14,7 +14,7 @@ export const Dashboard = (props) => {
           <h1 className="display-1">Hello! </h1>
           <h3>Here are your problems for today</h3>
           <p>Click on start to start a problem.
-            Then come back to this page <br/> track progress.</p>
+            Then come back to this page track progress.</p>
             <QueryClientProvider client={ queryClient }>
               <Problems />
             </QueryClientProvider>

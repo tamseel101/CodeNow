@@ -56,7 +56,7 @@ export const Register = (props) => {
                             name="name"
                             id="name"
                             className="form-control"
-                            placeholder="enter your username here">
+                            placeholder="Enter your username here">
                         </input>
                     </div>
 
@@ -64,7 +64,7 @@ export const Register = (props) => {
                         <label className="form-label" htmlFor="email">Email</label>
                         <input value={email} onChange={(e) => setEmail(e.target.value)}
                             type="email"
-                            placeholder="enter your email here"
+                            placeholder="Enter your email here"
                             id="email"
                             className="form-control"
                             name="email">
@@ -77,7 +77,7 @@ export const Register = (props) => {
 
                         <input value={pass} onChange={(e) => setPass(e.target.value)}
                             type="password"
-                            placeholder="enter your password here"
+                            placeholder="Enter your password here"
                             className="form-control"
                             id="password"
                             name="password">
