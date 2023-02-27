@@ -1,7 +1,13 @@
 ---
 name: Checks
 
-on: [pull_request, push]
+on:
+pull_request:
+  types:
+    - opened
+  branches:
+    - 'task/**'
+    - 'user-story/**'
 
 jobs:
   backend-test:
