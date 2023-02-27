@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import './Register.css'
+import Navbar from '../../Navbar'
+
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -35,42 +36,66 @@ export const Register = (props) => {
 
 
     return(
-        <div className="auth-form-container">
-            <h2>Register</h2>
 
-            <form className="register-form" onSubmit={handleSubmit}>
+        <div>
 
-                <label>username</label>
-                <input value={username} onChange={(e) => setUserName(e.target.value)}
-                    type="name"  
-                    name="name" 
-                    id="name" 
-                    placeholder="enter your username here">
-                </input>
+            <Navbar />
 
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} 
-                    type="email" 
-                    placeholder="enter your email here" 
-                    id="email" 
-                    name="email">
-                </input>
 
-                <label htmlFor="password">password</label>
+            <div className="container">
 
-                <input value={pass} onChange={(e) => setPass(e.target.value)} 
-                    type="password" 
-                    placeholder="enter your password here" 
-                    id="password" 
-                    name="password">
-                </input>
-                <button id="register-button">register</button>
-            </form>
+                <div className="auth-form-container mt-4">
+                <h1 className="fw-bold">Register</h1>
 
-            <Link to="/login" className="link-button" onClick={() =>props.onFormSwitch('login')}>
-                already have an account? login here.
-            </Link>
+                <form className="register-form" onSubmit={handleSubmit}>
+
+                    <div className="mb-3">
+                        <label className="form-label">Username</label>
+                        <input value={username} onChange={(e) => setUserName(e.target.value)}
+                            type="name"
+                            name="name"
+                            id="name"
+                            className="form-control"
+                            placeholder="enter your username here">
+                        </input>
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="email">Email</label>
+                        <input value={email} onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                            placeholder="enter your email here"
+                            id="email"
+                            className="form-control"
+                            name="email">
+                        </input>
+                    </div>
+
+
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="password">Password</label>
+
+                        <input value={pass} onChange={(e) => setPass(e.target.value)}
+                            type="password"
+                            placeholder="enter your password here"
+                            className="form-control"
+                            id="password"
+                            name="password">
+                        </input>
+                    </div>
+
+                    <div className="mb-3">
+                        <button className="btn btn-primary pe-4 ps-4" id="register-button">register</button>
+                    </div>
+                </form>
+
+
+                </div>
+
+            </div>
+
         </div>
+
     )
 }
 
