@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './LeetQuestion.css';
 import { useNavigate } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
 
 function LeetQuestion(props) {
   const navigate = useNavigate();

@@ -1,11 +1,10 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from "react";
 import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from '../Navbar'
+
+/* eslint-disable no-unused-vars */
 export const Landing = (props) => {
     const cardInfo = [
         {title: "Tailored Plan", text: 
@@ -75,3 +74,4 @@ export const Landing = (props) => {
 }
 
 export default Landing;
+/* eslint-enable no-unused-vars */

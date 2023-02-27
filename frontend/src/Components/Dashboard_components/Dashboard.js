@@ -1,12 +1,11 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
-import LeetQuestion from "../LeetQuestion_components/LeetQuestion";
 import Problems from "../../Problems";
 import { QueryClient, QueryClientProvider } from 'react-query';
-import LogoutButton from "../logoutButton";
 
 const queryClient = new QueryClient();
 
+/* eslint-disable no-unused-vars */
 
 export const Dashboard = (props) => {
   return (
@@ -23,3 +22,4 @@ export const Dashboard = (props) => {
 }
 
 export default Dashboard;
+/* eslint-enable no-unused-vars */

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import {Row, Col} from 'react-bootstrap';
 import axios from 'axios';
@@ -10,7 +9,7 @@ axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
-
+/* eslint-disable no-unused-vars */
 function Attempt({route, navigation}) {
   const location = useLocation();
 
@@ -115,3 +114,4 @@ function Attempt({route, navigation}) {
 }
 
 export default Attempt;
+/* eslint-enable no-unused-vars */
