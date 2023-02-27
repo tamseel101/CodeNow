@@ -19,7 +19,7 @@ function LeetQuestion(props) {
         <Card.Body>
             <Row className="d-flex align-items-center">
                 <Col sm={10}>
-                    <Card.Title className="QuestionText fw-bold"><h2>{props.name}</h2></Card.Title>
+                    <Card.Title className="text-light fw-bold"><h2>{props.name}</h2></Card.Title>
                     <Card.Text className="DescText">{props.desc}</Card.Text>
                 </Col>
                 <Col sm={2}>
