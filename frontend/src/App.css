@@ -1,9 +1,0 @@
-body {
-  text-align: center;
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(65deg, #060124, #3eab76 55%, #022b02);
-  bottom: 0;
-}

@@ -4,7 +4,7 @@ import './Questions.css'
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-function Questions({data, cardIndex}) {
+function Questions() {
     const[active, setActive] = useState("FirstCard")
     const [showButton, setShowButton] = useState(true);
 
@@ -16,7 +16,7 @@ function Questions({data, cardIndex}) {
     <div id="home">
         <section>
             <div className='App'>
-                <div lassName='cards'>
+                <div className='cards'>
                     {active === "FirstCard" && 
                     <Card>
                         <section className='Main'>
@@ -67,8 +67,8 @@ function Questions({data, cardIndex}) {
                                     <br></br>
                                     <label className='Q3'>
                                         How dificult was the question from the range 1-5?
-                                            <label for="customRange2" class="form-label"></label>
-                                            <input type="range" class="form-range" min="0" max="5" id="customRange2" required/>
+                                            <label htmlFor="customRange2" className="form-label"></label>
+                                            <input type="range" className="form-range" min="0" max="5" id="customRange2" required/>
                                     </label>
                                     <br></br>
                                     <button>Done</button>

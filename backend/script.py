@@ -65,7 +65,7 @@ problems = [
 	]
 
 for problem in problems:
-    response = requests.post('http://localhost:8000/UserProblems/prequizproblems/', data=problem)
+    response = requests.post('http://localhost:8000/problems/prequiz_problems/', data=problem)
     if response.status_code == 200:
         print(f"{problem['problem_name']} submitted successfully")
     else:

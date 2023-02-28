@@ -4,13 +4,13 @@
 
 .QuestionBackground{
     background-color: #2a294d !important;
+    background-color: #006b3c !important;
 }
 
-.QuestionText{
-    color: cyan;
-}
+
 
 .QuestionButton{
-    background-color: #d775ff !important;
+    background-color: white !important;
+    color: #006b3c;
     align-items: center;
 }
