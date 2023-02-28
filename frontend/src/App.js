@@ -8,6 +8,7 @@ import useToken from './Hooks/useToken';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Attempt from './Attempt'
+import About from './About';
 
 
 function App() {
@@ -30,9 +31,12 @@ function App() {
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
 
+        <Route path='/register' element= {!token ? <Register/> : <Navigate to ="/" />} />
 
-          <Route path='/register'
-          element= {!token ? <Register/> : <Navigate to ="/" />} />
+        <Route exact path='/about' element={ <About /> }/>
+
+         
+
       </Routes>
     </div>
   );
