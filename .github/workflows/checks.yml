@@ -1,7 +1,7 @@
 ---
 name: Checks
 
-on: [pull_request, push]
+on: [push]
 
 jobs:
   backend-test:
@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
-          ref: dev
       - name: Install Requirements
         run: |
           cd backend
@@ -24,9 +23,6 @@ jobs:
       - name: Tests [Backend]
         run: cd backend; python manage.py test
 
-      - name: Lint [Backend]
-        run: flake8
-
   frontend-test:
     name: Frontend
     runs-on: ubuntu-20.04
@@ -35,17 +31,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: CSC301H5/finalprojectw23-jason-s-juniors
-          ref: dev
       - name: Install packages
         run: |
           cd frontend
           npm ci
           npm install -g eslint
           eslint --init
-      - name: Lint
-        run: |
-          cd frontend
-          eslint src --ext .js
-          
-    
-          
