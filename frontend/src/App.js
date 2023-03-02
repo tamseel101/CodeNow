@@ -8,6 +8,7 @@ import useToken from './Hooks/useToken';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Attempt from './Attempt'
+import {QuizPage} from './PreQuiz/QuizPage'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route exact path="/dashboard" element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
-
+        <Route exact path="/prequiz" element={!token ? <Landing setToken={ setToken }/> : <QuizPage/> }/>
         <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
 
         <Route path='/login'
