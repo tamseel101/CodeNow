@@ -1,9 +1,11 @@
 import './App.css';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {Register} from './Account/Register/Register';
 import {Landing} from './Landing/Landing'
 import { Login } from './Account/Login/Login';
 import {Dashboard} from './Components/Dashboard_components/Dashboard'
+import {InfoForm} from './Pre-quiz/InfoForm';
 import useToken from './Hooks/useToken';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -31,6 +33,8 @@ function App() {
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
 
+        <Route path='/post-quiz'
+          element= {!token ? <InfoForm setToken={ setToken }  /> : <Navigate to ="dashboard/" />} />
 
           <Route path='/register'
           element= {!token ? <Register/> : <Navigate to ="/" />} />
