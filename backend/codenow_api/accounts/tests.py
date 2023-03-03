@@ -8,7 +8,9 @@ class UserViewSetTestCase(APITestCase):
     def setUp(self):
         # Set up a test client and create a user for testing
         self.client = APIClient()
-        self.user_data = {'username': 'testuser', 'password': 'testpass', 'email': 'testuser@example.com'}
+        self.user_data = {'username': 'testuser',
+                          'password': 'testpass',
+                          'email': 'testuser@example.com'}
         self.user = User.objects.create_user(**self.user_data)
 
     def test_create_user(self):
@@ -16,10 +18,11 @@ class UserViewSetTestCase(APITestCase):
         Test that a new user can be created.
         """
         url = reverse('user-list')
-        data = {'username': 'newuser', 'password': 'newpass', 'email': 'newuser@example.com'}
+        data = {'username': 'newuser',
+                'password': 'newpass',
+                'email': 'newuser@example.com'}
         response = self.client.post(url, data)
 
-        # Check that the response is HTTP 201 CREATED and a new user was added to the database
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 2)
 
@@ -39,10 +42,11 @@ class UserViewSetTestCase(APITestCase):
         Test that a user can be updated.
         """
         url = reverse('user-detail', args=[self.user.id])
-        data = {'username': 'updateduser', 'password': 'updatedpass', 'email': 'updateduser@example.com'}
+        data = {'username': 'updateduser',
+                'password': 'updatedpass',
+                'email': 'updateduser@example.com'}
         response = self.client.put(url, data)
 
-        # Check that the response is HTTP 200 OK and the user was updated in the database
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.user.refresh_from_db()
         self.assertEqual(self.user.username, data['username'])
@@ -54,7 +58,6 @@ class UserViewSetTestCase(APITestCase):
         url = reverse('user-detail', args=[self.user.id])
         response = self.client.delete(url)
 
-        # Check that the response is HTTP 204 NO CONTENT and the user was removed from the database
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(User.objects.count(), 0)
 
@@ -63,7 +66,9 @@ class LoginViewTestCase(APITestCase):
     def setUp(self):
         # Set up a test client and create a user for testing
         self.client = APIClient()
-        self.user_data = {'username': 'testuser', 'password': 'testpass', 'email': 'testuser@example.com'}
+        self.user_data = {'username': 'testuser',
+                          'password': 'testpass',
+                          'email': 'testuser@example.com'}
         self.user = User.objects.create_user(**self.user_data)
 
         # Set the URL for the login endpoint
@@ -73,10 +78,10 @@ class LoginViewTestCase(APITestCase):
         """
         Test successful login with valid credentials.
         """
-        data = {'username': 'testuser', 'password': 'testpass'}
+        data = {'username': 'testuser',
+                'password': 'testpass'}
         response = self.client.post(self.url, data)
 
-        # Check that the response is HTTP 200 OK and includes a token and user ID
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('token', response.data)
         self.assertIn('user_id', response.data)
@@ -105,10 +110,10 @@ class LoginViewTestCase(APITestCase):
         """
         Test login with invalid credentials.
         """
-        data = {'username': 'testuser', 'password': 'wrongpass'}
+        data = {'username': 'testuser',
+                'password': 'wrongpass'}
         response = self.client.post(self.url, data)
 
-        # Check that the response is HTTP 200 OK and does not include a token or user ID
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertNotIn('token', response.data)
         self.assertNotIn('user_id', response.data)
