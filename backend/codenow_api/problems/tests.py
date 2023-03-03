@@ -27,4 +27,17 @@ class PrequizProblemsViewTest(TestCase):
         self.assertEqual(req_post.status_code, 200)
         problem = PrequizProblem.objects.get(question_id=1050)
         self.assertEqual(problem.perceived_difficulty, "hard")
+
+
+        data = {
+            "question_id": 1050,
+            "perceived_difficulty": "hard"
+        }
+        req_get = requests.get(url)
+        self.assertEqual(req_get.status_code, 200)
+        print(PrequizProblem.objects.all())
+        req_post = requests.post(url, data)
+        self.assertEqual(req_post.status_code, 200)
+        problem = PrequizProblem.objects.get(question_id=1050)
+        self.assertEqual(problem.perceived_difficulty, "hard")
 """
