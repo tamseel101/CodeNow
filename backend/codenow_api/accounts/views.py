@@ -50,5 +50,5 @@ class LoginView(APIView):
                             status=HTTP_200_OK)
 
         token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user_id': user.id},
+        return Response({'token': token.key, 'user_id': user.id, 'username': user.get_username()},
                         status=HTTP_200_OK)
