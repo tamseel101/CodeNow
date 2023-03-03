@@ -47,7 +47,7 @@ function App() {
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
           
-        <Route path='/register' element= {!token ? <Register/> : <Navigate to ="/" />} />
+        <Route path='/register' element= {<Register setToken={ setToken }  /> } />
 
         <Route exact path='/about' element={ <About /> }/>
 
