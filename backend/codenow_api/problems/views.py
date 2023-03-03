@@ -118,14 +118,14 @@ class AddProblemView(APIView):
     Add Problem View
     """
 
-    """
+    
     @csrf_exempt
     def get(self, request):
-        ""
+        """
         API endpoint that returns pre quiz problems
-        ""
+        """
         # checking for the parameters from the URL
-        problems = PrequizProblems.objects.all()
+        problems = PrequizProblem.objects.all()
         count = len(problems)
         problems_list = list(problems.values())
         response = {
@@ -133,7 +133,7 @@ class AddProblemView(APIView):
             'problems': problems_list[:]
         }
         return Response(response)
-    """
+    
 
     @csrf_exempt
     def post(self, request):
@@ -171,8 +171,10 @@ class PrequizProblemsView(APIView):
         problem_id = request.data.get('question_id')
         perceived_difficulty = request.data.get('perceived_difficulty')
         completion_time = request.data.get('completion_time')
+        completed = request.data.get('completed')
         problem = PrequizProblem.objects.get(question_id=problem_id)
         problem.perceived_difficulty = perceived_difficulty
         problem.completion_time = completion_time
+        problem.completed = completed
         problem.save()
         return HttpResponse(status=200)
