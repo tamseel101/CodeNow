@@ -1,4 +1,5 @@
 import React from "react";
+// import LogoutButton from "../logoutButton";
 // import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 // import Navbar from 'react-bootstrap/Navbar';
@@ -27,6 +28,7 @@ function NavBar() {
               <a className="nav-link active" aria-current="page" href="/Dashboard">Dashboard</a>
               <a className="nav-link active" aria-current="page" href="/PreQuiz">Pre-Quiz</a>
               <a className="nav-link active" aria-current="page" href="/Mockinterview">Mock Interview</a>
+              <a className="nav-link active" aria-current="page" href="/logout">Log Out</a>
             </div>
           </div>
         </div>

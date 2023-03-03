@@ -31,6 +31,9 @@ function App() {
         <Route path='/login'
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
+        <Route path='/logout'
+          element= {token ? <Landing setToken={ null }/> : <Navigate to ="/" />} />
+
         <Route exact path='/attempt' element={ <Attempt /> }/>
 
         <Route exact path='/post-quiz' element={<InfoForm />}/>
