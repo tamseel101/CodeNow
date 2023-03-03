@@ -13,6 +13,12 @@ import Attempt from './Attempt'
 import {QuizPage} from './PreQuiz/QuizPage'
 
 
+function logout() {
+  useEffect(()=>{
+    localStorage.clear()
+    },[])
+}
+
 function App() {
 
   const { token, setToken } = useToken()
@@ -29,6 +35,13 @@ function App() {
         <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
 
         <Route path='/login'
+          element= {<Login setToken={ setToken }  /> } />
+
+        <Route path='/logout'
+          onEnter={logout()}
+          element= {token ? <Landing setToken={ null }/> : <Navigate to ="/" />} />
+
+        <Route path='/logout/login'
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
