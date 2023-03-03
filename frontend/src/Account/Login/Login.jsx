@@ -1,8 +1,6 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Login.css'
-// import Row from "react-bootstrap/esm/Row";
 import Navbar from '../../Navbar'
 import { useNavigate } from "react-router-dom";
 
