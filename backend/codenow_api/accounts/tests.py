@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
-from rest_framework.authtoken.models import Token
 from django.urls import reverse
 
 
@@ -11,7 +10,6 @@ class UserViewSetTestCase(APITestCase):
         self.client = APIClient()
         self.user_data = {'username': 'testuser', 'password': 'testpass', 'email': 'testuser@example.com'}
         self.user = User.objects.create_user(**self.user_data)
-
 
     def test_create_user(self):
         """
