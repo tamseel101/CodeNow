@@ -23,3 +23,4 @@ class PrequizProblem(models.Model):
     leetcode_url = models.CharField(max_length=255)
     perceived_difficulty = models.CharField(max_length=255, default=None, null=True)
     completion_time = models.DateTimeField(auto_now=True, null=True)
+    completed = models.BooleanField(default=False)
