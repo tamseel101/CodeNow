@@ -1,37 +1,45 @@
-section{
+.questions section{
     /* background-image: linear-gradient(65deg, #022916b0, #661152b9); */
     border-radius: 10px;
     cursor: pointer;
 }
-section h1{
+.questions section h1{
     color: rgb(251, 10, 255);
 }
 
-section p, section ul{
+.questions section p, section ul{
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     color: rgb(151, 232, 231);
 }
-.track{
+.questions .track{
     color: black;
     padding: 7px;
 }
 .card{
-    border: px solid black;
-    margin: 10px 0;
     color: white;
     padding: 0.5%;
-    background-image: linear-gradient(65deg, #022916b0, #661152b9);
+    /*background-image: linear-gradient(180deg, #367cffd7, #ae5ff8be);*/
+    background-color:#006b3c;
 }
 
-.form, .form select, .form input{
+.btn-primary {
+    background-color:#006b3c;
+    border: none;
+}
+
+.link-primary {
+    color:#006b3c;
+}
+
+.questions .form, .form select, .form input{
     display: grid;
     justify-content: center;
 }
-.form select, .form input{
+.questions .form select, .form input{
     background-color: rgba(151, 232, 231, 0.308);
 }
-.form input::placeholder{
+.questions .form input::placeholder{
     color: rgba(0, 0, 0, 0.236);
 }
