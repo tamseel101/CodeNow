@@ -10,6 +10,7 @@ import useToken from './Hooks/useToken';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Attempt from './Attempt'
+import About from './About';
 import {QuizPage} from './PreQuiz/QuizPage'
 
 
@@ -45,11 +46,15 @@ function App() {
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
+          
+        <Route path='/register' element= {!token ? <Register/> : <Navigate to ="/" />} />
+
+        <Route exact path='/about' element={ <About /> }/>
+
 
         <Route exact path='/post-quiz' element={<InfoForm />}/>
 
-          <Route path='/register'
-          element= {!token ? <Register/> : <Navigate to ="/" />} />
+
       </Routes>
     </div>
   );
