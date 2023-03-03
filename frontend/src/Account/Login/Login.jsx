@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Login.css'
+import Navbar from '../../Navbar'
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -10,9 +11,10 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 export const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     // TODO: Refactor
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
 
         // Send a request to the backend
         axios.post('http://localhost:8000/login', {
@@ -24,6 +26,7 @@ export const Login = (props) => {
               alert(response.data['error'])
             } else {
               props.setToken(response.data['token'], response.data['user_id'])
+              navigate("/")
             }
           })
           .catch(function (error) {
@@ -32,37 +35,53 @@ export const Login = (props) => {
 
     }
     return(
+
+        <div>
+        <Navbar />
+
+        <div className="container mt-4">
         <div className="auth-form-container">
-            <h2>Log in</h2>
+        <h1 className="fw-bold">Log in</h1>
 
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="username">username</label>
+        <form className="login-form" onSubmit={handleSubmit}>
 
-                <input value={username} onChange={(e) => setUsername(e.target.value)}
-                    type="text"
-                    placeholder="enter your username here" 
-                    id="email" 
-                    name="email">
-                </input>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="username">Username</label>
 
-                <label htmlFor="password">password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)}
-                    type="password" 
-                    placeholder="enter your password here" 
-                    id="password" 
-                    name="password">
-                </input>
+              <input className="form-control" value={username} onChange={(e) => setUsername(e.target.value)}
+                  type="text"
+                  placeholder="Enter your username here"
+                  id="email"
+                  name="email">
+              </input>
+            </div>
 
-                <button
-                    id="login-button"
-                    type="button"
-                    onClick={handleSubmit}>log in</button>
-            </form>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="password">Password</label>
+              <input className="form-control" value={password} onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Enter your password here"
+                  id="password"
+                  name="password">
+              </input>
+            </div>
 
-            <Link to="/Register" className="link-button" onClick={() =>props.onFormSwitch('register')}>
-                don't have an account? register here.
-            </Link>
+            <div className="mb-3">
+              <button
+                  className="btn btn-primary pe-4 ps-4"
+                  id="login-button"
+                  type="button"
+                  onClick={handleSubmit}>
+                    Log in
+              </button>
+            </div>
+
+        </form>
 
         </div>
+      </div>
+
+        </div>
+
     )
 }

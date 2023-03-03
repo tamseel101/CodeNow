@@ -9,8 +9,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from rest_framework.status import HTTP_400_BAD_REQUEST, \
-    HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_403_FORBIDDEN
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 
 # local imports
 from .serializers import UserSerializer
@@ -36,7 +35,8 @@ class LoginView(APIView):
         password = request.data.get("password")
 
         if username is None or password is None:
-            return Response({'error': 'Please provide both username and password'},
+            return Response({'error': 'Please provide both '
+                                      'username and password'},
                             status=HTTP_400_BAD_REQUEST)
 
         print(username, password)
