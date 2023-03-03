@@ -3,8 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useNavigate } from "react-router-dom";
 
 function QuizQuestion(props) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/post-quiz', { state: { problem_id: props.problem_id, user_id: 1 } });
+  };
 
   return (
     <Card className="mt-4">
@@ -18,6 +24,7 @@ function QuizQuestion(props) {
                 <a target="_blank" href={props.url} rel="noreferrer">
                   <Button
                     className= "QuestionButton"
+                    onClick={handleClick}
                    >
                     Code Next
                   </Button>

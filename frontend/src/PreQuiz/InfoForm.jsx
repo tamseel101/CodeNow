@@ -10,7 +10,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
 /* eslint-disable no-unused-vars */
-function Attempt({route, navigation}) {
+function InfoForm({route, navigation}) {
   const location = useLocation();
 
     const[active, setActive] = useState("SecondCard")
@@ -66,10 +66,10 @@ function Attempt({route, navigation}) {
         <div className="container mt-4">
 
           <section className='Question'>
-            <h1 className='fw-bold'>Are you done?</h1>
+            <h1 className='fw-bold'>Have you finished?</h1>
             <p>
-                If you have successfully attempted the given problem,
-                It is now time to go over a few questions to track your progress!
+                Once you have attempted the given problem,
+                please fill out this survey to better tailor your user experience in Code Next.
             </p>
           </section>
 
@@ -87,13 +87,13 @@ function Attempt({route, navigation}) {
 
 
           <div className='mb-3'>
-            <Form.Label>How long did you take to complete the question? (Minutes)</Form.Label>
+            <Form.Label>How many minutes did you take to complete this question?</Form.Label>
             <Form.Control type="numeric" placeholder="10" required onChange={handleTimeTakenChange}/>
           </div>
 
 
           <div className="mb-3">
-            <Form.Label>How dificult was this question for you?</Form.Label>
+            <Form.Label>How difficult was this question?</Form.Label>
             <Row>
                 <Col>Easy</Col>
                 <Col sm={10}><Form.Range min="1" max="5" required onChange={handleDifficultyChange}/></Col>
@@ -101,8 +101,22 @@ function Attempt({route, navigation}) {
             </Row>
           </div>
 
+          <div className='mb-3'>
+            <Form.Label>Do you feel your performance in this question represented your self-perceived skills well?</Form.Label>
+            <Form.Select value={selectedOption} onChange={handleChange} required>
+              <option value="">Select</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </Form.Select>
+          </div>
+
+          <div className='mb-3'>
+            <Form.Label>Why or why not?</Form.Label>
+            <Form.Control type="text" placeholder="..." required onChange={handleTimeTakenChange}/>
+          </div>
+
           <div className="mb-3">
-          <a className="nav-link active" aria-current="page" href="/"><button className="btn btn-primary mb-4" onClick={sendAttempt}>Done</button></a>
+            <a className="nav-link active" aria-current="page" href="/"><button className="btn btn-primary mb-4" onClick={sendAttempt}>Submit Response</button></a>
           </div>
 
           </div>
@@ -113,5 +127,5 @@ function Attempt({route, navigation}) {
   )
 }
 
-export default Attempt;
+export default InfoForm;
 /* eslint-enable no-unused-vars */
