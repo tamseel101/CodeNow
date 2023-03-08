@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-// import Form from 'react-bootstrap/Form';
+import Form from 'react-bootstrap/Form';
 // import {Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import {useLocation} from 'react-router-dom';
@@ -67,47 +67,34 @@ function Behavior({route, navigation}) {
         <div className="container mt-4">
 
           <section className='Question'>
-            <h1 className='fw-bold'>{location.state.behavior_name}</h1>
-            <p>
-            {location.state.behavior_ques}
-            </p>
+            <h1 className="display-1">{location.state.behavior_name}</h1>
+            <h3> {location.state.behavior_ques} </h3>
+            <p>Note that these textfields are here for you to get your thoughts down, but our site will not record your responses!</p>
+            <p>This is for you to reflect and organize your thoughts for the real interview!</p>
           </section>
 
-          {/* Next sprint will have the textfield  */}
+          <div className='form'>
 
-          {/* <div className='form'>
+            <div className="mb-3">
+              <Form.Label><h6>Situation</h6></Form.Label>
+              <Form.Control as="textarea" rows={3}/>
+            </div>
 
-          <div className="mb-3">
-            <Form.Label>Did you manage to complete this question?</Form.Label>
+            <div className="mb-3">
+              <Form.Label><h6>Task</h6></Form.Label>
+              <Form.Control as="textarea" rows={3}/>
+            </div>
 
-            <Form.Select value={selectedOption} onChange={handleChange} required>
-              <option value="">Select</option>
-              <option value="True">Yes</option>
-              <option value="False">No</option>
-            </Form.Select>
+            <div className="mb-3">
+              <Form.Label><h6>Action</h6></Form.Label>
+              <Form.Control as="textarea" rows={3}/>
+            </div>
+
+            <div className="mb-3">
+              <Form.Label><h6>Result</h6></Form.Label>
+              <Form.Control as="textarea" rows={3}/>
+            </div>
           </div>
-
-
-          <div className='mb-3'>
-            <Form.Label>How long did you take to complete the question? (Minutes)</Form.Label>
-            <Form.Control type="numeric" placeholder="10" required onChange={handleTimeTakenChange}/>
-          </div>
-
-
-          <div className="mb-3">
-            <Form.Label>How dificult was this question for you?</Form.Label>
-            <Row>
-                <Col>Easy</Col>
-                <Col sm={10}><Form.Range min="1" max="5" required onChange={handleDifficultyChange}/></Col>
-                <Col>Hard</Col>
-            </Row>
-          </div>
-
-          <div className="mb-3">
-          <a className="nav-link active" aria-current="page" href="/"><button className="btn btn-primary mb-4" onClick={sendAttempt}>Done</button></a>
-          </div>
-
-          </div> */}
 
           <div className="mb-3">
           <a className="nav-link active" aria-current="page" href="/behavioral"><button className="btn btn-primary mb-4">Done</button></a>
