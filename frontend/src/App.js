@@ -12,7 +12,7 @@ import { Navigate } from 'react-router-dom';
 import Attempt from './Attempt'
 import About from './About';
 import {QuizPage} from './PreQuiz/QuizPage'
-
+import {BehavioralPage} from './Behavioral/BehavioralPage'
 
 function logout() {
   useEffect(()=>{
@@ -33,6 +33,7 @@ function App() {
       <Routes>
         <Route exact path="/dashboard" element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
         <Route exact path="/prequiz" element={!token ? <Landing setToken={ setToken }/> : <QuizPage/> }/>
+        <Route exact path="/Behavioral" element={!token ? <Landing setToken={ setToken }/> : <BehavioralPage/> }/>
         <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
 
         <Route path='/login'
