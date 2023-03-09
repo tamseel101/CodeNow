@@ -1,7 +1,7 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 // import { QueryClient, QueryClientProvider } from 'react-query';
-import NavBar from "../Components/NavBar_components/NavBar"
+import NavBar from "../Components/NavBar_components/NavBar";
 import BehavioralQuestion from './BehavioralQuestion';
 
 // const queryClient = new QueryClient();
@@ -12,11 +12,14 @@ export const BehavioralPage = (props) => {
   return (
         <div>
           <NavBar/>
-          <Container className="pb-2">
+
+     <Container className="pt-5 pb-5">
+
           <h1 className="display-1">Welcome to Behavioral Questions! </h1>
           <h3>Here you will be given common behavioral questions asked during interviews. </h3>
           <p>These are slightly different from questions on your dashboard.
             To answer these questions, think of your past experiences and what you have learned.</p>
+
           <p>Remember to use the STAR method</p>
           <ul>
                 <li><strong>Situation:</strong> Set the scene and give the necessary details of your example</li>
@@ -39,6 +42,7 @@ export const BehavioralPage = (props) => {
             </div>
           </Container>
         </div> 
+
   );
 }
 
