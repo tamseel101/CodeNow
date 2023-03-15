@@ -1,6 +1,6 @@
 import requests
 
-# List of problems
+# List of prequiz
 problems = [
     {
         "question_id": 136,
