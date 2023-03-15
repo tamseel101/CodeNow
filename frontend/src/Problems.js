@@ -8,10 +8,10 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export const Problems = () => {
 
-    const { data:problems, status } = useQuery('problems', async () => {
+    const { data:problems, status } = useQuery('prequiz', async () => {
         const { data:problems } = await axios.get('http://localhost:8000/problems/add_problems/');
-        console.log(problems['problems'])
-        return problems['problems']
+        console.log(problems['prequiz'])
+        return problems['prequiz']
       });
 
 
