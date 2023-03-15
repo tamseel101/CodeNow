@@ -10,3 +10,11 @@ class Problem(models.Model):
     # TODO Implement choices here
     topic = models.CharField(max_length=100)
     difficulty = models.CharField(max_length=100)
+
+
+class BehaviorProblem(models.Model):
+    """
+    Behavioral Problems
+    """
+    name = models.CharField(max_length=250)
+    desc = models.CharField(max_length=600)
