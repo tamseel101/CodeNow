@@ -13,23 +13,24 @@ export const GetBehaProbs = () => {
         console.log(problems['problems'])
         return problems['problems']
       });
-
+    
 
   return (
     <div>
     {status === 'loading' && <div>Loading...</div>}
     {status === 'error' && <div>Error</div>}
     {status === 'success' && (
-        <ul>
+        <div className="row mt-1">
             {problems.map(problem => (
                 <BehavioralQuestion
-                  name={problem.problem_name}
-                  desc={problem.difficulty_level}
+                  name={problem.name}
+                  desc={problem.desc}
                   problem_id={problem.id}
                   key={problem.id}
                 />
+              
             ))}
-        </ul>
+        </div>
     )}
 </div>
   );
