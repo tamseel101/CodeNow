@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Navbar from '../../Navbar'
 
 
-export const Register = (props) => {
+export const Register = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [username, setUserName] = useState('');
@@ -27,7 +27,7 @@ export const Register = (props) => {
                 navigate("/")
             }
           })
-          .catch(function (error) {
+          .catch(function () {
             alert("Error. Username or email likely exist.")
           });
 
