@@ -1,11 +1,40 @@
-# from rest_framework import serializers
-#from .models import problems
+from rest_framework import serializers
+from .models import Problem, ProblemCategory, Attempt
+from django.contrib.auth import get_user_model
 
-
-
-"""
-class UserProblemsSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = problems
-        fields = ['question_id', ' user_duration', 'difficulty', 'completion_time']
-"""
+        model = get_user_model()
+        fields = ('id', 'username', 'email')
+
+class ProblemCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProblemCategory
+        fields = '__all__'
+
+class ProblemSerializer(serializers.ModelSerializer):
+    categories = serializers.PrimaryKeyRelatedField(
+        queryset=ProblemCategory.objects.all(),
+        many=True,
+        allow_null=True
+    )
+
+    class Meta:
+        model = Problem
+        fields = '__all__'
+
+    def create(self, validated_data):
+        categories_data = validated_data.pop('categories', [])
+        problem = Problem.objects.create(**validated_data)
+        for category_id in categories_data:
+            problem.categories.add(category_id)
+        problem.save()
+        return problem
+
+class AttemptSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    problem = ProblemSerializer(read_only=True)
+
+    class Meta:
+        model = Attempt
+        fields = '__all__'
