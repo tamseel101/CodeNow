@@ -1,54 +1,36 @@
-# django imports
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.views.decorators.csrf import csrf_exempt
-
-# django rest imports
-from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
-from rest_framework.views import APIView
-from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
+from django.contrib.auth import get_user_model
+from .models import CustomUser
+from rest_framework.generics import CreateAPIView, DestroyAPIView
+from rest_framework import generics, permissions, status
 
 # local imports
 from .serializers import UserSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
+# Login
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+
+# Register
+class RegisterView(CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    model = get_user_model()
     serializer_class = UserSerializer
 
 
-class LoginView(APIView):
-    permission_classes = [AllowAny]
+# Logout
+class LogoutView(DestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
-    @csrf_exempt
-    def post(self, request):
-        """
-        API endpoint that authenticates user and returns a token
-        """
-        username = request.data.get("username")
-        password = request.data.get("password")
-
-        if username is None or password is None:
-            return Response({'error': 'Please provide both '
-                                      'username and password'},
-                            status=HTTP_400_BAD_REQUEST)
-
-        print(username, password)
-
-        user = authenticate(username=username, password=password)
-
-        print(user)
-
-        if not user:
-            return Response({'error': 'Invalid Credentials'},
-                            status=HTTP_200_OK)
-
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user_id': user.id, 'username': user.get_username()},
-                        status=HTTP_200_OK)
+    def destroy(self, request, *args, **kwargs):
+        Token.objects.filter(user=request.user).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
