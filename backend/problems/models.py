@@ -42,3 +42,10 @@ class Attempt(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.problem.leetcode_url} - {self.date_time}'
+
+class BehaviorProblem(models.Model):
+    """
+    Behavioral Problems
+    """
+    name = models.CharField(max_length=250)
+    desc = models.CharField(max_length=600)

@@ -38,3 +38,11 @@ class AttemptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attempt
         fields = '__all__'
+
+
+class BehavioralProblemsSerializer(serializers.Serializer):
+    """
+    Behavioral Problems Serializer
+    """
+    name = serializers.CharField(max_length=200)
+    desc = serializers.CharField(max_length=600)
