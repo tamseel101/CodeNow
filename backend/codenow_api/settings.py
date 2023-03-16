@@ -33,7 +33,6 @@ CORS_ORIGIN_WHITELIST = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Application definition
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
@@ -46,9 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'rest_framework',
-    #'prequiz',
     'accounts',
     'problems',
+    'confidence',
 ]
 
 MIDDLEWARE = [
