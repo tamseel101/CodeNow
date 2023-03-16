@@ -158,12 +158,12 @@ export const QuizPage = () => {
       </div>
       <br></br>
       <Container className="d-flex justify-content-center align-items-center flex-column pt-5 pb-5" style={{ backgroundColor: '#F5F5F5', padding: '50px' }}>
-        <h1 className="display-1 text-center mb-4">Welcome to the Pre-Quiz! </h1>
-        <h3 className="text-center mb-4">We will use this quiz to identify which problems to assign to you!</h3>
+        <h1 className="display-1 text-center mb-4">Welcome to the Pre-Assessment! </h1>
+        <h3 className="text-center mb-4">We will use this assessment to identify which problems to assign to you!</h3>
         {/* <Button variant="primary" onClick={handleStart}>Start</Button> */}
         {!isStarted && (
         <div className="start-button-container" style={{display: "grid", justifyContent: "center", alignItems: "center"}}>
-          <p className="text-center mb-4">To begin the quiz, simply click on the Start button. Please answer these questions to the best of your ability.</p>
+          <p className="text-center mb-4">To begin the assessment, simply click on the Start button. Please answer these questions to the best of your ability.</p>
           <Button
             variant="primary"
             onClick={() => {
@@ -172,7 +172,7 @@ export const QuizPage = () => {
             }}
             className={submitted ? "hidden" : ""}
           >
-            Start Prequiz
+            Start Assessment
           </Button>
       </div>
       
