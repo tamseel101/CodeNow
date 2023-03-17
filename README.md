@@ -1,4 +1,4 @@
-# CodeNow
+# CodeNext
 
 [![Checks](https://github.com/CSC301H5/finalprojectw23-jason-s-juniors/actions/workflows/checks.yml/badge.svg?branch=dev)](https://github.com/CSC301H5/finalprojectw23-jason-s-juniors/actions/workflows/checks.yml)
 
