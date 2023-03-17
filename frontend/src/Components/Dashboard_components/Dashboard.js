@@ -7,16 +7,8 @@ import NavBar from "../NavBar_components/NavBar"
 const queryClient = new QueryClient();
 
 /* eslint-disable no-unused-vars */
-let username = JSON.parse(sessionStorage.getItem("username"))
+//let username = JSON.parse(sessionStorage.getItem("username"))
 
-
-
-console.log(username)
-
-
-if (username === null || username === undefined) {
-  username = ""
-}
 
 export const Dashboard = (props) => {
 
@@ -24,7 +16,7 @@ export const Dashboard = (props) => {
         <div>
           <NavBar/>
           <Container className="pt-5 pb-5">
-          <h1 className="display-1">Hello {username}!</h1>
+          <h1 className="display-1">Hello!</h1>
           <h3>Here are your problems for today</h3>
           <p>Click on start to start a problem.
             Then come back to this page track progress.</p>

@@ -28,3 +28,4 @@ class ConfidenceUpdateView(APIView):
                 confidence.save()
 
         return Response("Confidence levels updated successfully", status=status.HTTP_200_OK)
+

@@ -1,3 +1,4 @@
+from unicodedata import category
 from rest_framework import serializers
 from .models import Problem, ProblemCategory, Attempt
 from django.contrib.auth import get_user_model
@@ -13,23 +14,22 @@ class ProblemCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProblemSerializer(serializers.ModelSerializer):
-    categories = serializers.PrimaryKeyRelatedField(
-        queryset=ProblemCategory.objects.all(),
-        many=True,
-        allow_null=True
-    )
+    categories = ProblemCategorySerializer(many=True)
 
     class Meta:
         model = Problem
-        fields = '__all__'
+        fields = ('id', 'name', 'leetcode_url', 'difficulty', 'categories')
 
     def create(self, validated_data):
-        categories_data = validated_data.pop('categories', [])
+        categories_data = validated_data.pop('categories')
         problem = Problem.objects.create(**validated_data)
-        for category_id in categories_data:
-            problem.categories.add(category_id)
-        problem.save()
+
+        for category_data in categories_data:
+            category, _ = ProblemCategory.objects.get_or_create(**category_data)
+            problem.categories.add(category)
+
         return problem
+
 
 class AttemptSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

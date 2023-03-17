@@ -6,7 +6,7 @@ class ProblemCategory(models.Model):
     """
     Examples: Arrays, LinkedLists, BFS
     """
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -27,6 +27,10 @@ class Problem(models.Model):
 
     def __str__(self):
         return f'{self.get_difficulty_display()} - {self.leetcode_url}'
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        super(Problem, self).save(*args, **kwargs)
 
 
 class Attempt(models.Model):
