@@ -1,4 +1,7 @@
 # views.py
+from random import choice
+from urllib import request
+from confidence.models import Confidence
 from rest_framework import generics, permissions
 from confidence.models import Confidence
 from .models import Problem, ProblemCategory, Attempt
@@ -119,3 +122,43 @@ class BehavioralProblemsView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class RecommendedProblemsView(generics.ListAPIView):
+    serializer_class = ProblemSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Problem.objects.none()
+
+        confidences = Confidence.objects.all().filter(user=user).order_by('level')
+
+        print(confidences)
+
+        selected_problems = []
+
+        for confidence in confidences:
+            category = [confidence.problem_category]
+            problems = Problem.objects.filter(categories__in=category)
+
+            if confidence.level < 40:
+                difficulty = 'EASY'
+            elif 30 <= confidence.level <= 70:
+                difficulty = 'MEDIUM'
+            else:
+                difficulty = 'HARD'
+
+            problems = problems.filter(difficulty=difficulty)
+
+            if problems:
+                problem = choice(list(problems))
+                selected_problems.append(problem)
+
+        # Sort selected_problems by confidence level
+        selected_problems.sort(key=lambda p: Confidence.objects.get(user=user, problem_category__in=p.categories.all()).level)
+
+
+        # Build queryset from the sorted list of problems
+        queryset = Problem.objects.filter(pk__in=[p.pk for p in selected_problems])
+
+        return queryset
