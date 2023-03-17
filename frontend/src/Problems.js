@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 export const Problems = () => {
 
     const { data:problems, status } = useQuery('prequiz', async () => {
-        const { data:problems } = await axios.get('http://localhost:8000/problems/add_problems/');
+        const { data:problems } = await axios.get('http://localhost:8000/problems/recommended/');
         console.log(problems['prequiz'])
         return problems['prequiz']
       });
