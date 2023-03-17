@@ -131,7 +131,7 @@ class RecommendedProblemsView(generics.ListAPIView):
         user = self.request.user
         queryset = Problem.objects.none()
 
-        confidences = Confidence.objects.all().filter(user=user).order_by('level')
+        confidences = Confidence.objects.all().filter(user=user.id).order_by('level')
 
         print(confidences)
 
