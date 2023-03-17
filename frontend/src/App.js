@@ -14,6 +14,7 @@ import About from './About';
 import Behavior from './Behavior'
 import {QuizPage} from './PreQuiz/QuizPage'
 import {BehavioralPage} from './Behavioral/BehavioralPage'
+import axios from 'axios';
 
 function logout() {
   useEffect(()=>{
@@ -26,6 +27,12 @@ function App() {
   const { token, setToken } = useToken()
 
   useEffect(() => {console.log(token)}, [token])
+
+  const localToken = sessionStorage.getItem('token');
+
+  if (localToken)
+    axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+
 
   console.log(token)
 

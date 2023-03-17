@@ -9,9 +9,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 export const Problems = () => {
 
     const { data:problems, status } = useQuery('prequiz', async () => {
-        const { data:problems } = await axios.get('http://localhost:8000/problems/add_problems/');
-        console.log(problems['prequiz'])
-        return problems['prequiz']
+        const { data:problems } = await axios.get('http://localhost:8000/problems/recommended/');
+        return problems['results']
       });
 
 
@@ -23,9 +22,9 @@ export const Problems = () => {
         <ul>
             {problems.map(problem => (
                 <LeetQuestion
-                  name={problem.problem_name}
+                  name={problem.name}
                   url={problem.leetcode_url}
-                  desc={problem.difficulty_level}
+                  desc={problem.difficulty}
                   problem_id={problem.id}
                   key={problem.id}
                 />

@@ -14,7 +14,7 @@ export const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Send a request to the backend
-        axios.post('http://localhost:8000/users/', {
+        axios.post('http://localhost:8000/account/register/', {
             "username": username,
             "password": pass,
             "email": email
