@@ -16,8 +16,8 @@ The following are our improvements to our site:
 The following are our planned core features: 
 
 - An assessment quiz to assess the current skills on the user so they get a better understanding of their weaknesses
-- An algorithm that can assign the user questions based on their assessment quiz result and user feedback from assigned problems
-- Notifications to remind the user to do their daily problems, which will combat the forgetting curve
+- A logout button to log users out
+- An about page to display the purpose of our website, what is the forgetting curve and how we plan to combat it
 
 In addition to this, we want to emphasize testing, so we decided to invest time into creating unit tests for endpoints.
 

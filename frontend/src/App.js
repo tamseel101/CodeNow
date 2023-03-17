@@ -33,7 +33,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route exact path="/dashboard" element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
-        <Route exact path="/prequiz" element={!token ? <Landing setToken={ setToken }/> : <QuizPage/> }/>
+        <Route exact path="/prequiz" element={<QuizPage setToken={ setToken }/>}/>
         <Route exact path="/Behavioral" element={!token ? <Landing setToken={ setToken }/> : <BehavioralPage/> }/>
         <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
 
