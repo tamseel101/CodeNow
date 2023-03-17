@@ -1,69 +1,120 @@
 import requests
 
-# List of prequiz
+# List of problems to populate
 problems = [
+    # arrays
     {
-        "question_id": 136,
-        "problem_name": "Single Number",
-        "difficulty_level": "easy",
-        "leetcode_url": "https://leetcode.com/problems/single-number/"
+        "name": "Single Number",
+        "leetcode_url": "https://leetcode.com/problems/single-number/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Arrays"}]
     },
     {
-        "question_id": 1448,
-        "problem_name": "Count Good Nodes in Binary Tree",
-        "difficulty_level": "medium",
-        "leetcode_url": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/"
+        "name": "Contains Duplicate",
+        "leetcode_url": "https://leetcode.com/problems/contains-duplicate/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Arrays"}]
     },
     {
-        "question_id": 11,
-        "problem_name": "Container With Most Water",
-        "difficulty_level": "medium",
-        "leetcode_url": "https://leetcode.com/problems/container-with-most-water/"
+        "name": "Container With Most Water",
+        "leetcode_url": "https://leetcode.com/problems/container-with-most-water/",
+        "difficulty": "MEDIUM",
+        "categories": [{"name": "Arrays"}]
+    },
+    # trees
+    {
+        "name": "Invert Binary Tree",
+        "leetcode_url": "https://leetcode.com/problems/invert-binary-tree/",
+        "difficulty": "EASY",
+        "categories": [
+            {"name": "Trees"}]
     },
     {
-        "question_id": 268,
-        "problem_name": "Missing Number",
-        "difficulty_level": "easy",
-        "leetcode_url": "https://leetcode.com/problems/missing-number/"
+        "name": "Maximum Depth of Binary Tree",
+        "leetcode_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Trees"}]
     },
     {
-        "question_id": 695,
-        "problem_name": "Max Area of Island",
-        "difficulty_level": "medium",
-        "leetcode_url": "https://leetcode.com/problems/max-area-of-island/"
+        "name": "Diameter of Binary Tree",
+        "leetcode_url": "https://leetcode.com/problems/diameter-of-binary-tree/",
+        "difficulty": "EASY",
+        "categories": [
+            {"name": "Trees"}]
     },
     {
-        "question_id": 217,
-        "problem_name": "Contains Duplicate",
-        "difficulty_level": "easy",
-        "leetcode_url": "https://leetcode.com/problems/contains-duplicate/"
+        "name": "Count Good Nodes in Binary Tree",
+        "leetcode_url": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+        "difficulty": "MEDIUM",
+        "categories": [{"name": "Trees"}]
+    },
+
+    # need more mediums here
+    # heaps
+    {
+        "name": "Last Stone Weight",
+        "leetcode_url": "https://leetcode.com/problems/last-stone-weight/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Heaps"}]
     },
     {
-        "question_id": 42,
-        "problem_name": "Trapping Rain Water",
-        "difficulty_level": "hard",
-        "leetcode_url": "https://leetcode.com/problems/trapping-rain-water/"
+        "name": "Kth Largest Element in a Stream",
+        "leetcode_url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Heaps"}]
     },
     {
-        "question_id": 704,
-        "problem_name": "Binary Search",
-        "difficulty_level": "easy",
-        "leetcode_url": "https://leetcode.com/problems/binary-search/"
+        "name": "Last Stone Weight",
+        "leetcode_url": "https://leetcode.com/problems/last-stone-weight/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Heaps"}]
     },
     {
-        "question_id": 153,
-        "problem_name": "Find Minimum in Rotated Sorted Array",
-        "difficulty_level": "medium",
-        "leetcode_url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+        "name": "K Closest Points to Origin",
+        "leetcode_url": "https://leetcode.com/problems/k-closest-points-to-origin/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Heaps"}]
+    },
+
+    # linked lists
+    {
+        "name": "Merge Two Sorted Lists",
+        "leetcode_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Linked Lists"}]
     },
     {
-        "question_id": 1046,
-        "problem_name": "Last Stone Weight",
-        "difficulty_level": "easy",
-        "leetcode_url": "https://leetcode.com/problems/last-stone-weight/"
+        "name": "Reverse Linked Lists",
+        "leetcode_url": "https://leetcode.com/problems/reverse-linked-list/",
+        "difficulty": "EASY",
+        "categories": [{"name": "Linked Lists"}]
+    },
+    {
+        "name": "Reorder List",
+        "leetcode_url": "https://leetcode.com/problems/reorder-list/",
+        "difficulty": "MEDIUM",
+        "categories": [{"name": "Linked Lists"}]
+    },
+    {
+        "name": "Copy List with Random Pointer",
+        "leetcode_url": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+        "difficulty": "MEDIUM",
+        "categories": [{"name": "Linked Lists"}]
     }
 ]
 
+
+for problem in problems:
+    response = requests.post('http://localhost:8000/problems/', json=problem)
+    if response.status_code == 201:
+        print(f"{problem['name']} submitted successfully")
+    else:
+        print(f"Error submitting {problem['name']}: {response.status_code}")
+        print(response.content)
+
+
+
+######### Extra
 behavioral_questions = [
     {
         "name": "Recent Projects",
@@ -111,17 +162,11 @@ behavioral_questions = [
         "desc": "What source control tools have you used?"
     },
 ]
-"""
-for problem in problems:
-    response = requests.post('http://localhost:8000/problems/add_problems/', data=problem)
-    if response.status_code == 200:
-        print(f"{problem['problem_name']} submitted successfully")
-    else:
-        print(f"Error submitting {problem['problem_name']}: {response.status_code}")
-"""
-for behavioral_question in behavioral_questions:
-    response = requests.post('http://localhost:8000/problems/behavioral_problems/', data=behavioral_question)
-    if response.status_code == 200:
-        print(f"{behavioral_question['name']} submitted successfully")
-    else:
-        print(f"Error submitting {behavioral_question['name']}: {response.status_code}")
+
+
+#for behavioral_question in behavioral_questions:
+    #response = requests.post('http://localhost:8000/problems/behavioral_problems/', data=behavioral_question)
+    #if response.status_code == 200:
+        #print(f"{behavioral_question['name']} submitted successfully")
+    #else:
+        #print(f"Error submitting {behavioral_question['name']}: {response.status_code}")
