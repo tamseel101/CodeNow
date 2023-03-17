@@ -1,5 +1,6 @@
 # views.py
 from rest_framework import generics, permissions
+from confidence.models import Confidence
 from .models import Problem, ProblemCategory, Attempt
 from .serializers import ProblemSerializer, ProblemCategorySerializer, AttemptSerializer
 from django.contrib.auth.models import User
@@ -41,6 +42,44 @@ class AttemptListCreate(generics.ListCreateAPIView):
         problem_id = self.kwargs['pid']
         problem = get_object_or_404(Problem, id=problem_id)
         serializer.save(user=self.request.user, problem=problem)
+
+    def post(self, request, *args, **kwargs):
+        problem_id = self.kwargs['pid']
+        problem = get_object_or_404(Problem, id=problem_id)
+        for category in problem.categories.all():
+            name = category.name
+
+        category = get_object_or_404(ProblemCategory, name=name)
+        print(category)
+        user=self.request.user
+        print(user)
+        confidence = get_object_or_404(Confidence, user=user, problem_category=category)
+        print(confidence)
+
+        perceived_difficulty = request.data.get("perceived_difficulty")
+        time_taken = request.data.get("time_taken")
+        completed = request.data.get("completed")
+        if completed and confidence.level < 5: # assuming 5 is max
+            confidence.level += 1
+        elif not completed and confidence.level > 0:
+            confidence.level -= 1
+        if time_taken >= 40 and perceived_difficulty == 'hard' and confidence.level > 0:
+            confidence.level -= 1
+        elif time_taken >= 30 and perceived_difficulty == 'medium' and confidence.level > 0:
+            confidence.level -= 0.5
+        elif time_taken >= 20 and perceived_difficulty == 'easy' and confidence.level < 5:
+            confidence.level += 1
+
+        confidence.save()
+
+
+        return Response(status=status.HTTP_200_OK)
+
+
+
+        
+
+    
 
 class AttemptRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Attempt.objects.all()
