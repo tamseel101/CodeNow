@@ -7,6 +7,7 @@ import GetPreProbs from '../GetPreProbs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './prequiz.css'
+import user_id from '../user'
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
@@ -42,6 +43,7 @@ export const QuizPage = () => {
   const submitQuiz = (e) => {
     setShowModal(false)
     axios.put('http://localhost:8000/confidence/skill_assessment/', {
+            "user": user_id.val,
             "arrays": sliderValues[0]*20, //// multiply these
             "linked lists": sliderValues[1]*20,
             "stacks": sliderValues[2]*20,

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Navbar from '../../Navbar'
+import user_id from '../../user'
 
-
-export const Register = () => {
+export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [username, setUserName] = useState('');
@@ -24,7 +24,9 @@ export const Register = () => {
               alert(response.data['error'])
             } else {
                 alert("User created! Please login.")
-                navigate("/prequi")
+                //props.setToken(response.data['token'], response.data['user_id'], response.data['username'])
+                user_id.val = username
+                navigate("/prequiz")
             }
           })
           .catch(function () {
