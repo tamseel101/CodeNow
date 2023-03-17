@@ -11,6 +11,9 @@ urlpatterns = [
     path('<int:pid>/attempts/', views.AttemptListCreate.as_view(), name='attempt_list_create'),
     path('<int:pid>/attempts/<int:pk>/', views.AttemptRetrieveUpdateDestroy.as_view(), name='attempt_retrieve_update_destroy'),
 
+    # recommended problems
+    path('recommended/', views.RecommendedProblemsView.as_view(), name='recommended_problems'),
+
     # behavioural
     path('behavioral_problems/', BehavioralProblemsView.as_view(), name='behavioralproblems'),
 ]
