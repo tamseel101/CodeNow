@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
 import axios from "axios"
-import { QueryClient, QueryClientProvider } from 'react-query';
+// import { QueryClient } from 'react-query';
 import NavBar from "../Components/NavBar_components/NavBar";
-import GetPreProbs from '../GetPreProbs';
+// import GetPreProbs from '../GetPreProbs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './prequiz.css'
@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 export const QuizPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,11 +36,11 @@ export const QuizPage = () => {
     } else {
       setShowModal(true);
       setSubmitted(true);
-      setModalText("WOOHOO thanks");
+      setModalText("Thank you!");
     }
   };
   
-  const submitQuiz = (e) => {
+  const submitQuiz = () => {
     setShowModal(false)
     axios.put('http://localhost:8000/confidence/skill_assessment/', {
             "user": user_id.val,
@@ -90,7 +90,7 @@ export const QuizPage = () => {
       default:
         return '';
       case 6:
-        return 'WOOHOO! >.<';
+        return 'Assessment complete!';
     }
   };
 
@@ -106,55 +106,55 @@ export const QuizPage = () => {
       case 1:
         return (
           <>
-            <p>How well do you know Arrays?</p>
+            <p>How experienced are you with Arrays?</p>
             <div className="slider-container">
-              <span className="slider-label">No experience </span>
+              <span className="slider-label">Not experienced </span>
               <input type="range" min="0" max="4" value={sliderValues[0]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(0, parseInt(event.target.value))} />
-              <span className="slider-label"> Experienced</span>
+              <span className="slider-label"> Very experienced</span>
             </div>
           </>
         );
       case 2:
         return (
           <>
-            <p>How well do you know Linked Lists?</p>
+            <p>How experienced are you with Linked Lists?</p>
             <div className="slider-container1">
-              <span className="slider-label">No experience </span>
+              <span className="slider-label">Not experienced </span>
               <input type="range" min="0" max="4" value={sliderValues[1]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(1, parseInt(event.target.value))} />
-              <span className="slider-label"> Experienced</span>
+              <span className="slider-label"> Very experienced</span>
             </div>
           </>
         );
       case 3:
         return (
           <>
-            <p>How well do you know Stacks?</p>
+            <p>How experienced are you with Stacks?</p>
             <div className="slider-container2">
-              <span className="slider-label">No experience </span>
+              <span className="slider-label">Not experienced </span>
               <input type="range" min="0" max="4" value={sliderValues[2]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(2, parseInt(event.target.value))} />
-              <span className="slider-label"> Experienced</span>
+              <span className="slider-label"> Very experienced</span>
             </div>
           </>
         );
       case 4:
         return (
           <>
-            <p>How well do you know Heaps?</p>
+            <p>How experienced are you with Heaps?</p>
             <div className="slider-container3">
-              <span className="slider-label">No experience </span>
+              <span className="slider-label">Not experienced </span>
               <input type="range" min="0" max="4" value={sliderValues[3]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(3, parseInt(event.target.value))} />
-              <span className="slider-label"> Experienced</span>
+              <span className="slider-label"> Very experienced</span>
             </div>
           </>
         );
       case 5:
         return (
           <>
-            <p>How well do you know Trees?</p>
+            <p>How experienced are you with Trees?</p>
             <div className="slider-container4">
-              <span className="slider-label">No experience </span>
+              <span className="slider-label">Not experienced </span>
               <input type="range" min="0" max="4" value={sliderValues[4]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(4, parseInt(event.target.value))} />
-              <span className="slider-label"> Experienced</span>
+              <span className="slider-label"> Very experienced</span>
             </div>
           </>
         );
