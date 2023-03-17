@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
+import axios from "axios"
 import { QueryClient, QueryClientProvider } from 'react-query';
 import NavBar from "../Components/NavBar_components/NavBar";
 import GetPreProbs from '../GetPreProbs';
@@ -38,25 +39,25 @@ export const QuizPage = () => {
     }
   };
   
-  const submitQuiz = () => {
+  const submitQuiz = (e) => {
     setShowModal(false)
-    axios({
-      method: "POST",
-      url:"/skill_assessment/",  // change this 
-      // slider values here: variable sliderValues
-      data:{
-        arrays: sliderValues[0], //// multiply these
-        linkedLists: sliderValues[1],
-        stacks: sliderValues[2],
-        priorityQueues: sliderValues[3],
-        trees: sliderValues[4]
-       }
-    })
-    .then((response) => {
-      navigate("/")
-    })
-
-    event.preventDefault()
+    axios.post('http://localhost:8000/assessment/skill_assessment/', {
+            "arrays": sliderValues[0]*20, //// multiply these
+            "linked lists": sliderValues[1]*20,
+            "stacks": sliderValues[2]*20,
+            "priority queues": sliderValues[3]*20,
+            "trees": sliderValues[4]*20
+          })
+          .then(function (response) {
+            if (response.data['error']) {
+              alert(response.data['error'])
+            } else {
+                navigate("/")
+            }
+          })
+          .catch(function () {
+            alert("Error submitting data.")
+          });
   }
 
   const handleBackToQuestion = () => {
@@ -199,9 +200,9 @@ export const QuizPage = () => {
       
       )}
        
-        <QueryClientProvider client={ queryClient }>
+        {/* <QueryClientProvider client={ queryClient }>
           <GetPreProbs />
-        </QueryClientProvider>
+        </QueryClientProvider> */}
       </Container>
     
       <Modal show={showModal} onHide={() => {}} centered className="fade">

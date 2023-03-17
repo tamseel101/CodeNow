@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Navbar from '../../Navbar'
 
 
-export const Register = (props) => {
+export const Register = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [username, setUserName] = useState('');
@@ -14,7 +14,7 @@ export const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Send a request to the backend
-        axios.post('http://localhost:8000/users/', {
+        axios.post('http://localhost:8000/account/register/', {
             "username": username,
             "password": pass,
             "email": email
@@ -24,10 +24,10 @@ export const Register = (props) => {
               alert(response.data['error'])
             } else {
                 alert("User created! Please login.")
-                navigate("/prequiz/")
+                navigate("/prequi")
             }
           })
-          .catch(function (error) {
+          .catch(function () {
             alert("Error. Username or email likely exist.")
           });
 
