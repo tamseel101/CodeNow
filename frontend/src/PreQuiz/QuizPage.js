@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
+import axios from "axios"
 import { QueryClient, QueryClientProvider } from 'react-query';
 import NavBar from "../Components/NavBar_components/NavBar";
 import GetPreProbs from '../GetPreProbs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './prequiz.css'
+import user_id from '../user'
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +21,7 @@ export const QuizPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [modalText, setModalText] = useState('');
-
+  const navigate = useNavigate();
 
   const [isStarted, setIsStarted] = useState(false);
 
@@ -37,6 +40,27 @@ export const QuizPage = () => {
     }
   };
   
+  const submitQuiz = (e) => {
+    setShowModal(false)
+    axios.put('http://localhost:8000/confidence/skill_assessment/', {
+            "user": user_id.val,
+            "arrays": sliderValues[0]*20, //// multiply these
+            "linked lists": sliderValues[1]*20,
+            "stacks": sliderValues[2]*20,
+            "priority queues": sliderValues[3]*20,
+            "trees": sliderValues[4]*20
+          })
+          .then(function (response) {
+            if (response.data['error']) {
+              alert(response.data['error'])
+            } else {
+                navigate("/")
+            }
+          })
+          .catch(function () {
+            alert("Error submitting data.")
+          });
+  }
 
   const handleBackToQuestion = () => {
     if (currentQuestion > 1) {
@@ -138,7 +162,7 @@ export const QuizPage = () => {
           return (
             <>
               <p>You have completed the quiz!</p>
-              <Button onClick={() => setShowModal(false)}>Close</Button>
+              <Button onClick={() => submitQuiz()}>Close</Button>
             </>
           );
         
@@ -178,9 +202,9 @@ export const QuizPage = () => {
       
       )}
        
-        <QueryClientProvider client={ queryClient }>
+        {/* <QueryClientProvider client={ queryClient }>
           <GetPreProbs />
-        </QueryClientProvider>
+        </QueryClientProvider> */}
       </Container>
     
       <Modal show={showModal} onHide={() => {}} centered className="fade">
