@@ -48,28 +48,39 @@ class AttemptListCreate(generics.ListCreateAPIView):
         problem = get_object_or_404(Problem, id=problem_id)
         for category in problem.categories.all():
             name = category.name
-
+        #print(category)
         category = get_object_or_404(ProblemCategory, name=name)
-        print(category)
+        #print(category)
         user=self.request.user
-        print(user)
+        #print(user)
         confidence = get_object_or_404(Confidence, user=user, problem_category=category)
-        print(confidence)
+        #print(confidence)
 
         perceived_difficulty = request.data.get("perceived_difficulty")
         time_taken = request.data.get("time_taken")
         completed = request.data.get("completed")
-        if completed and confidence.level < 5: # assuming 5 is max
-            confidence.level += 1
-        elif not completed and confidence.level > 0:
-            confidence.level -= 1
-        if time_taken >= 40 and perceived_difficulty == 'hard' and confidence.level > 0:
-            confidence.level -= 1
-        elif time_taken >= 30 and perceived_difficulty == 'medium' and confidence.level > 0:
-            confidence.level -= 0.5
-        elif time_taken >= 20 and perceived_difficulty == 'easy' and confidence.level < 5:
-            confidence.level += 1
 
+
+        if completed:
+            confidence.level = min(100, confidence.level + 20)
+        else:
+            confidence.level = max(0, confidence.level - 20)
+        if perceived_difficulty.upper() == 'HARD':
+            if time_taken >= 40:
+                confidence.level = max(0, confidence.level - 10)
+            elif time_taken >= 30:
+                confidence.level = max(0, confidence.level - 5)
+        elif perceived_difficulty.upper() == 'MEDIUM':
+            if time_taken >= 30:
+                confidence.level = max(0, confidence.level - 5)
+        elif perceived_difficulty.upper() == 'EASY':
+            if time_taken >= 15:
+                confidence.level = max(0, confidence.level - 5)
+            if time_taken < 15:
+                confidence.level = min(100, confidence.level + 5)
+
+
+        #print(confidence)
         confidence.save()
 
 
