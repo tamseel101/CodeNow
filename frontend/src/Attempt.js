@@ -33,17 +33,29 @@ function Attempt({route, navigation}) {
     const [difficulty, setDifficulty] = useState(3)
 
     const handleDifficultyChange = (e) => {
-        setDifficulty(e.target.value)
+
+        const diff = e.target.value;
+        let difficulty = "EASY"
+
+        if (diff <= 2) {
+          difficulty = "EASY"
+        }
+        else if (diff <= 4) {
+          difficulty = "MEDIUM"
+        } else {
+          difficulty = "HARD"
+        }
+
+        setDifficulty(difficulty)
     }
 
     const sendAttempt = () => {
 
         // Send a request to the backend
-        axios.post('http://localhost:8000/problems/attempts', {
-            "user_id":sessionStorage.getItem('user_id'),
-            "problem_id":location.state.problem_id,
+        const url = "http://localhost:8000/problems/" + location.state.problem_id + "/attempts/"
+        axios.post(url, {
             "perceived_difficulty": difficulty,
-            "time":timeTaken,
+            "time_taken": parseInt(timeTaken),
             "completed": selectedOption
           })
           .then(function (response) {
