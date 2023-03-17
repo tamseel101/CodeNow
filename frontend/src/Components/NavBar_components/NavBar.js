@@ -27,6 +27,7 @@ function NavBar() {
             <div className="navbar-nav">
               <a className="nav-link active" aria-current="page" href="/Dashboard">Dashboard</a>
               <a className="nav-link active" aria-current="page" href="/PreQuiz">Pre-Quiz</a>
+              <a className="nav-link active" aria-current="page" href="/Behavioral">Behavioral</a>
               <a className="nav-link active" aria-current="page" href="/Mockinterview">Mock Interview</a>
               <a className="nav-link active" aria-current="page" href="/logout">Log Out</a>
             </div>

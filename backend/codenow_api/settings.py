@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,7 +33,8 @@ CORS_ORIGIN_WHITELIST = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Application definition
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,13 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'corsheaders',
     'rest_framework.authtoken',
-    'codenow_api.problems',
-    #'codenow_api.PrequizProblem'
-    #'codenow_api'
-    #'codenow_api.problems.views.PrequizProblem'
+    'rest_framework',
+    'accounts',
+    'problems',
+    'confidence',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +151,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Rest Framework Configurations
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}

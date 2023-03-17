@@ -11,8 +11,9 @@ import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Attempt from './Attempt'
 import About from './About';
+import Behavior from './Behavior'
 import {QuizPage} from './PreQuiz/QuizPage'
-
+import {BehavioralPage} from './Behavioral/BehavioralPage'
 
 function logout() {
   useEffect(()=>{
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route exact path="/dashboard" element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
         <Route exact path="/prequiz" element={!token ? <Landing setToken={ setToken }/> : <QuizPage/> }/>
+        <Route exact path="/Behavioral" element={!token ? <Landing setToken={ setToken }/> : <BehavioralPage/> }/>
         <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
 
         <Route path='/login'
@@ -46,6 +48,8 @@ function App() {
           element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
 
         <Route exact path='/attempt' element={ <Attempt /> }/>
+
+        <Route exact path='/behavior' element={ <Behavior /> }/>
           
         <Route path='/register' element= {<Register setToken={ setToken }  /> } />
 

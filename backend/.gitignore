@@ -6,9 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-
-*.pyc
-
 # Distribution / packaging
 .Python
 build/
@@ -38,6 +35,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
 
 # Unit test / coverage reports
 htmlcov/
@@ -116,4 +114,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+media/
+
 

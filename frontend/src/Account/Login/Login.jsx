@@ -25,7 +25,7 @@ export const Login = (props) => {
             if (response.data['error']) {
               alert(response.data['error'])
             } else {
-              props.setToken(response.data['token'], response.data['user_id'])
+              props.setToken(response.data['token'], response.data['user_id'], response.data['username'])
               navigate("/")
             }
           })
