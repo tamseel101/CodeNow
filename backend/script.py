@@ -7,19 +7,19 @@ problems = [
         "name": "Single Number",
         "leetcode_url": "https://leetcode.com/problems/single-number/",
         "difficulty": "EASY",
-        "categories": [{"name": "Arrays"}]
+        "categories": [{"name": "arrays"}]
     },
     {
         "name": "Contains Duplicate",
         "leetcode_url": "https://leetcode.com/problems/contains-duplicate/",
         "difficulty": "EASY",
-        "categories": [{"name": "Arrays"}]
+        "categories": [{"name": "arrays"}]
     },
     {
         "name": "Container With Most Water",
         "leetcode_url": "https://leetcode.com/problems/container-with-most-water/",
         "difficulty": "MEDIUM",
-        "categories": [{"name": "Arrays"}]
+        "categories": [{"name": "arrays"}]
     },
     # trees
     {
@@ -27,26 +27,26 @@ problems = [
         "leetcode_url": "https://leetcode.com/problems/invert-binary-tree/",
         "difficulty": "EASY",
         "categories": [
-            {"name": "Trees"}]
+            {"name": "trees"}]
     },
     {
         "name": "Maximum Depth of Binary Tree",
         "leetcode_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
         "difficulty": "EASY",
-        "categories": [{"name": "Trees"}]
+        "categories": [{"name": "trees"}]
     },
     {
         "name": "Diameter of Binary Tree",
         "leetcode_url": "https://leetcode.com/problems/diameter-of-binary-tree/",
         "difficulty": "EASY",
         "categories": [
-            {"name": "Trees"}]
+            {"name": "trees"}]
     },
     {
         "name": "Count Good Nodes in Binary Tree",
         "leetcode_url": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
         "difficulty": "MEDIUM",
-        "categories": [{"name": "Trees"}]
+        "categories": [{"name": "trees"}]
     },
 
     # need more mediums here
@@ -55,25 +55,25 @@ problems = [
         "name": "Last Stone Weight",
         "leetcode_url": "https://leetcode.com/problems/last-stone-weight/",
         "difficulty": "EASY",
-        "categories": [{"name": "Heaps"}]
+        "categories": [{"name": "heaps"}]
     },
     {
         "name": "Kth Largest Element in a Stream",
         "leetcode_url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
         "difficulty": "EASY",
-        "categories": [{"name": "Heaps"}]
+        "categories": [{"name": "heaps"}]
     },
     {
         "name": "Last Stone Weight",
         "leetcode_url": "https://leetcode.com/problems/last-stone-weight/",
         "difficulty": "EASY",
-        "categories": [{"name": "Heaps"}]
+        "categories": [{"name": "heaps"}]
     },
     {
         "name": "K Closest Points to Origin",
         "leetcode_url": "https://leetcode.com/problems/k-closest-points-to-origin/",
         "difficulty": "EASY",
-        "categories": [{"name": "Heaps"}]
+        "categories": [{"name": "heaps"}]
     },
 
     # linked lists
@@ -81,25 +81,39 @@ problems = [
         "name": "Merge Two Sorted Lists",
         "leetcode_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
         "difficulty": "EASY",
-        "categories": [{"name": "Linked Lists"}]
+        "categories": [{"name": "linked lists"}]
     },
     {
-        "name": "Reverse Linked Lists",
+        "name": "Reverse linked lists",
         "leetcode_url": "https://leetcode.com/problems/reverse-linked-list/",
         "difficulty": "EASY",
-        "categories": [{"name": "Linked Lists"}]
+        "categories": [{"name": "linked lists"}]
     },
     {
         "name": "Reorder List",
         "leetcode_url": "https://leetcode.com/problems/reorder-list/",
         "difficulty": "MEDIUM",
-        "categories": [{"name": "Linked Lists"}]
+        "categories": [{"name": "linked lists"}]
     },
     {
         "name": "Copy List with Random Pointer",
         "leetcode_url": "https://leetcode.com/problems/copy-list-with-random-pointer/",
         "difficulty": "MEDIUM",
-        "categories": [{"name": "Linked Lists"}]
+        "categories": [{"name": "linked lists"}]
+    },
+
+    #stacks
+    {
+        "name": "Valid Parentheses",
+        "leetcode_url": "https://leetcode.com/problems/valid-parentheses/",
+        "difficulty": "EASY",
+        "categories": [{"name": "stack"}]
+    },
+    {
+        "name": "Min Stack",
+        "leetcode_url": "https://leetcode.com/problems/min-stack/",
+        "difficulty": "MEDIUM",
+        "categories": [{"name": "stack"}]
     }
 ]
 
