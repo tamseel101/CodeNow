@@ -57,7 +57,7 @@ class AttemptListCreate(generics.ListCreateAPIView):
         #print(confidence)
 
         perceived_difficulty = request.data.get("perceived_difficulty")
-        time_taken = request.data.get("time_taken")
+        time_taken = int(request.data.get("time_taken"))
         completed = request.data.get("completed")
 
 
