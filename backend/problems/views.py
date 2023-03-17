@@ -42,10 +42,7 @@ class AttemptListCreate(generics.ListCreateAPIView):
         problem_id = self.kwargs['pid']
         problem = get_object_or_404(Problem, id=problem_id)
         serializer.save(user=self.request.user, problem=problem)
-
-    def post(self, request, *args, **kwargs):
-        problem_id = self.kwargs['pid']
-        problem = get_object_or_404(Problem, id=problem_id)
+        request= self.request
         for category in problem.categories.all():
             name = category.name
         #print(category)
