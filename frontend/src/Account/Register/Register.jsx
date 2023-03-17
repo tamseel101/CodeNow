@@ -14,7 +14,7 @@ export const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Send a request to the backend
-        axios.post('http://localhost:8000/account/register', {
+        axios.post('http://localhost:8000/account/register/', {
             "username": username,
             "password": pass,
             "email": email
@@ -26,7 +26,7 @@ export const Register = (props) => {
                 alert("User created! Please login.")
                 //props.setToken(response.data['token'], response.data['user_id'], response.data['username'])
                 user_id.val = username
-                navigate("/prequiz")
+                navigate("/prequiz/")
             }
           })
           .catch(function () {
