@@ -41,7 +41,7 @@ export const QuizPage = () => {
   
   const submitQuiz = (e) => {
     setShowModal(false)
-    axios.post('http://localhost:8000/assessment/skill_assessment/', {
+    axios.put('http://localhost:8000/confidence/skill_assessment/', {
             "arrays": sliderValues[0]*20, //// multiply these
             "linked lists": sliderValues[1]*20,
             "stacks": sliderValues[2]*20,
