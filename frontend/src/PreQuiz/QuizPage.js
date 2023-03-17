@@ -6,6 +6,7 @@ import GetPreProbs from '../GetPreProbs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './prequiz.css'
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +19,7 @@ export const QuizPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [modalText, setModalText] = useState('');
-
+  const navigate = useNavigate();
 
   const [isStarted, setIsStarted] = useState(false);
 
@@ -37,6 +38,26 @@ export const QuizPage = () => {
     }
   };
   
+  const submitQuiz = () => {
+    setShowModal(false)
+    axios({
+      method: "POST",
+      url:"/skill_assessment/",  // change this 
+      // slider values here: variable sliderValues
+      data:{
+        arrays: sliderValues[0], //// multiply these
+        linkedLists: sliderValues[1],
+        stacks: sliderValues[2],
+        priorityQueues: sliderValues[3],
+        trees: sliderValues[4]
+       }
+    })
+    .then((response) => {
+      navigate("/")
+    })
+
+    event.preventDefault()
+  }
 
   const handleBackToQuestion = () => {
     if (currentQuestion > 1) {
@@ -138,7 +159,7 @@ export const QuizPage = () => {
           return (
             <>
               <p>You have completed the quiz!</p>
-              <Button onClick={() => setShowModal(false)}>Close</Button>
+              <Button onClick={() => submitQuiz()}>Close</Button>
             </>
           );
         

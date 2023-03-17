@@ -24,7 +24,7 @@ export const Register = (props) => {
               alert(response.data['error'])
             } else {
                 alert("User created! Please login.")
-                navigate("/")
+                navigate("/prequiz/")
             }
           })
           .catch(function (error) {
