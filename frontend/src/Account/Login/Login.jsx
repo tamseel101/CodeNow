@@ -17,7 +17,7 @@ export const Login = (props) => {
     const handleSubmit = () => {
 
         // Send a request to the backend
-        axios.post('http://localhost:8000/account/login', {
+        axios.post('http://localhost:8000/account/login/', {
             "username": username,
             "password": password
           })

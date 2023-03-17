@@ -46,8 +46,8 @@ export const QuizPage = () => {
             "user": user_id.val,
             "arrays": sliderValues[0]*20, //// multiply these
             "linked lists": sliderValues[1]*20,
-            "stacks": sliderValues[2]*20,
-            "priority queues": sliderValues[3]*20,
+            "stack": sliderValues[2]*20,
+            "heaps": sliderValues[3]*20,
             "trees": sliderValues[4]*20
           })
           .then(function (response) {
@@ -139,7 +139,7 @@ export const QuizPage = () => {
       case 4:
         return (
           <>
-            <p>How well do you know Priority Queues?</p>
+            <p>How well do you know Heaps?</p>
             <div className="slider-container3">
               <span className="slider-label">No experience </span>
               <input type="range" min="0" max="4" value={sliderValues[3]} className="slider" id={"stack-knowledge-slider-" + currentQuestion} onChange={(event) => handleSliderChange(3, parseInt(event.target.value))} />

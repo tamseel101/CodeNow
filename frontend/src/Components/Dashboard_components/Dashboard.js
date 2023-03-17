@@ -17,9 +17,9 @@ export const Dashboard = (props) => {
           <NavBar/>
           <Container className="pt-5 pb-5">
           <h1 className="display-1">Hello!</h1>
-          <h3>Here are your problems for today</h3>
-          <p>Click on start to start a problem.
-            Then come back to this page track progress.</p>
+          <h3>Here are your recommended problems for today.</h3>
+          <p>Click on the "Code Next" button to start a problem.
+            Then come back to this page to track your progress.</p>
             <QueryClientProvider client={ queryClient }>
               <Problems />
             </QueryClientProvider>
