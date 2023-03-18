@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Navbar from '../../Navbar'
-
+import user_id from '../../user'
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ export const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Send a request to the backend
-        axios.post('http://localhost:8000/users/', {
+        axios.post('http://localhost:8000/account/register/', {
             "username": username,
             "password": pass,
             "email": email
@@ -24,10 +24,12 @@ export const Register = (props) => {
               alert(response.data['error'])
             } else {
                 alert("User created! Please login.")
-                navigate("/")
+                //props.setToken(response.data['token'], response.data['user_id'], response.data['username'])
+                user_id.val = username
+                navigate("/prequiz/")
             }
           })
-          .catch(function (error) {
+          .catch(function () {
             alert("Error. Username or email likely exist.")
           });
 
