@@ -4,12 +4,13 @@ import {Register} from './pages/Register';
 import {Landing} from './pages/Landing'
 import {Login} from './pages/Login';
 import {Dashboard} from './pages/Dashboard'
-import useToken from './hooks/useToken';
+import useToken from './Hooks/useToken';
 import Attempt from './pages/Attempt'
 import About from './pages/About';
 import {QuizPage} from './pages/QuizPage'
 import {BehavioralPage} from './pages/BehavioralPage'
 import Navbar from "./components/Navbar";
+import {Profile} from './pages/Profile'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path="/skill-assessment" element={loggedIn ? <QuizPage/> : <Navigate to={'/'} /> }/>
                 <Route exact path="/behavioral" element={loggedIn ? <BehavioralPage/> : <Navigate to={'/'} />}/>
                 <Route exact path='/attempt' element={loggedIn ? <Attempt/> : <Navigate to={'/'} />}/>
+                <Route exact path="/profile" element={loggedIn ? <Profile/> : <Navigate to={'/'} />}/>
             </Routes>
         </div>
     );
