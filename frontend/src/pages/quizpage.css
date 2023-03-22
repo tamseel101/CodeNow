@@ -1,20 +1,20 @@
 .fade {
     transition: opacity 1.3s ease-in-out;
-    
-  }
-  
-  .modal.fade .modal-dialog {
+
+}
+
+.modal.fade .modal-dialog {
     transition: transform 0.3s ease-out, opacity 0.3s ease-in-out;
     transform: translate(0, -50px);
     opacity: 0;
-  }
-  
-  .modal.fade.show .modal-dialog {
+}
+
+.modal.fade.show .modal-dialog {
     transform: translate(0, 0);
     opacity: 1;
-  }
-  
-  .fade{
+}
+
+.fade {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
@@ -22,9 +22,10 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-  }
-  .hidden {
+}
+
+.hidden {
     display: none;
-  }
+}
   
   
