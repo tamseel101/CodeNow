@@ -6,6 +6,9 @@ import Col from 'react-bootstrap/Col';
 import Img from './pfp.jpg';
 import Image from 'react-bootstrap/Image';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 /* eslint-disable no-unused-vars */
 //let username = JSON.parse(sessionStorage.getItem("username"))
 
@@ -53,23 +56,34 @@ export const Profile = () => {
                     </Card.Body>
                 </Card>
                 <br/>
-                
-
-
                 <Accordion>
-                
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Edit Profile</Accordion.Header>
-                    <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                        <Accordion.Header>Edit Profile</Accordion.Header>
+                        <Accordion.Body>
+                        <Form>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter new email" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword1">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Enter new password" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword2">
+                            <Form.Label>Retype Password</Form.Label>
+                            <Form.Control type="password" placeholder="Retype new password" />
+                        </Form.Group>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>rofile Picture</Form.Label>
+                            <Form.Control type="file" />
+                        </Form.Group>
+                        <Button variant="success" type="submit">
+                            Submit
+                        </Button>
+                        </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
                 </Accordion>
                 <br/>
                 <br/>
