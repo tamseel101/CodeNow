@@ -1,74 +1,37 @@
-import './App.css';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import {Register} from './Account/Register/Register';
-import {Landing} from './Landing/Landing'
-import { Login } from './Account/Login/Login';
-import {Dashboard} from './Components/Dashboard_components/Dashboard'
-import InfoForm from './PreQuiz/InfoForm';
-import useToken from './Hooks/useToken';
-import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import Attempt from './Attempt'
-import About from './About';
-import Behavior from './Behavior'
-import {QuizPage} from './PreQuiz/QuizPage'
-import {BehavioralPage} from './Behavioral/BehavioralPage'
-import axios from 'axios';
-
-function logout() {
-  useEffect(()=>{
-    localStorage.clear()
-    },[])
-}
+import {Route, Routes, Navigate} from 'react-router-dom';
+import {Register} from './pages/Register';
+import {Landing} from './pages/Landing'
+import {Login} from './pages/Login';
+import {Dashboard} from './pages/Dashboard'
+import useToken from './hooks/useToken';
+import Attempt from './pages/Attempt'
+import About from './pages/About';
+import {QuizPage} from './pages/QuizPage'
+import {BehavioralPage} from './pages/BehavioralPage'
+import Navbar from "./components/Navbar";
 
 function App() {
 
-  const { token, setToken } = useToken()
+    const {token} = useToken()
+    const loggedIn = !!token;
 
-  useEffect(() => {console.log(token)}, [token])
+    return (
+        <div className="App">
+            <Navbar />
+            <Routes>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
+                <Route exact path='/about' element={<About/>}/>
+                <Route exact path='/' element={loggedIn ? <Navigate to={'/dashboard'} /> : <Landing/>}/>
 
-  const localToken = sessionStorage.getItem('token');
-
-  if (localToken)
-    axios.defaults.headers.common['Authorization'] = `Token ${token}`;
-
-
-  console.log(token)
-
-  return (
-    <div className="App">
-      <Routes>
-        <Route exact path="/dashboard" element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
-        <Route exact path="/prequiz" element={<QuizPage setToken={ setToken }/>}/>
-        <Route exact path="/Behavioral" element={!token ? <Landing setToken={ setToken }/> : <BehavioralPage/> }/>
-        <Route exact path='/' element={!token ? <Landing setToken={ setToken }/> : <Dashboard name="John"/> }/>
-
-        <Route path='/login'
-          element= {<Login setToken={ setToken }  /> } />
-
-        <Route path='/logout'
-          onEnter={logout()}
-          element= {token ? <Landing setToken={ null }/> : <Navigate to ="/" />} />
-
-        <Route path='/logout/login'
-          element= {!token ? <Login setToken={ setToken }  /> : <Navigate to ="/" />} />
-
-        <Route exact path='/attempt' element={ <Attempt /> }/>
-
-        <Route exact path='/behavior' element={ <Behavior /> }/>
-          
-        <Route path='/register' element= {<Register setToken={ setToken }  /> } />
-
-        <Route exact path='/about' element={ <About /> }/>
-
-
-        <Route exact path='/post-quiz' element={<InfoForm />}/>
-
-
-      </Routes>
-    </div>
-  );
+                <Route exact path="/dashboard" element={loggedIn ? <Dashboard/> : <Navigate to={'/'} />}/>
+                <Route exact path="/skill-assessment" element={loggedIn ? <QuizPage/> : <Navigate to={'/'} /> }/>
+                <Route exact path="/behavioral" element={loggedIn ? <BehavioralPage/> : <Navigate to={'/'} />}/>
+                <Route exact path='/attempt' element={loggedIn ? <Attempt/> : <Navigate to={'/'} />}/>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
