@@ -1,15 +1,17 @@
+import axios from "axios";
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import Problems from "../components/Problems";
-import {QueryClient, QueryClientProvider} from 'react-query';
-
-const queryClient = new QueryClient();
+import useToken from "../hooks/useToken";
 
 /* eslint-disable no-unused-vars */
 //let username = JSON.parse(sessionStorage.getItem("username"))
 
 
 export const Dashboard = () => {
+
+    const {token} = useToken()
+    axios.defaults.headers.common['Authorization'] = `Token ${token}`;
 
     return (
         <div>
@@ -18,9 +20,7 @@ export const Dashboard = () => {
                 <h3>Here are your recommended problems for today.</h3>
                 <p>Click on the Code Next button to start a problem.
                     Then come back to this page to track your progress.</p>
-                <QueryClientProvider client={queryClient}>
                     <Problems/>
-                </QueryClientProvider>
             </Container>
         </div>
 

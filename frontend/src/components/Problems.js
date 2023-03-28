@@ -35,9 +35,10 @@ export const Problems = () => {
             <LeetQuestion
               name={problem.name}
               url={problem.leetcode_url}
-              desc={problem.difficulty}
+              difficulty={problem.difficulty}
               problem_id={problem.id}
               key={problem.id}
+              categories={problem.categories}
             />
           ))}
         </ul>
