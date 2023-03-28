@@ -28,4 +28,25 @@
     display: none;
 }
   
+/* QuizPage.css */
+
+.modal-dialog {
+    max-width: 800px;
+  }
+
+  .quiz-modal-body {
+    padding: 24px;
+  }
+
+  .modal-title {
+    font-size: 24px;
+  }
+
+  .modal-body {
+    font-size: 18px;
+  }
+
+  .modal-footer {
+    font-size: 18px;
+  }
   
