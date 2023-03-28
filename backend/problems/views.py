@@ -41,24 +41,32 @@ class AttemptListCreate(generics.ListCreateAPIView):
         problem_id = self.kwargs['pid']
         return Attempt.objects.filter(problem__id=problem_id)
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        diff_confidence = self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response({'confidence_difference': diff_confidence}, status=status.HTTP_201_CREATED, headers=headers)
+
+
     def perform_create(self, serializer):
         problem_id = self.kwargs['pid']
         problem = get_object_or_404(Problem, id=problem_id)
         serializer.save(user=self.request.user, problem=problem)
-        request= self.request
+        request = self.request
+
         for category in problem.categories.all():
             name = category.name
-        #print(category)
+
         category = get_object_or_404(ProblemCategory, name=name)
-        #print(category)
         user=self.request.user
-        #print(user)
         confidence = get_object_or_404(Confidence, user=user, problem_category=category)
-        #print(confidence)
 
         perceived_difficulty = request.data.get("perceived_difficulty")
         time_taken = int(request.data.get("time_taken"))
         completed = request.data.get("completed")
+
+        old_confidence_level = confidence.level
 
 
         if completed:
@@ -80,11 +88,19 @@ class AttemptListCreate(generics.ListCreateAPIView):
                 confidence.level = min(100, confidence.level + 5)
 
 
-        #print(confidence)
         confidence.save()
 
+        new_confidence_level = confidence.level
 
-        return Response(status=status.HTTP_200_OK)
+        diff_confidence = new_confidence_level - old_confidence_level
+
+        new_confidence_level = confidence.level
+
+        diff_confidence = new_confidence_level - old_confidence_level
+
+        # Return the diff_confidence value
+        return diff_confidence
+
 
 
 
