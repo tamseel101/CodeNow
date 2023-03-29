@@ -5,9 +5,18 @@ from django.contrib.auth import get_user_model
 from .models import CustomUser
 from rest_framework.generics import CreateAPIView, DestroyAPIView
 from rest_framework import generics, permissions, status
-
+from rest_framework.views import APIView
 # local imports
 from .serializers import UserSerializer
+
+class viewProfile(APIView):
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return Response({'detail':'user must be logged in'}, status=status.HTTP_401_UNAUTHORIZED)
+        user_obj = request.user
+        response_data = {'email':user_obj.email, 'username':user_obj.username}
+
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 # Login
