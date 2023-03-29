@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import './LeetQuestion.css';
 import {Link, useNavigate} from "react-router-dom";
 
-function LeetQuestion({ id, name, difficulty, categories, url, viewOnly }) {
+function LeetQuestion({ id, name, difficulty, categories, leetcode_url, viewOnly }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -50,16 +50,26 @@ function LeetQuestion({ id, name, difficulty, categories, url, viewOnly }) {
 
                       <div className="mb-2"></div>
                     </Col>
-                    {!viewOnly &&
+                    {viewOnly ? (
                       <Col sm={2}>
-                          <a target="_blank" href={url} rel="noreferrer">
+                          <a target="_blank" href={leetcode_url} rel="noreferrer">
                               <Button
-                                  className="QuestionButton"
+                                  className="QuestionButton fw-bold"
                                   onClick={handleClick}>
-                                  Code Next
+                                  Attempt
                               </Button>
                           </a>
-                      </Col>
+                      </Col>) : (
+                        <Col sm={2}>
+                        <Link className="problem-link" to={`/problems/${id}`}>
+                          <Button
+                            className="QuestionButton fw-bold"
+                          >
+                            Code Next
+                          </Button>
+                        </Link>
+                        </Col>
+                      )
                     }
                 </Row>
             </Card.Body>

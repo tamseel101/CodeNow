@@ -45,7 +45,7 @@ function SingleProblem() {
       {problem && <LeetQuestion viewOnly={true} {...problem} />}
 
       <div className='mb-4 mt-4'>.</div>
-      <h1 className='mt-4 mb-4'>Your Attempts</h1>
+      <h1 className='mt-4 mb-4'>Attempts</h1>
 
       <UserAttempts problemId={id} token={token} />
 

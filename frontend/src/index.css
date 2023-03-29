@@ -23,6 +23,10 @@ code {
     border: none;
 }
 
+.btn-primary:disabled {
+    background-color: #0e462e;
+}
+
 
 .link-primary {
     color: #006b3c;

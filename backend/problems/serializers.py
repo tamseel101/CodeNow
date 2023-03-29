@@ -34,7 +34,7 @@ class ProblemSerializer(serializers.ModelSerializer):
 class AttemptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attempt
-        fields = '__all__'
+        fields = ('completed', 'perceived_difficulty', 'time_taken')
 
 
 class BehavioralProblemsSerializer(serializers.Serializer):
