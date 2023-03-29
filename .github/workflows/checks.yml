@@ -21,7 +21,7 @@ jobs:
         run: pip install flake8
 
       - name: Tests [Backend]
-        run: cd backend; ls; python manage.py test
+        run: cd backend; pipenv shell; python manage.py test
 
   frontend-test:
     name: Frontend
