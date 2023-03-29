@@ -13,10 +13,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 function Achievements (props) {
 
-    // const {data: problems, status} = useQuery('prequiz', async () => {
-    //     const {data: problems} = await axios.get('http://localhost:8000/problems/recommended/');
-    //     return problems['results']
-    // });
 
 
     return (

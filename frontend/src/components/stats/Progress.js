@@ -9,18 +9,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import {useNavigate} from "react-router-dom";
 
 function Progress(props) {
-    // const navigate = useNavigate();
-
-    // const handleClick = () => {
-    //     navigate('/behavior', {
-    //         state: {
-    //             problem_id: props.problem_id,
-    //             user_id: 1,
-    //             behavior_name: props.name,
-    //             behavior_ques: props.desc
-    //         }
-    //     }); //CHANGE THIS
-    // };
 
     return (
         <Col>
@@ -32,7 +20,7 @@ function Progress(props) {
                     </Row>
                     <Row style={{height: '1rem'}} className="align-items-center">
 
-                        <ProgressBar style={{height: '200%', width: '100%'}} now={60} className="rounded-0"/> {/*make dynamic from props, for now hardcode*/}
+                        <ProgressBar style={{height: '200%', width: '100%'}} now={props.value} className="rounded-0"/> 
                         <br></br>
                     </Row>
 
