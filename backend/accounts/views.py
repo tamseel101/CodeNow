@@ -22,6 +22,20 @@ class viewProfile(APIView):
 
         return Response(response_data, status=status.HTTP_200_OK)
 
+# update profile
+class EditProfile(APIView):
+    def patch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return Response({'detail':'user must be logged in'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        user_obj = request.user
+
+        serializer = UserSerializer(user_obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Login
 class CustomAuthToken(ObtainAuthToken):
