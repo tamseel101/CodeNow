@@ -10,10 +10,10 @@ const Navbar = () => {
             // Logged in links
             return (
                 <>
-                    <Link to={'/dashboard'} className="nav-link active">Dashboard</Link>
-                    <Link to={'/skill-assessment'} className="nav-link active">Skill Assessment</Link>
-                    <Link to={'/behavioral'} className="nav-link active">Behavioral</Link>
-                    <Link to={'/'} className="nav-link active" onClick={() => removeToken()}>Logout</Link>
+                    <Link to={'/dashboard'} className='nav-link'>Dashboard</Link>
+                    <Link to={'/problems'} className="nav-link">Browse</Link>
+                    <Link to={'/behavioral'} className="nav-link">Behavioral</Link>
+                    <Link to={'/'} className="nav-link" onClick={() => removeToken()}>Logout</Link>
                 </>
             )
         } else {

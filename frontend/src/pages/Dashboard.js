@@ -30,7 +30,7 @@ export const Dashboard = () => {
             <Container className="pt-5 pb-5">
                 {quizCompleted ? (
                     <div>
-                        <h1 className="display-1">Hello!</h1>
+                        <h1 className="">Welcome back! 👋</h1>
                         <h3>Here are your recommended problems for today.</h3>
                         <p>Click on the Code Next button to start a problem.
                             Then come back to this page to track your progress.</p>
@@ -38,7 +38,7 @@ export const Dashboard = () => {
                     </div>
                 ) : (
                     <div>
-                        <h1 className="display-1">Welcome to CodeNext!</h1>
+                        <h1 className="">Welcome to CodeNext!</h1>
                         <h3>To get started, you are required to complete the <Link className="text-success" to="/skill-assessment">skill assessment</Link> in order for us to provide appropriate recommendations.</h3>
                     </div>
                 )}

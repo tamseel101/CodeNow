@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Row} from 'react-bootstrap';
 import axios from 'axios';
@@ -19,11 +19,24 @@ function Attempt() {
 
     // states
     const [message, setMessage] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+
+    // show pop up
+    useEffect(() => {
+      if (showPopup) {
+        const timer = setTimeout(() => {
+          setShowPopup(false);
+        }, 9000); // Hide the popup after 3 seconds
+        return () => clearTimeout(timer);
+      }
+    }, [showPopup]);
 
     // form validation state
     const [completedValidation, setCompletedValidation] = useState(null);
     const [timeTakenValidation, setTimeTakenValidation] = useState(null);
     const [difficultyValidation, setDifficultyValidation] = useState(null);
+    const [isTracked, setIsTracked] = useState(false);
 
 
     // Completion
@@ -97,16 +110,21 @@ function Attempt() {
           if (response.data['error']) {
             console.log(response.data['error'])
           } else {
-            if (response.data['error']) {
-              setMessage(response.data['error']);
-            } else {
-              setMessage(
-                <>
-                  Good job! Your attempt was successfully tracked 🙌. Would you like to{" "}
-                  <Link to="/"><span className='fw text-primary'>go back and try more problems</span></Link>?
-                </>
-              );
-            }
+            setMessage(
+              <div>
+                Your attempt was successfully tracked 🙌. Click here to go to the {" "}
+                <Link to="/"><span className='fw text-primary'>Dashboard</span></Link>.
+              </div>
+            );
+
+            const confidenceDifference = parseInt(response.data['confidence_difference']);
+            const emoji = confidenceDifference >= 0 ? "🚀" : "😢";
+            setPopupMessage(`Your confidence ${
+              confidenceDifference >= 0 ? "increased" : "decreased"
+            } by ${Math.abs(confidenceDifference)} ${emoji}`);
+            setShowPopup(true);
+
+            setIsTracked(true)
           }
         })
         .catch(function (error) {
@@ -126,7 +144,7 @@ function Attempt() {
                 <section className='Question'>
                     <h1 className='fw-bold'>Are you done?</h1>
 
-                    {message && <div className='alert alert-success'>{message}</div>}
+                    {message && <div className='alert alert-secondary'>{message}</div>}
 
                     <p>
                         If you have successfully attempted the given problem,
@@ -207,12 +225,31 @@ function Attempt() {
 
                     <div className="mb-3">
                         <a className="nav-link active" aria-current="page">
-                            <button className="btn btn-primary mb-4" onClick={sendAttempt}>Done</button>
+                            <button className="btn btn-primary mb-4 w-100" onClick={sendAttempt} disabled={isTracked}>Track Attempt</button>
                         </a>
                     </div>
 
-                </div>
+                    {showPopup && (
+                      <div
+                        style={{
+                          //position: "fixed",
+                          //bottom: "20px",
+                          //left: "50%",
+                          //transform: "translateX(-50%)",
+                          //zIndex: 999,
+                          backgroundColor:"rgba(0, 128, 0, 0.9)",
+                          color: "white",
+                          borderRadius: "5px",
+                          padding: "10px",
+                          fontSize: "16px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {popupMessage}
+                      </div>
+                    )}
 
+                </div>
             </div>
 
         </div>
