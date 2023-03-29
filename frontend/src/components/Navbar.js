@@ -13,6 +13,7 @@ const Navbar = () => {
                     <Link to={'/dashboard'} className="nav-link active">Dashboard</Link>
                     <Link to={'/skill-assessment'} className="nav-link active">Skill Assessment</Link>
                     <Link to={'/behavioral'} className="nav-link active">Behavioral</Link>
+                    <Link to="/mockinterview" className="nav-link active">Mock Interview</Link>
                     <Link to={'/'} className="nav-link active" onClick={() => removeToken()}>Logout</Link>
                 </>
             )
