@@ -11,22 +11,32 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 const queryClient = new QueryClient();
 
 /* eslint-disable no-unused-vars */
-//let username = JSON.parse(sessionStorage.getItem("username"))
+let username = JSON.parse(sessionStorage.getItem("username"))
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
 export const Stats = () => {
 
-    const {data: skills, status1} = useQuery('skills', async () => {
-        const {data: skills} = await axios.get('http://localhost:8000/problems/behavioral_problems/'); // this should be the url to get all confidences
-        console.log(skills['skills'])
-        return skills['skills']
-    });
+    const [skills, setSkills] = useState([]);
+    const [achievements, setAchievements] = useState([]);
+  
+    useEffect(() => {
+        // this should be the url to get all confidences
+        axios.get('http://localhost:8000/problems/behavioral_problems/')
+        .then(response => setSkills(response.skills))
+        .catch(error => console.log(error));
+    }, []);
 
-    const {data: achievements, status2} = useQuery('achievements', async () => {
-        const {data: achievements} = await axios.get('http://localhost:8000/problems/behavioral_problems/'); // this should be the url to get all user achievements
-        console.log(achievements['achievements'])
-        return achievements['achievements']
-    });
+    useEffect(() => {
+        // this should be the url to get all user achievements
+        axios.get('http://localhost:8000/problems/behavioral_problems/')
+        .then(response => setAchievements(response.achievements))
+        .catch(error => console.log(error));
+    }, []);
+
+    //   <button onClick={() => setCount(count + 1)}>Increment</button>
 
     return (
         <div>
