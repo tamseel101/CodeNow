@@ -17,6 +17,12 @@ code {
     border: none;
 }
 
+.btn-primary:hover {
+    background-color: #004f2d;
+    border: none;
+}
+
+
 .link-primary {
     color: #006b3c;
 }
