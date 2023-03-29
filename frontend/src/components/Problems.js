@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LeetQuestion from "./leet_question/LeetQuestion";
 import axios from "axios";
 
@@ -8,22 +8,69 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 export const Problems = ({ endPoint }) => {
   const [problems, setProblems] = useState([]);
   const [status, setStatus] = useState("loading");
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({ next: null, previous: null });
+  const [observer, setObserver] = useState(null);
+  const loaderRef = useRef(null);
+
 
   useEffect(() => {
     const fetchProblems = async () => {
+      if (status === "success" && !pagination.next) return;
+
+      setStatus("loading");
       try {
         const { data: problemsData } = await axios.get(
-          `http://localhost:8000${endPoint}`
+          `http://localhost:8000${endPoint}?page=${page}`
         );
-        setProblems(problemsData["results"]);
+        setProblems((prevProblems) => [...prevProblems, ...problemsData["results"]]);
+        setPagination({ next: problemsData["next"], previous: problemsData["previous"] });
         setStatus("success");
-      } catch (error) {
+        } catch (error) {
         setStatus("error");
+        }
+        };
+
+        fetchProblems();
+        }, [page]);
+
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+
+    const observerCallback = (entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        if (pagination.next) {
+          setPage((prevPage) => prevPage + 1);
+        }
       }
     };
 
-    fetchProblems();
-  }, []);
+    const newObserver = new IntersectionObserver(observerCallback, options);
+    setObserver(newObserver);
+
+    return () => {
+      if (observer) observer.disconnect();
+    };
+  }, [pagination.next]);
+
+  useEffect(() => {
+    if (observer && loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+
+    return () => {
+      if (observer && loaderRef.current) {
+        observer.unobserve(loaderRef.current);
+      }
+    };
+  }, [observer, loaderRef]);
+
 
   return (
     <>
@@ -43,6 +90,7 @@ export const Problems = ({ endPoint }) => {
           ))}
         </ul>
       )}
+      <div ref={loaderRef} style={{ height: "1px" }}></div>
     </>
   );
 };
