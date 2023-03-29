@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Route, Routes, Navigate} from 'react-router-dom';
 import {Register} from './pages/Register';
 import {Landing} from './pages/Landing'
@@ -16,13 +16,11 @@ import SingleProblem from './pages/SingleProblem';
 function App() {
 
     const {token} = useToken()
-    console.log(token)
-    const loggedIn = !!token;
-    console.log(loggedIn)
+    const [loggedIn, setLoggedIn] = useState(!!token);
 
     return (
         <div className="App">
-            <Navbar />
+            <Navbar onLogout={() => setLoggedIn(false)} />
             <Routes>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>

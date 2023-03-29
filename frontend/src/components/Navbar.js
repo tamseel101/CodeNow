@@ -2,7 +2,7 @@ import React from 'react';
 import useToken from "../hooks/useToken";
 import {Link} from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({onLogout}) => {
     const {token, removeToken} = useToken()
 
     const Links = () => {
@@ -13,7 +13,7 @@ const Navbar = () => {
                     <Link to={'/dashboard'} className='nav-link'>Dashboard</Link>
                     <Link to={'/problems'} className="nav-link">Browse</Link>
                     <Link to={'/behavioral'} className="nav-link">Behavioral</Link>
-                    <Link to={'/'} className="nav-link" onClick={() => removeToken()}>Logout</Link>
+                    <Link to={'/'} className="nav-link" onClick={() => {removeToken(); onLogout();}}>Logout</Link>
                 </>
             )
         } else {
