@@ -2,7 +2,7 @@ import React from 'react';
 import useToken from "../hooks/useToken";
 import {Link} from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({onLogout}) => {
     const {token, removeToken} = useToken()
 
     const Links = () => {
@@ -10,11 +10,11 @@ const Navbar = () => {
             // Logged in links
             return (
                 <>
-                    <Link to={'/dashboard'} className="nav-link active">Dashboard</Link>
-                    <Link to={'/skill-assessment'} className="nav-link active">Skill Assessment</Link>
-                    <Link to={'/behavioral'} className="nav-link active">Behavioral</Link>
+                    <Link to={'/dashboard'} className='nav-link'>Dashboard</Link>
+                    <Link to={'/problems'} className="nav-link">Browse</Link>
+                    <Link to={'/behavioral'} className="nav-link">Behavioral</Link>
                     <Link to="/mockinterview" className="nav-link active">Mock Interview</Link>
-                    <Link to={'/'} className="nav-link active" onClick={() => removeToken()}>Logout</Link>
+                    <Link to={'/'} className="nav-link" onClick={() => {removeToken(); onLogout();}}>Logout</Link>
                 </>
             )
         } else {
@@ -34,7 +34,7 @@ const Navbar = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light ">
                 <div className="container">
-                    <a className="navbar-brand" href="/">CodeNext</a>
+                    <a className="navbar-brand">CodeNext</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">

@@ -1,18 +1,40 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import axios from "axios"
-// import { QueryClient } from 'react-query';
-// import GetPreProbs from '../GetPreProbs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './quizpage.css'
 import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
+import useToken from "../hooks/useToken";
+import QuizItem from "./QuizItem";
 
 export const QuizPage = () => {
+
+    // TODO: make this global
+    // authorization stuff
+    const {token} = useToken()
+    axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+
     const [showModal, setShowModal] = useState(false);
-    const [sliderValues, setSliderValues] = useState([2, 2, 2, 2, 2]);
+    const [sliderValues, setSliderValues] = useState({});
+
+    // use effect ensures confidence is only fetched once.
+    useEffect(() => {
+        const fetchConfidenceData = async () => {
+          try {
+            const response = await axios.get('http://127.0.0.1:8000/confidence/skill_assessment/');
+            setSliderValues(response.data);
+          } catch (error) {
+            console.error('Error fetching confidence data:', error);
+          }
+        };
+
+        fetchConfidenceData();
+      }, []);
+
+
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [submitted, setSubmitted] = useState(false);
     const [modalText, setModalText] = useState('');
@@ -35,30 +57,33 @@ export const QuizPage = () => {
         }
     };
 
+    // submit quiz, revamped!
     const submitQuiz = () => {
-        setShowModal(false)
-        axios.put('http://localhost:8000/confidence/skill_assessment/', {
-            "user": '',
-            "arrays": sliderValues[0] * 20, //// multiply these
-            "linked_lists": sliderValues[1] * 20,
-            "stack": sliderValues[2] * 20,
-            "heaps": sliderValues[3] * 20,
-            "trees": sliderValues[4] * 20
-        })
-            .then(function (response) {
-                console.log(response);
-                console.log("testing")
-                if (response.data['error']) {
-                    alert(response.data['error'])
-                } else {
-                    navigate("/")
-                }
-            })
-            .catch(function (error) {
-                console.log(error.response.data)
-                alert(error.response.data)
-            });
-    }
+        setShowModal(false);
+
+        const updatedSliderValues = Object.entries(sliderValues).reduce((acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+        }, {});
+
+        axios
+          .put("http://localhost:8000/confidence/skill_assessment/", {
+            user: "",
+            ...updatedSliderValues,
+          })
+          .then((response) => {
+            console.log(response);
+            console.log("testing");
+            if (response.data["error"]) {
+              console.log(response.data["error"]);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error.response.data);
+          });
+    };
 
     const handleBackToQuestion = () => {
         if (currentQuestion > 1) {
@@ -66,120 +91,56 @@ export const QuizPage = () => {
         }
     };
 
-    const handleSliderChange = (index, value) => {
-        const newSliderValues = [...sliderValues];
-        newSliderValues[index] = value;
-        setSliderValues(newSliderValues);
-    };
+    const handleSliderChange = (question, value) => {
+        setSliderValues({
+          ...sliderValues,
+          [question]: value,
+        });
+      };
 
 
-    const renderModalTitle = () => {
-        switch (currentQuestion) {
-            case 1:
-                return 'Question 1';
-            case 2:
-                return 'Question 2';
-            case 3:
-                return 'Question 3';
-            case 4:
-                return 'Question 4';
-            case 5:
-                return 'Question 5';
-            default:
-                return '';
-            case 6:
-                return 'Assessment complete!';
+      const renderModalTitle = () => {
+        if (currentQuestion >= 1 && currentQuestion <= Object.keys(sliderValues).length) {
+          return `Question ${currentQuestion}`;
+        } else if (currentQuestion === Object.keys(sliderValues).length + 1) {
+          return "Assessment complete!";
+        } else {
+          return "";
         }
-    };
+      };
 
     const renderModalBody = () => {
         if (submitted) {
-            return (
-                <div>
-                    <p>{modalText}</p>
-                </div>
-            );
+          return (
+            <div>
+              <p>{modalText}</p>
+            </div>
+          );
         }
-        switch (currentQuestion) {
-            case 1:
-                return (
-                    <>
-                        <p>How experienced are you with Arrays?</p>
-                        <div className="slider-container">
-                            <span className="slider-label">Not experienced </span>
-                            <input type="range" min="0" max="4" value={sliderValues[0]} className="slider"
-                                   id={"stack-knowledge-slider-" + currentQuestion}
-                                   onChange={(event) => handleSliderChange(0, parseInt(event.target.value))}/>
-                            <span className="slider-label"> Very experienced</span>
-                        </div>
-                    </>
-                );
-            case 2:
-                return (
-                    <>
-                        <p>How experienced are you with Linked Lists?</p>
-                        <div className="slider-container1">
-                            <span className="slider-label">Not experienced </span>
-                            <input type="range" min="0" max="4" value={sliderValues[1]} className="slider"
-                                   id={"stack-knowledge-slider-" + currentQuestion}
-                                   onChange={(event) => handleSliderChange(1, parseInt(event.target.value))}/>
-                            <span className="slider-label"> Very experienced</span>
-                        </div>
-                    </>
-                );
-            case 3:
-                return (
-                    <>
-                        <p>How experienced are you with Stacks?</p>
-                        <div className="slider-container2">
-                            <span className="slider-label">Not experienced </span>
-                            <input type="range" min="0" max="4" value={sliderValues[2]} className="slider"
-                                   id={"stack-knowledge-slider-" + currentQuestion}
-                                   onChange={(event) => handleSliderChange(2, parseInt(event.target.value))}/>
-                            <span className="slider-label"> Very experienced</span>
-                        </div>
-                    </>
-                );
-            case 4:
-                return (
-                    <>
-                        <p>How experienced are you with Heaps?</p>
-                        <div className="slider-container3">
-                            <span className="slider-label">Not experienced </span>
-                            <input type="range" min="0" max="4" value={sliderValues[3]} className="slider"
-                                   id={"stack-knowledge-slider-" + currentQuestion}
-                                   onChange={(event) => handleSliderChange(3, parseInt(event.target.value))}/>
-                            <span className="slider-label"> Very experienced</span>
-                        </div>
-                    </>
-                );
-            case 5:
-                return (
-                    <>
-                        <p>How experienced are you with Trees?</p>
-                        <div className="slider-container4">
-                            <span className="slider-label">Not experienced </span>
-                            <input type="range" min="0" max="4" value={sliderValues[4]} className="slider"
-                                   id={"stack-knowledge-slider-" + currentQuestion}
-                                   onChange={(event) => handleSliderChange(4, parseInt(event.target.value))}/>
-                            <span className="slider-label"> Very experienced</span>
-                        </div>
-                    </>
-                );
-            case 6:
-                return (
-                    <>
-                        <p>You have completed the quiz!</p>
-                        <Button onClick={() => submitQuiz()}>Close</Button>
-                    </>
-                );
 
+        if (currentQuestion <= Object.keys(sliderValues).length) {
+          const question = Object.keys(sliderValues)[currentQuestion - 1];
+          const sliderValue = sliderValues[question];
 
-            default:
-                return '';
+          return (
+            <QuizItem
+              question={question}
+              sliderValue={sliderValue}
+              handleSliderChange={handleSliderChange}
+            />
+          );
         }
-    };
 
+        if (currentQuestion === Object.keys(sliderValues).length + 1) {
+          return (
+            <div>
+              <p>You have successfully completed the quiz. Please submit your results!</p>
+            </div>
+          );
+        }
+
+        return '';
+      };
 
     return (
         <>
@@ -223,29 +184,35 @@ export const QuizPage = () => {
                     <Modal.Title>{renderModalTitle()}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {renderModalBody()}
+                    <div className="quiz-modal-body">{renderModalBody()}</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    {currentQuestion > 1 && currentQuestion !== 6 && (
-                        <Button variant="secondary" onClick={handleBackToQuestion}>Back to
-                            Question {currentQuestion - 1}</Button>
+                    {currentQuestion > 1 && currentQuestion !== Object.keys(sliderValues).length + 1 && (
+                    <Button variant="secondary" onClick={handleBackToQuestion}>
+                        Back to Question {currentQuestion - 1}
+                    </Button>
                     )}
-                    {currentQuestion < 5 ? (
-                        <Button variant="primary" onClick={handleSaveAndContinue}>Save and Continue</Button>
+                    {currentQuestion < Object.keys(sliderValues).length ? (
+                        <Button variant="primary" onClick={handleSaveAndContinue}>
+                            Save and Continue
+                        </Button>
                     ) : (
-                        currentQuestion === 6 ? null :
-                            <Button variant="primary" onClick={() => handleSaveAndContinue(false)}>Submit</Button>
+                    currentQuestion === Object.keys(sliderValues).length + 1 ? (
+                        <Button onClick={() => submitQuiz()}>Submit Results</Button>
+                    ) : (
+                        <Button variant="primary" onClick={() => handleSaveAndContinue(false)}>
+                            Save and Continue
+                        </Button>
+                    )
                     )}
-
-
-                </Modal.Footer>
+              </Modal.Footer>
             </Modal>
             <style type="text/css">
                 {`
-          .modal-backdrop.show {
-            opacity: 1 !important;
-          }
-        `}
+                    .modal-backdrop.show {
+                        opacity: 1 !important;
+                    }
+                `}
             </style>
         </>
     );
