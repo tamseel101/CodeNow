@@ -14,7 +14,11 @@ class viewProfile(APIView):
         if not request.user.is_authenticated:
             return Response({'detail':'user must be logged in'}, status=status.HTTP_401_UNAUTHORIZED)
         user_obj = request.user
-        response_data = {'email':user_obj.email, 'username':user_obj.username}
+        response_data = {'email':user_obj.email, 
+                         'username':user_obj.username,
+                         'first_name':user_obj.first_name,
+                         'last_name':user_obj.last_name,
+                         }
 
         return Response(response_data, status=status.HTTP_200_OK)
 
