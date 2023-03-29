@@ -13,6 +13,7 @@ urlpatterns = [
 
     # recommended problems
     path('recommended/', views.RecommendedProblemsView.as_view(), name='recommended_problems'),
+    path('recommended/category/', views.RecommendedProblemsCategoryView.as_view(), name='recommended_problems_category'),
 
     # behavioural
     path('behavioral_problems/', BehavioralProblemsView.as_view(), name='behavioralproblems'),
