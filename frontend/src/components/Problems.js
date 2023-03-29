@@ -5,7 +5,7 @@ import axios from "axios";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-export const Problems = () => {
+export const Problems = ({ endPoint }) => {
   const [problems, setProblems] = useState([]);
   const [status, setStatus] = useState("loading");
 
@@ -13,7 +13,7 @@ export const Problems = () => {
     const fetchProblems = async () => {
       try {
         const { data: problemsData } = await axios.get(
-          "http://localhost:8000/problems/recommended/"
+          `http://localhost:8000${endPoint}`
         );
         setProblems(problemsData["results"]);
         setStatus("success");
@@ -26,25 +26,30 @@ export const Problems = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {status === "loading" && <div>Loading...</div>}
       {status === "error" && <div>Error</div>}
       {status === "success" && (
-        <ul>
+        <ul className="px-0">
           {problems.map((problem) => (
             <LeetQuestion
               name={problem.name}
               url={problem.leetcode_url}
               difficulty={problem.difficulty}
-              problem_id={problem.id}
+              id={problem.id}
               key={problem.id}
               categories={problem.categories}
             />
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 };
+
+Problems.defaultProps = {
+  endPoint: '/problems/recommended/'
+};
+
 
 export default Problems;

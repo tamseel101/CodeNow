@@ -32,9 +32,6 @@ class ProblemSerializer(serializers.ModelSerializer):
 
 
 class AttemptSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    problem = ProblemSerializer(read_only=True)
-
     class Meta:
         model = Attempt
         fields = '__all__'

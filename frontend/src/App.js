@@ -10,6 +10,8 @@ import About from './pages/About';
 import {QuizPage} from './pages/QuizPage'
 import {BehavioralPage} from './pages/BehavioralPage'
 import Navbar from "./components/Navbar";
+import AllProblems from './pages/AllProblems';
+import SingleProblem from './pages/SingleProblem';
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
                 <Route exact path="/skill-assessment" element={loggedIn ? <QuizPage/> : <Navigate to={'/'} /> }/>
                 <Route exact path="/behavioral" element={loggedIn ? <BehavioralPage/> : <Navigate to={'/'} />}/>
                 <Route exact path='/attempt' element={loggedIn ? <Attempt/> : <Navigate to={'/'} />}/>
+                <Route exact path='/problems' element={loggedIn ? <AllProblems/> : <Navigate to={'/'} />}/>
+                <Route exact path='/problems/:id' element={loggedIn ? <SingleProblem /> : <Navigate to={'/'} />}/>
             </Routes>
         </div>
     );

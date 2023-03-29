@@ -5,6 +5,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #fdfff8;
 }
 
 code {
@@ -25,4 +26,16 @@ code {
 
 .link-primary {
     color: #006b3c;
+}
+
+.problem-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.problem-link:hover {
+    color: rgb(242, 242, 242);
+    text-decoration: none;
+    cursor: pointer;
 }
