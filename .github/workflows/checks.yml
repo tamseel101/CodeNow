@@ -24,7 +24,7 @@ jobs:
         run: pip install pipenv
 
       - name: Tests [Backend]
-        run: cd backend; pip install python3.10; pipenv shell; python manage.py test
+        run: cd backend; python manage.py test
 
   frontend-test:
     name: Frontend
