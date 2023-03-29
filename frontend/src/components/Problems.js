@@ -13,6 +13,18 @@ export const Problems = ({ endPoint }) => {
   const [observer, setObserver] = useState(null);
   const loaderRef = useRef(null);
 
+  const handleAttemptedProblem = (id) => {
+    // Find the index of the problem with the given ID in the problems state
+    const problemIndex = problems.findIndex((problem) => problem.id === id);
+    // If the problem was found, update its 'attempted' field in the state
+    if (problemIndex !== -1) {
+      setProblems((prevProblems) => {
+        const newProblems = [...prevProblems];
+        newProblems[problemIndex] = { ...newProblems[problemIndex], attempted: true };
+        return newProblems;
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -86,6 +98,8 @@ export const Problems = ({ endPoint }) => {
               id={problem.id}
               key={problem.id}
               categories={problem.categories}
+              attempted={problem.attempted}
+              setAttempt = {handleAttemptedProblem}
             />
           ))}
         </ul>

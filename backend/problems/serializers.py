@@ -30,11 +30,28 @@ class ProblemSerializer(serializers.ModelSerializer):
 
         return problem
 
+class CustomProblemSerializer(serializers.ModelSerializer):
+    attempted = serializers.SerializerMethodField()
+    categories = ProblemCategorySerializer(many=True)
+
+
+    class Meta:
+        model = Problem
+        fields = ['id', 'name', 'leetcode_url', 'difficulty', 'categories', 'attempted']
+
+    def get_attempted(self, obj):
+        user = self.context['request'].user
+        attempted = Attempt.objects.filter(user=user, problem=obj).exists()
+        return attempted
+
 
 class AttemptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attempt
-        fields = ('completed', 'perceived_difficulty', 'time_taken')
+        fields = ('completed', 'perceived_difficulty', 'time_taken', 'date_time')
+
+
+
 
 
 class BehavioralProblemsSerializer(serializers.Serializer):

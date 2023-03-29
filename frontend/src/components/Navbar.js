@@ -33,7 +33,7 @@ const Navbar = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light ">
                 <div className="container">
-                    <a className="navbar-brand" href="/">CodeNext</a>
+                    <a className="navbar-brand">CodeNext</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">

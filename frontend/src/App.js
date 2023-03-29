@@ -16,7 +16,9 @@ import SingleProblem from './pages/SingleProblem';
 function App() {
 
     const {token} = useToken()
+    console.log(token)
     const loggedIn = !!token;
+    console.log(loggedIn)
 
     return (
         <div className="App">

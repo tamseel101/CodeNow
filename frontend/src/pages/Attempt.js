@@ -11,7 +11,7 @@ axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
-function Attempt() {
+function Attempt({setAttempt}) {
     const location = useLocation();
 
     const {token} = useToken()
@@ -125,10 +125,11 @@ function Attempt() {
             setShowPopup(true);
 
             setIsTracked(true)
+            setAttempt(location.state.problem_id)
           }
         })
         .catch(function (error) {
-          alert(error);
+          console.log(error);
         });
       };
 
