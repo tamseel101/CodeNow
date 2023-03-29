@@ -1,11 +1,12 @@
 # views.py
+from math import perm
 from random import choice
 from urllib import request
 from confidence.models import Confidence
 from rest_framework import generics, permissions
 from confidence.models import Confidence
 from .models import Problem, ProblemCategory, Attempt
-from .serializers import ProblemSerializer, ProblemCategorySerializer, AttemptSerializer
+from .serializers import CustomProblemSerializer, ProblemSerializer, ProblemCategorySerializer, AttemptSerializer
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
 from django.shortcuts import get_object_or_404
@@ -39,7 +40,8 @@ class AttemptListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         problem_id = self.kwargs['pid']
-        return Attempt.objects.filter(problem__id=problem_id)
+        user = self.request.user
+        return Attempt.objects.filter(problem__id=problem_id, user=user)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -64,28 +66,22 @@ class AttemptListCreate(generics.ListCreateAPIView):
 
         perceived_difficulty = request.data.get("perceived_difficulty")
         time_taken = int(request.data.get("time_taken"))
-        completed = request.data.get("completed")
+        completed = request.data.get("completed").lower() == "true"
 
         old_confidence_level = confidence.level
 
-
-        if completed:
-            confidence.level = min(100, confidence.level + 20)
+        # if not completed, immediate -15
+        if completed == False:
+            confidence.level = max(1, confidence.level - 15)
         else:
-            confidence.level = max(0, confidence.level - 20)
-        if perceived_difficulty.upper() == 'HARD':
-            if time_taken >= 40:
-                confidence.level = max(0, confidence.level - 10)
-            elif time_taken >= 30:
-                confidence.level = max(0, confidence.level - 5)
-        elif perceived_difficulty.upper() == 'MEDIUM':
-            if time_taken >= 30:
-                confidence.level = max(0, confidence.level - 5)
-        elif perceived_difficulty.upper() == 'EASY':
-            if time_taken >= 15:
-                confidence.level = max(0, confidence.level - 5)
-            if time_taken < 15:
-                confidence.level = min(100, confidence.level + 5)
+            difficulty_multiplier = {
+                'HARD': 0.5,
+                'MEDIUM': 0.75,
+                'EASY': 1.0
+            }.get(perceived_difficulty.upper(), 1.0)
+            time_multiplier = max(0.25, (1.0 - time_taken / 120.0))
+            confidence_diff = 20 * difficulty_multiplier * time_multiplier
+            confidence.level = min(100, max(1, confidence.level + confidence_diff))
 
 
         confidence.save()
@@ -94,19 +90,8 @@ class AttemptListCreate(generics.ListCreateAPIView):
 
         diff_confidence = new_confidence_level - old_confidence_level
 
-        new_confidence_level = confidence.level
-
-        diff_confidence = new_confidence_level - old_confidence_level
-
-        # Return the diff_confidence value
         return diff_confidence
 
-
-
-
-        
-
-    
 
 class AttemptRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Attempt.objects.all()
@@ -141,7 +126,7 @@ class BehavioralProblemsView(APIView):
 
 
 class RecommendedProblemsView(generics.ListAPIView):
-    serializer_class = ProblemSerializer
+    serializer_class = CustomProblemSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -149,32 +134,42 @@ class RecommendedProblemsView(generics.ListAPIView):
 
         confidences = Confidence.objects.all().filter(user=user.id).order_by('level')
 
-        print(confidences)
+        confidence = confidences[0]
 
         selected_problems = []
 
-        for confidence in confidences:
-            category = [confidence.problem_category]
-            problems = Problem.objects.filter(categories__in=category)
+        category = [confidence.problem_category]
+        problems = Problem.objects.filter(categories__in=category)
 
-            if confidence.level < 40:
-                difficulty = 'EASY'
-            elif 30 <= confidence.level <= 70:
-                difficulty = 'MEDIUM'
-            else:
-                difficulty = 'HARD'
+        if confidence.level < 40:
+            difficulty = 'EASY'
+        elif 30 <= confidence.level <= 70:
+            difficulty = 'MEDIUM'
+        else:
+            difficulty = 'HARD'
 
-            problems = problems.filter(difficulty=difficulty)
+        problems = problems.filter(difficulty=difficulty)
 
-            if problems:
-                problem = choice(list(problems))
-                selected_problems.append(problem)
+        selected_problems.extend(problems)
 
-        # Sort selected_problems by confidence level
         selected_problems.sort(key=lambda p: Confidence.objects.get(user=user, problem_category__in=p.categories.all()).level)
 
-
-        # Build queryset from the sorted list of problems
         queryset = Problem.objects.filter(pk__in=[p.pk for p in selected_problems])
 
         return queryset
+
+
+class RecommendedProblemsCategoryView(APIView):
+    def get(self, request):
+        user = request.user
+
+        confidences = Confidence.objects.all().filter(user=user.id).order_by('level')
+        confidence = confidences[0]
+        category = confidence.problem_category
+
+        category_dict = {
+            'id': category.id,
+            'name': category.name
+        }
+
+        return Response(category_dict)

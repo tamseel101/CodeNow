@@ -6,11 +6,11 @@ import Col from 'react-bootstrap/Col';
 import './LeetQuestion.css';
 import {Link, useNavigate} from "react-router-dom";
 
-function LeetQuestion({ id, name, difficulty, categories, leetcode_url, viewOnly }) {
+function LeetQuestion({ id, name, difficulty, categories, leetcode_url, viewOnly, attempted, setAttempt }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/Attempt', {state: {problem_id: id}});
+        navigate('/Attempt', {state: {problem_id: id, setAttempt: setAttempt}});
     };
 
     const difficultyTagColor = () => {
@@ -29,8 +29,8 @@ function LeetQuestion({ id, name, difficulty, categories, leetcode_url, viewOnly
             <Card.Body>
                 <Row className="d-flex align-items-center">
                     <Col sm={10}>
-                        <Card.Title className="text-light fw-bold mb-3" style={{ textTransform: 'capitalize' }}>
-                          <h2><Link className="problem-link" to={`/problems/${id}`}>{name}</Link></h2>
+                        <Card.Title className="text-light fw-bold mb-3 text-capitalize">
+                          <h2>{attempted && '✅ '} <Link className="problem-link" to={`/problems/${id}`}>{name}</Link></h2>
                         </Card.Title>
                         <span
                         className={`px-3 py-2 rounded-pill ${difficultyTagColor()}`}>

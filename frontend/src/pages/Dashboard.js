@@ -9,8 +9,18 @@ export const Dashboard = () => {
     const {token} = useToken()
     axios.defaults.headers.common['Authorization'] = `Token ${token}`;
     const [quizCompleted, setQuizCompleted] = useState(false);
+    const [categoryName, setCategoryName] = useState('');
 
     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/problems/recommended/category/')
+            .then(response => {
+                const category = response.data.name;
+                setCategoryName(category);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
         axios.get('http://127.0.0.1:8000/confidence/skill_assessment/')
             .then(response => {
                 const quizData = response.data;
@@ -31,9 +41,10 @@ export const Dashboard = () => {
                 {quizCompleted ? (
                     <div>
                         <h1 className="">Welcome back! 👋</h1>
-                        <h3>Here are your recommended problems for today.</h3>
-                        <p>Click on the Code Next button to start a problem.
-                            Then come back to this page to track your progress.</p>
+                        <p className="fs-3">Our data shows that your weakest data structure is <strong>{categoryName}</strong>,
+                            so we recommend the following {categoryName} problems to you.
+                        </p>
+
                         <Problems />
                     </div>
                 ) : (
