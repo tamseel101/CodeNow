@@ -4,7 +4,7 @@ import {Register} from './pages/Register';
 import {Landing} from './pages/Landing'
 import {Login} from './pages/Login';
 import {Dashboard} from './pages/Dashboard'
-import useToken from './hooks/useToken';
+import useToken from './Hooks/useToken';
 import Attempt from './pages/Attempt'
 import About from './pages/About';
 import {QuizPage} from './pages/QuizPage'
@@ -14,6 +14,7 @@ import MockInterviewQuestions from "./components/MockInterviewQuestions"; // Imp
 import MockInterviewQuestionsMedium from './components/MockInterviewQuestionsMedium';
 import MockInterviewQuestionsHard from './components/MockInterviewQuestionHard';
 import Navbar from "./components/Navbar";
+import {Profile} from './pages/Profile'
 import AllProblems from './pages/AllProblems';
 import SingleProblem from './pages/SingleProblem';
 
@@ -42,6 +43,7 @@ function App() {
 
 
                 <Route exact path='/attempt' element={loggedIn ? <Attempt/> : <Navigate to={'/'} />}/>
+                <Route exact path="/profile" element={loggedIn ? <Profile/> : <Navigate to={'/'} />}/>
                 <Route exact path='/problems' element={loggedIn ? <AllProblems/> : <Navigate to={'/'} />}/>
                 <Route exact path='/problems/:id' element={loggedIn ? <SingleProblem /> : <Navigate to={'/'} />}/>
             </Routes>
