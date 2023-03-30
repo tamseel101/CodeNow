@@ -13,6 +13,7 @@ const Navbar = ({onLogout}) => {
                     <Link to={'/dashboard'} className='nav-link'>Dashboard</Link>
                     <Link to={'/problems'} className="nav-link">Browse</Link>
                     <Link to={'/behavioral'} className="nav-link">Behavioral</Link>
+                    <Link to="/mockinterview" className="nav-link active">Mock Interview</Link>
                     <Link to={'/'} className="nav-link" onClick={() => {removeToken(); onLogout();}}>Logout</Link>
                 </>
             )
