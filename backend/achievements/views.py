@@ -12,6 +12,7 @@ from problems.models import Attempt
 
 # Create your views here.
 
+# TODO: Break this into two views
 class AchievementView(APIView):
     """
     Achievements View

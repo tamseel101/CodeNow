@@ -11,9 +11,15 @@ from accounts.models import CustomUser
 User = get_user_model()
 
 class ConfidenceUpdateView(APIView):
+    """
+    Confidence Update View
+    """
     permission_classes = [IsAuthenticated]
 
     def put(self, request, *args, **kwargs):
+        """
+        Updates Confidence Levels
+        """
         user = request.user
 
         if not isinstance(request.data, dict):
@@ -34,6 +40,9 @@ class ConfidenceUpdateView(APIView):
 
     # todo: make it a protected view
     def get(self, request, *args, **kwargs):
+        """
+        Gets User Confidence
+        """
         user_obj = request.user
 
         confidence_levels = Confidence.objects.filter(user=user_obj)

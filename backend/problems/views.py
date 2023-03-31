@@ -18,40 +18,67 @@ from rest_framework.views import APIView
 
 
 class ProblemCategoryListCreate(generics.ListCreateAPIView):
+    """
+    Create Problem Category View
+    """
     queryset = ProblemCategory.objects.all()
     serializer_class = ProblemCategorySerializer
+
 
 class ProblemCategoryRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, Update and Destroy Problem Category View
+    """
     queryset = ProblemCategory.objects.all()
     serializer_class = ProblemCategorySerializer
 
+
 class ProblemListCreate(generics.ListCreateAPIView):
+    """
+    Create Problem List View
+    """
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
+
 
 class ProblemRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, Update, Destroy Problem View
+    """
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
 
+
 class AttemptListCreate(generics.ListCreateAPIView):
+    """
+    Create Attempt List View
+    """
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Attempt.objects.all()
     serializer_class = AttemptSerializer
 
     def get_queryset(self):
+        """
+        Gets Attempt From ID
+        """
         problem_id = self.kwargs['pid']
         user = self.request.user
         return Attempt.objects.filter(problem__id=problem_id, user=user)
 
     def create(self, request, *args, **kwargs):
+        """
+        Updates Confidence
+        """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         diff_confidence = self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response({'confidence_difference': diff_confidence}, status=status.HTTP_201_CREATED, headers=headers)
 
-
     def perform_create(self, serializer):
+        """
+        Inputs Confidence Level
+        """
         problem_id = self.kwargs['pid']
         problem = get_object_or_404(Problem, id=problem_id)
         serializer.save(user=self.request.user, problem=problem)
@@ -61,7 +88,7 @@ class AttemptListCreate(generics.ListCreateAPIView):
             name = category.name
 
         category = get_object_or_404(ProblemCategory, name=name)
-        user=self.request.user
+        user = self.request.user
         confidence = get_object_or_404(Confidence, user=user, problem_category=category)
 
         perceived_difficulty = request.data.get("perceived_difficulty")
@@ -83,7 +110,6 @@ class AttemptListCreate(generics.ListCreateAPIView):
             confidence_diff = 20 * difficulty_multiplier * time_multiplier
             confidence.level = min(100, max(1, confidence.level + confidence_diff))
 
-
         confidence.save()
 
         new_confidence_level = confidence.level
@@ -94,6 +120,9 @@ class AttemptListCreate(generics.ListCreateAPIView):
 
 
 class AttemptRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, Update and Destroy Attempt View
+    """
     queryset = Attempt.objects.all()
     serializer_class = AttemptSerializer
 
@@ -105,10 +134,16 @@ class BehavioralProblemsView(APIView):
     serializer_class = BehavioralProblemsSerializer
 
     def get(self, request, format=None):
+        """
+        Retrieves Behavioral Problems
+        """
         problems = BehaviorProblem.objects.order_by('?').values('id', 'name', 'desc')[:9]
         return Response({'problems': list(problems)})
 
     def post(self, request):
+        """
+        Creates Behavioral Problem Using Name And Description
+        """
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             name = serializer.validated_data.get("name")
@@ -126,9 +161,15 @@ class BehavioralProblemsView(APIView):
 
 
 class RecommendedProblemsView(generics.ListAPIView):
+    """
+    Recommended Problems View
+    """
     serializer_class = CustomProblemSerializer
 
     def get_queryset(self):
+        """
+        Retrieves All Recommended Problems
+        """
         user = self.request.user
         queryset = Problem.objects.none()
 
@@ -152,7 +193,8 @@ class RecommendedProblemsView(generics.ListAPIView):
 
         selected_problems.extend(problems)
 
-        selected_problems.sort(key=lambda p: Confidence.objects.get(user=user, problem_category__in=p.categories.all()).level)
+        selected_problems.sort(
+            key=lambda p: Confidence.objects.get(user=user, problem_category__in=p.categories.all()).level)
 
         queryset = Problem.objects.filter(pk__in=[p.pk for p in selected_problems])
 
@@ -160,7 +202,13 @@ class RecommendedProblemsView(generics.ListAPIView):
 
 
 class RecommendedProblemsCategoryView(APIView):
+    """
+    Recommended Problems Category View
+    """
     def get(self, request):
+        """
+        Retrieves Confidence Levels From User
+        """
         user = request.user
 
         confidences = Confidence.objects.all().filter(user=user.id).order_by('level')
