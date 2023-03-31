@@ -1,10 +1,12 @@
 // spotlight card for putting certain stats front and center (ie highest skill, maybe total time spent coding, average time coding, etc)
 import React from "react";
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useNavigate} from "react-router-dom";
+import axios from 'axios';
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 function Spotlight(props) {
     // const navigate = useNavigate();
@@ -32,6 +34,7 @@ function Spotlight(props) {
 
                         <Card.Text style={{color: 'white'}} className="text-center">
                             {props.desc}
+                            <h2>{props.stat}</h2>
                         </Card.Text>
                     </Row>
 

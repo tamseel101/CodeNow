@@ -7,7 +7,7 @@ import './quizpage.css'
 import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
-import useToken from "../hooks/useToken";
+import useToken from "../Hooks/useToken";
 import QuizItem from "./QuizItem";
 
 export const QuizPage = () => {
