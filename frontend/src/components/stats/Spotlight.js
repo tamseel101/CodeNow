@@ -36,7 +36,7 @@ function Spotlight(props) {
 
                         <Card.Text style={{color: 'white'}} className="text-center">
                             {props.desc}
-                            {/* <h2>{props.stat}</h2> */}
+                            <h2>{props.stat}</h2>
                         </Card.Text>
                     </Row>
 

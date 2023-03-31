@@ -24,8 +24,8 @@ export const Stats = () => {
 
     const [s, setS] = useState([]);
     const [achievements, setAchievements] = useState([]);
-    const [getMaxSkill, getSkill] = useState();
-    const [numMax, getNumMax] = useState(0);
+    // const [getMaxSkill, getSkill] = useState("");
+    // const [numMax, getNumMax] = useState(0);
 
     console.log(s)
     console.log(achievements)
@@ -48,33 +48,55 @@ export const Stats = () => {
         fetchSkills();
     }, []);
 
-    // useEffect(() => {
-    //     // this should be the url to get all user achievements
-    //     axios.get('http://localhost:8000/achievements/list-achievement/')
-    //     .then(response => setAchievements(response.achievements))
-    //     .catch(error => console.log(error));
-    // }, []);
+    useEffect(() => {
+        // this should be the url to get all user achievements
+        axios.get('http://localhost:8000/achievements/list-achievement/')
+        .then(response => setAchievements(response.achievements))
+        .catch(error => console.log(error));
 
-    // useEffect(() => {
-    //     // this should be the url to get all user achievements
-    //     var maxSkill = 0;
-    //     for (var i = 0; i < skills.count; i++) {
-    //         if (maxSkill.level < skills[i].level) {
-    //             maxSkill = getSkill(skills[i])
-    //         }
-    //     }
-    // });
+        const fetchAchieve = async () => {
+            try {
+              const {data: achieveData} = await axios.get(
+                "http://localhost:8000/achievements/list-achievement/"
+              );
+              console.log("data:")
+              console.log(Object.entries(achieveData))
+              setAchievements(Object.entries(achieveData));
+            } catch (error) {
+                console.log(error)
+            }
+          };
+      
+        fetchAchieve();
+    }, []);
 
-    // useEffect(() => {
-    //     // this should be the url to get all user achievements
-    //     var num = 0;
-    //     for (var i = 0; i < skills.count; i++) {
-    //         if (skills.count == skills[i].level) { // count should be max possible of skill
-    //             num += 1
-    //         }
-    //     }
-    //     getNumMax(num)
-    // });
+    function getMax(skills) {
+        // this should be the url to get all user achievements
+        var maxSkill = ['', 0];
+        console.log(skills.length)
+        for (var i = 0; i < skills.length; i++) {
+            console.log(skills[i][1])
+            if (maxSkill[1] < Number(skills[i][1])) {
+                maxSkill = skills[i]
+                console.log("i")
+                console.log(skills[i])
+            }
+        }
+        console.log("called")
+        console.log(maxSkill)
+        return maxSkill
+    }
+
+    function getCount(skills) {
+        // this should be the url to get all user achievements
+        var num = 0;
+        for (var i = 0; i < skills.length; i++) {
+            if (100 == skills[i][0]) { // count should be max possible of skill
+                num += 1
+            }
+        }
+        return num
+    }
 
     //   <button onClick={() => setCount(count + 1)}>Increment</button>
 
@@ -89,21 +111,21 @@ export const Stats = () => {
                                 <Spotlight
                                     name={"Highest Skill"}
                                     desc={"Your highest skill is: "} // get highest skill from a user query
-                                    // stat={getMaxSkill.problem_category} // fix this to say the name
+                                    stat={getMax(s)[0]} // fix this to say the name
                                 />
                             </Col>
                             <Col sm={4}>
                                 <Spotlight
                                     name={"Highest Proficiency"}
                                     desc={"The proficiency of your highest skill is: "} // get time spent from an attempt query
-                                    // stat={getMaxSkill.level}
+                                    stat={getMax(s)[1]}
                                 />
                             </Col>
                             <Col sm={4}>
                                 <Spotlight
                                     name={"Number of Skills Maxxed Out"}
                                     desc={"The number of skills you've maxxed out is: "} 
-                                    // stat={numMax}
+                                    stat={getCount(s)}
                                 />
                             </Col>
                         </Row>
