@@ -20,6 +20,9 @@ jobs:
       - name: Install Flake
         run: pip install flake8
 
+      - name: Install Pipenv
+        run: pip install pipenv
+
       - name: Tests [Backend]
         run: cd backend; python manage.py test
 
@@ -34,6 +37,6 @@ jobs:
       - name: Install packages
         run: |
           cd frontend
-          npm ci
+          npm install
           npm install -g eslint
           eslint --init
