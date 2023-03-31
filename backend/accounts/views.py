@@ -10,7 +10,13 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer
 
 class ViewEditProfile(APIView):
+    """
+    Edit Profile View
+    """
     def get(self, request, *args, **kwargs):
+        """
+        Gets Profile Data
+        """
         if not request.user.is_authenticated:
             return Response({'detail':'user must be logged in'}, status=status.HTTP_401_UNAUTHORIZED)
         user_obj = request.user
@@ -23,6 +29,9 @@ class ViewEditProfile(APIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
     def patch(self, request, *args, **kwargs):
+        """
+        Updates Profile Data
+        """
         if not request.user.is_authenticated:
             return Response({'detail':'user must be logged in'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -38,7 +47,13 @@ class ViewEditProfile(APIView):
 
 # Login
 class CustomAuthToken(ObtainAuthToken):
+    """
+    Auth Token View
+    """
     def post(self, request, *args, **kwargs):
+        """
+        Generates An Auth Token
+        """
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
@@ -48,6 +63,9 @@ class CustomAuthToken(ObtainAuthToken):
 
 # Register
 class RegisterView(CreateAPIView):
+    """
+    Register User View
+    """
     permission_classes = (permissions.AllowAny,)
     model = get_user_model()
     serializer_class = UserSerializer
@@ -55,8 +73,14 @@ class RegisterView(CreateAPIView):
 
 # Logout
 class LogoutView(DestroyAPIView):
+    """
+    Logout User View
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def destroy(self, request, *args, **kwargs):
+        """
+        Destroys Token
+        """
         Token.objects.filter(user=request.user).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
