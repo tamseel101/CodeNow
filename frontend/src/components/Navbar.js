@@ -1,5 +1,5 @@
 import React from 'react';
-import useToken from "../Hooks/useToken";
+import useToken from "../hooks/useToken";
 import {Link} from "react-router-dom";
 
 const Navbar = ({onLogout}) => {
@@ -12,10 +12,10 @@ const Navbar = ({onLogout}) => {
                 <>
                     <Link to={'/dashboard'} className='nav-link'>Dashboard</Link>
                     <Link to={'/problems'} className="nav-link">Browse</Link>
-                    <Link to={'/stats'} className="nav-link active">Statistics</Link>
-                    <Link to={'/behavioral'} className="nav-link">Behavioral</Link>
-                    <Link to="/mockinterview" className="nav-link active">Mock Interview</Link>
-                    <Link to={'/profile'} className="nav-link active">Profile</Link>
+                    <Link to={'/behavioral'} className="nav-link">Behaviorals</Link>
+                    <Link to="/mockinterview" className="nav-link">Mocks</Link>
+                    <Link to={'/stats'} className="nav-link">Stats</Link>
+                    <Link to={'/profile'} className="nav-link">Profile</Link>
                     <Link to={'/'} className="nav-link" onClick={() => {removeToken(); onLogout();}}>Logout</Link>
                 </>
             )

@@ -5,7 +5,7 @@ import Spotlight from "../components/stats/Spotlight";
 import Progress from "../components/stats/Progress";
 import Achievements from "../components/stats/Achievements";
 import {Col, Row} from 'react-bootstrap';
-import useToken from '../Hooks/useToken';
+import useToken from '../hooks/useToken';
 // import * as All from '../imgs';
 
 
@@ -24,11 +24,9 @@ export const Stats = () => {
 
     const [s, setS] = useState([]);
     const [achievements, setAchievements] = useState([]);
-    // const [getMaxSkill, getSkill] = useState("");
-    // const [numMax, getNumMax] = useState(0);
 
-    console.log(s)
-    console.log(achievements)
+    console.log("s", s)
+    //console.log(achievements)
   
     useEffect(() => {
         // this should be the url to get all confidences
@@ -89,7 +87,8 @@ export const Stats = () => {
         // this should be the url to get all user achievements
         var num = 0;
         for (var i = 0; i < skills.length; i++) {
-            if (100 == skills[i][0]) { // count should be max possible of skill
+            if (100 === skills[i][1]) { // count should be max possible of skill
+                console.log("printing", skills[i])
                 num += 1
             }
         }
@@ -121,7 +120,7 @@ export const Stats = () => {
                             </Col>
                             <Col sm={4}>
                                 <Spotlight
-                                    name={"Number of Skills Maxxed Out"}
+                                    name={"Number of Skills Maxed Out"}
                                     desc={"The number of skills you've maxxed out is: "} 
                                     stat={getCount(s)}
                                 />

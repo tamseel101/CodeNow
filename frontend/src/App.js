@@ -5,7 +5,7 @@ import {Landing} from './pages/Landing'
 import {Login} from './pages/Login';
 import {Stats} from './pages/Stats';
 import {Dashboard} from './pages/Dashboard'
-import useToken from './Hooks/useToken';
+import useToken from './hooks/useToken';
 import Attempt from './pages/Attempt'
 import About from './pages/About';
 import {QuizPage} from './pages/QuizPage'

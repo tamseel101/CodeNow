@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios from 'axios';
-import useLogin from "../Hooks/useLogin";
+import useLogin from "../hooks/useLogin";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'

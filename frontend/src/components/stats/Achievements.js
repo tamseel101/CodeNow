@@ -1,7 +1,5 @@
 import React from "react";
 // import LeetQuestion from "./leet_question/LeetQuestion";
-import {useQuery} from 'react-query';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

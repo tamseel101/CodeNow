@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from 'axios';
-import useLogin from "../Hooks/useLogin";
+import useLogin from "../hooks/useLogin";
 
 export const Register = () => {
     const [email, setEmail] = useState('');

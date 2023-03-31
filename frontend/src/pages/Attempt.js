@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import {Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 import {useLocation} from 'react-router-dom';
-import useToken from '../Hooks/useToken';
+import useToken from '../hooks/useToken';
 import { Link } from "react-router-dom";
 
 
