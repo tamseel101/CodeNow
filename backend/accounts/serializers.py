@@ -8,7 +8,7 @@ from confidence.models import Confidence
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password')
 
         extra_kwargs = {
             'password': {'write_only': True},

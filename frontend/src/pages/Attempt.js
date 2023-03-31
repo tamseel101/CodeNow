@@ -11,7 +11,7 @@ axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
-function Attempt() {
+function Attempt({setAttempt}) {
     const location = useLocation();
 
     const {token} = useToken()
@@ -36,6 +36,7 @@ function Attempt() {
     const [completedValidation, setCompletedValidation] = useState(null);
     const [timeTakenValidation, setTimeTakenValidation] = useState(null);
     const [difficultyValidation, setDifficultyValidation] = useState(null);
+    const [isTracked, setIsTracked] = useState(false);
 
 
     // Completion
@@ -111,8 +112,8 @@ function Attempt() {
           } else {
             setMessage(
               <div>
-                Your attempt was successfully tracked 🙌. Would you like to{" "}
-                <Link to="/"><span className='fw text-primary'>go back and try more problems</span></Link>?
+                Your attempt was successfully tracked 🙌. Click here to go to the {" "}
+                <Link to="/"><span className='fw text-primary'>Dashboard</span></Link>.
               </div>
             );
 
@@ -122,10 +123,13 @@ function Attempt() {
               confidenceDifference >= 0 ? "increased" : "decreased"
             } by ${Math.abs(confidenceDifference)} ${emoji}`);
             setShowPopup(true);
+
+            setIsTracked(true)
+            setAttempt(location.state.problem_id)
           }
         })
         .catch(function (error) {
-          alert(error);
+          console.log(error);
         });
       };
 
@@ -222,7 +226,7 @@ function Attempt() {
 
                     <div className="mb-3">
                         <a className="nav-link active" aria-current="page">
-                            <button className="btn btn-primary mb-4" onClick={sendAttempt}>Done</button>
+                            <button className="btn btn-primary mb-4 w-100" onClick={sendAttempt} disabled={isTracked}>Track Attempt</button>
                         </a>
                     </div>
 
