@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import { Link } from "react-router-dom";
 import Problems from "../components/Problems";
-import useToken from "../hooks/useToken";
+import useToken from "../Hooks/useToken";
 
 export const Dashboard = () => {
     const {token} = useToken()

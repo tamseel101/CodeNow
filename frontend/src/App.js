@@ -3,6 +3,7 @@ import {Route, Routes, Navigate} from 'react-router-dom';
 import {Register} from './pages/Register';
 import {Landing} from './pages/Landing'
 import {Login} from './pages/Login';
+import {Stats} from './pages/Stats';
 import {Dashboard} from './pages/Dashboard'
 import useToken from './Hooks/useToken';
 import Attempt from './pages/Attempt'
@@ -35,13 +36,11 @@ function App() {
                 <Route exact path="/dashboard" element={loggedIn ? <Dashboard/> : <Navigate to={'/'} />}/>
                 <Route exact path="/skill-assessment" element={loggedIn ? <QuizPage/> : <Navigate to={'/'} /> }/>
                 <Route exact path="/behavioral" element={loggedIn ? <BehavioralPage/> : <Navigate to={'/'} />}/>
+                <Route exact path="/stats" element={loggedIn ? <Stats/> : <Navigate to={'/'} />}/>
                 <Route exact path='/mockinterview' element={loggedIn ? <MockInterview/> : <Navigate to={'/'} />}/>
                 <Route exact path='/easy-mock-interview-questions' element={loggedIn ? <MockInterviewQuestions/> : <Navigate to={'/'} />}/>
                 <Route exact path='/medium-mock-interview-questions' element={loggedIn ? <MockInterviewQuestionsMedium/> : <Navigate to={'/'} />}/>
                 <Route exact path='/hard-mock-interview-questions' element={loggedIn ? <MockInterviewQuestionsHard/> : <Navigate to={'/'} />}/>
-
-
-
                 <Route exact path='/attempt' element={loggedIn ? <Attempt/> : <Navigate to={'/'} />}/>
                 <Route exact path="/profile" element={loggedIn ? <Profile/> : <Navigate to={'/'} />}/>
                 <Route exact path='/problems' element={loggedIn ? <AllProblems/> : <Navigate to={'/'} />}/>
