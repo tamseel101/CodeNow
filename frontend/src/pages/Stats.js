@@ -49,19 +49,17 @@ export const Stats = () => {
     }, []);
 
     useEffect(() => {
-        // this should be the url to get all user achievements
-        axios.get('http://localhost:8000/achievements/list-achievement/')
-        .then(response => setAchievements(response.achievements))
-        .catch(error => console.log(error));
-
         const fetchAchieve = async () => {
             try {
+              await axios.post(
+                "http://localhost:8000/achievements/add-achievement/"
+              );
               const {data: achieveData} = await axios.get(
                 "http://localhost:8000/achievements/list-achievement/"
               );
-              console.log("data:")
-              console.log(Object.entries(achieveData))
-              setAchievements(Object.entries(achieveData));
+              console.log("dachieve ata:")
+              console.log(achieveData[0])
+              setAchievements(achieveData);
             } catch (error) {
                 console.log(error)
             }
@@ -169,9 +167,9 @@ export const Stats = () => {
                         <ul>
                             {achievements.map(achievement => (
                                 <Achievements
-                                    key={achievement.id}
-                                    name={achievement.name}
-                                    desc={achievement.desc}
+                                    key={achievement["name"]}
+                                    name={achievement["name"]}
+                                    // desc={achievement["user"]} // for now
                                     // img={achievement.image}
                                 />
 

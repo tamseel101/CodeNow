@@ -1,11 +1,9 @@
 // spotlight card for putting certain stats front and center (ie highest skill, maybe total time spent coding, average time coding, etc)
 import React from "react";
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
