@@ -4,7 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
 import {useNavigate} from "react-router-dom";
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 function Spotlight(props) {
     // const navigate = useNavigate();
@@ -32,6 +36,7 @@ function Spotlight(props) {
 
                         <Card.Text style={{color: 'white'}} className="text-center">
                             {props.desc}
+                            {/* <h2>{props.stat}</h2> */}
                         </Card.Text>
                     </Row>
 
