@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from problems.models import ProblemCategory
 from confidence.models import Confidence
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()

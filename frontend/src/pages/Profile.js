@@ -107,7 +107,10 @@ export const Profile = () => {
             setUser(response.data);
           })
           .catch((error) => {
-            console.error(error);
+            console.error(error.response.data.email);
+
+            if (error.response.data.email)
+            alert(error.response.data.email);
           });
       };
 
