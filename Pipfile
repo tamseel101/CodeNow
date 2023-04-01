@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 requests = "*"
+pylint = "*"
+drf-spectacular = "==0.15.1"
 
 [dev-packages]
 
