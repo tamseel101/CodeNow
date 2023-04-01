@@ -13,8 +13,17 @@ export default function useToken() {
         return userToken
     }
 
+    // const getUsername = () => {
+    //     const tokenString = sessionStorage.getItem('username');
+    //     const userToken = JSON.parse(tokenString);
+    //     console.log(userToken)
+    //     return userToken
+    // }
+
     // Initialize token state with getToken()
     const [token, setToken] = useState(getToken());
+    //const [username, setUsername] = useState(getUsername())
+
 
 
     // Save token to local storage
