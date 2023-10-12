@@ -2,8 +2,8 @@
 
 [![Checks](https://github.com/CSC301H5/finalprojectw23-jason-s-juniors/actions/workflows/checks.yml/badge.svg?branch=dev)](https://github.com/CSC301H5/finalprojectw23-jason-s-juniors/actions/workflows/checks.yml)
 
-# Demo:
-# Demo Slides: 
+# Video Demo: https://youtu.be/el1MuzG2hGs?si=RnIuJ1yruPJ1mk6d&t=207
+# Demo Slides: https://docs.google.com/presentation/d/1thZBrtiz-499aZHFsFbMpXq5BkzTa8DDxUOPW09VPDg/edit?usp=sharing
 
 
 Preparing for technical interviews for software engineering positions can be a daunting process. The most common approach is to practice problems at [leetcode.com](http://leetcode.com/). However, with thousands of problems on the platform, it can get overwhelming for someone who has no idea where to start. Furthermore, even if you create your own plan for Leetcode problems, it quickly becomes cumbersome to track and manage your progress as you work through your plan. Lastly, it's important to take into account [Ebbinghaus's Forgetting Curve](https://www.mindtools.com/a9wjrjw/ebbinghauss-forgetting-curve) in your interview preparation. However, doing this manually is tedious and takes a lot of manual overhead.
